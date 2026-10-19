@@ -37,7 +37,7 @@ The content is **original commentary inspired by themes in these books**, not re
 
 ## Design philosophy
 
-**Dark, immersive, and deliberately minimal.** RABBIT pairs a pitch-black interface with restrained midnight-lilac details, editorial reading typography, real book-cover imagery, and a distinctive wordmark with animated rabbit ears. The goal is to make books feel at home in a modern discovery feed without losing the pleasure of reading.
+**Dark, immersive, and deliberately minimal.** RABBIT pairs a pitch-black interface with restrained midnight-lilac details, editorial reading typography, real book-cover imagery, and the original RABBIT wordmark with lilac rabbit-ear double Bs and a neatly placed lilac full stop. The goal is to make books feel at home in a modern discovery feed without losing the pleasure of reading.
 
 ## Built with
 
