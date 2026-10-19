@@ -2,7 +2,7 @@
 
 ### Follow your curiosity.
 
-**[↗ OPEN RABBIT — LAUNCH THE APP](https://ashmitamanikandan-sys.github.io/Rabbit./)**
+**[↗ OPEN RABBIT — LAUNCH THE APP](https://ashmitamanikandan-sys.github.io/Rabbit./?v=8)**
 
 *An Instagram-like discovery experience for books, ideas, and the curious mind.*
 
