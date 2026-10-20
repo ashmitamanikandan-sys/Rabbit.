@@ -6,12 +6,60 @@ const saved=new Set(JSON.parse(localStorage.getItem("rabbit_catalog_saved")||"[]
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const req=async path=>{const res=await fetch(url+"/rest/v1/"+path,{headers:{"apikey":key,"Authorization":"Bearer "+key}});if(!res.ok)throw Error("Catalog API "+res.status);return res.json()};
 const ready=()=>/^https:\/\/[a-z0-9-]+\.supabase\.co$/.test(url)&&!!key;
+
+// Public Open Library discovery fallback while RABBIT's reviewed catalog is prepared.
+// These are bibliographic listings, NOT RABBIT-reviewed insights.
+const openSubjects={"The Human Mind":"psychology","Romance":"romance","Fantasy":"fantasy","Science Fiction":"science_fiction","Mystery & Thriller":"mystery","Horror":"horror","Historical Fiction":"historical_fiction","Young Adult":"young_adult_fiction","Classics":"classic_literature","Adventure":"adventure","Literary Fiction":"literary_fiction","Philosophy":"philosophy","Self-Help":"self_help","Business & Money":"business","Science":"science","History":"history","Biography & Memoir":"biography","Politics & Society":"politics","True Crime":"true_crime","Poetry":"poetry"};
+const discoveryGenres=Object.keys(openSubjects).map(name=>({id:"open:"+openSubjects[name],name}));
+async function openLibraryBooks(start,count){
+ const params=new URLSearchParams({limit:String(count),offset:String(start),fields:"key,title,author_name,cover_i,language"});
+ if(query)params.set("q",query);
+ else params.set("subject",(genre.startsWith("open:")?genre.slice(5):"fiction"));
+ const response=await fetch("https://openlibrary.org/search.json?"+params.toString());
+ if(!response.ok)throw Error("Open Library HTTP "+response.status);
+ const data=await response.json();
+ return (data.docs||[]).filter(b=>b.key&&b.title&&b.author_name?.length&&b.cover_i&&(!b.language||b.language.includes("eng"))).map(b=>({id:b.key,title:b.title,author:b.author_name[0],cover_url:"https://covers.openlibrary.org/b/id/"+b.cover_i+"-M.jpg",original_summary:null,source:"Open Library"}));
+}
 function close(){if(!overlay)return;overlay.remove();overlay=null;document.body.style.overflow="";history.replaceState(null,"",location.pathname+location.search)}
 function make(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
 function updateStatus(msg){const e=overlay?.querySelector("#rabbit-catalog-status");if(e)e.textContent=msg}
 function renderGenres(){const el=overlay.querySelector("#rabbit-catalog-genres");el.replaceChildren();for(const g of [{id:"",name:"For you"},...genres]){const b=make("button","chip"+(genre===g.id?" active":""),g.name);b.type="button";b.setAttribute("aria-pressed",String(genre===g.id));b.onclick=()=>{genre=g.id;renderGenres();reset()};el.append(b)}}
-function card(book,index){const article=make("article","feedpost rabbit-live-post");article.style.scrollSnapAlign="start";const body=make("div","postbody");const meta=make("div","postmeta","THE RABBIT LIBRARY · HOP "+String(index+1).padStart(2,"0"));body.append(meta);const row=make("div","bookrow");row.style.marginTop="22px";if(book.cover_url&&/^https:\/\//.test(book.cover_url)){const img=make("img","cover");img.src=book.cover_url;img.alt="Cover of "+book.title;img.loading="lazy";row.append(img)}const detail=make("div");detail.style.flex="1";detail.style.minWidth="0";detail.append(make("div","eyebrow","DISCOVER A BOOK"),make("h3","",book.title||"Untitled"),make("p","muted",book.author||"Unknown author"));row.append(detail);body.append(row);const title=make("h2","",book.title||"A new discovery");title.style.marginTop="30px";body.append(title);const insight=make("div","insight");insight.textContent=book.original_summary||"A new rabbit hole to explore. Follow this book and discover more titles in your library.";body.append(insight);const actions=make("div","actions");actions.style.marginTop="30px";const save=make("button","",saved.has(book.id)?"♥ Following":"♡ Follow book");save.type="button";save.style.color=saved.has(book.id)?"var(--lilac)":"#eee";save.onclick=()=>{if(saved.has(book.id))saved.delete(book.id);else saved.add(book.id);localStorage.setItem("rabbit_catalog_saved",JSON.stringify([...saved]));save.textContent=saved.has(book.id)?"♥ Following":"♡ Follow book";save.style.color=saved.has(book.id)?"var(--lilac)":"#eee"};actions.append(save);const share=make("button","","↗ Share");share.onclick=()=>{if(navigator.share)navigator.share({title:book.title,text:book.title+" — "+book.author,url:location.href}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(book.title+" — "+book.author).then(()=>{share.textContent="Copied ✓"}).catch(()=>{})};actions.append(share);body.append(actions);const note=make("p","subtle","RABBIT · Follow your curiosity ↓");note.style.marginTop="22px";body.append(note);article.append(body);return article}
-async function load(){if(loading||done||!overlay)return;loading=true;const token=serial;const more=overlay.querySelector("#rabbit-catalog-more");more.hidden=true;updateStatus("Finding your next rabbit hole…");try{let filter="catalog_status=eq.ready";if(query){const safe=query.replace(/[*,().%]/g," ").trim();if(safe)filter+="&or=(title.ilike.*"+encodeURIComponent(safe)+"*,author.ilike.*"+encodeURIComponent(safe)+"*)"}if(genre){const matches=await req("book_genres?select=book_id&genre_id=eq."+encodeURIComponent(genre)+"&limit=10000");if(token!==serial)return;const ids=matches.map(x=>x.book_id);if(!ids.length){done=true;updateStatus("No approved books in this genre yet.");return}filter+="&id=in.("+ids.map(encodeURIComponent).join(",")+")"}const rows=await req("books?select=id,title,author,cover_url,original_summary&"+filter+"&order=created_at.desc&limit=20&offset="+offset);if(token!==serial)return;const feed=overlay.querySelector("#rabbit-catalog-feed");for(const b of rows){feed.append(card(b,offset++))}done=rows.length<20;updateStatus(offset?offset+" books explored"+(done?"":" · keep scrolling"):"No approved books are published yet. Our library is being curated.");more.hidden=done}catch(err){console.error(err);updateStatus("The library is unavailable right now. Please try again.");more.hidden=false}finally{loading=false}}
+function card(book,index){const article=make("article","feedpost rabbit-live-post");article.style.scrollSnapAlign="start";const body=make("div","postbody");const meta=make("div","postmeta",(book.source==="Open Library"?"OPEN LIBRARY DISCOVERY":"THE RABBIT LIBRARY")+" · HOP "+String(index+1).padStart(2,"0"));body.append(meta);const row=make("div","bookrow");row.style.marginTop="22px";if(book.cover_url&&/^https:\/\//.test(book.cover_url)){const img=make("img","cover");img.src=book.cover_url;img.alt="Cover of "+book.title;img.loading="lazy";row.append(img)}const detail=make("div");detail.style.flex="1";detail.style.minWidth="0";detail.append(make("div","eyebrow","DISCOVER A BOOK"),make("h3","",book.title||"Untitled"),make("p","muted",book.author||"Unknown author"));row.append(detail);body.append(row);const title=make("h2","",book.title||"A new discovery");title.style.marginTop="30px";body.append(title);const insight=make("div","insight");insight.textContent=book.original_summary||(book.source==="Open Library"?"Discover this book by "+book.author+". Full RABBIT insights are being curated.":"A new rabbit hole to explore. Follow this book and discover more titles in your library.");body.append(insight);const actions=make("div","actions");actions.style.marginTop="30px";const save=make("button","",saved.has(book.id)?"♥ Following":"♡ Follow book");save.type="button";save.style.color=saved.has(book.id)?"var(--lilac)":"#eee";save.onclick=()=>{if(saved.has(book.id))saved.delete(book.id);else saved.add(book.id);localStorage.setItem("rabbit_catalog_saved",JSON.stringify([...saved]));save.textContent=saved.has(book.id)?"♥ Following":"♡ Follow book";save.style.color=saved.has(book.id)?"var(--lilac)":"#eee"};actions.append(save);const share=make("button","","↗ Share");share.onclick=()=>{if(navigator.share)navigator.share({title:book.title,text:book.title+" — "+book.author,url:location.href}).catch(()=>{});else if(navigator.clipboard)navigator.clipboard.writeText(book.title+" — "+book.author).then(()=>{share.textContent="Copied ✓"}).catch(()=>{})};actions.append(share);body.append(actions);const note=make("p","subtle","RABBIT · Follow your curiosity ↓");note.style.marginTop="22px";body.append(note);article.append(body);return article}
+async function load(){
+ if(loading||done||!overlay)return;
+ loading=true;const token=serial,more=overlay.querySelector("#rabbit-catalog-more");more.hidden=true;
+ updateStatus("Finding your next rabbit hole…");
+ try{
+  let rows=[];
+  if(window.rabbitCatalogSource==="open"){
+   rows=await openLibraryBooks(offset,40);
+  }else{
+   let filter="catalog_status=eq.ready";
+   if(query){const safe=query.replace(/[*,().%]/g," ").trim();if(safe)filter+="&or=(title.ilike.*"+encodeURIComponent(safe)+"*,author.ilike.*"+encodeURIComponent(safe)+"*)"}
+   if(genre&&!genre.startsWith("open:")){
+    const matches=await req("book_genres?select=book_id&genre_id=eq."+encodeURIComponent(genre)+"&limit=10000");
+    if(token!==serial)return;
+    const ids=matches.map(x=>x.book_id);
+    if(!ids.length){done=true;updateStatus("No approved books in this genre yet.");return}
+    filter+="&id=in.("+ids.map(encodeURIComponent).join(",")+")";
+   }
+   rows=await req("books?select=id,title,author,cover_url,original_summary&"+filter+"&order=created_at.desc&limit=20&offset="+offset);
+   if(token!==serial)return;
+   if(rows.length===0&&offset===0){
+    window.rabbitCatalogSource="open";
+    genres=discoveryGenres;genre="";renderGenres();
+    rows=await openLibraryBooks(0,40);
+   }
+  }
+  if(token!==serial)return;
+  const feed=overlay.querySelector("#rabbit-catalog-feed");
+  for(const b of rows)feed.append(card(b,offset++));
+  done=rows.length<(window.rabbitCatalogSource==="open"?40:20);
+  updateStatus(offset?(window.rabbitCatalogSource==="open"?"Discovering Open Library books · ":"RABBIT curated books · ")+offset+" shown"+(done?"":" · keep scrolling"):"No books found. Try another genre or search.");
+  more.hidden=done;
+ }catch(err){console.error(err);updateStatus("Couldn't load books right now. Try again.");more.hidden=false}
+ finally{loading=false}
+}
 function reset(){serial++;loading=false;done=false;offset=0;overlay.querySelector("#rabbit-catalog-feed").replaceChildren();load()}
 async function start(){if(!ready()){updateStatus("The library connection is being prepared.");return}try{genres=await req("genres?select=id,name&order=name.asc");if(!overlay)return;renderGenres();reset()}catch(err){console.error(err);updateStatus("We couldn't connect to the library. Please try again.")}}
 function open(){if(overlay)return;overlay=make("section","rabbit-catalog-shell");overlay.setAttribute("aria-label","RABBIT book discovery");overlay.innerHTML='<div class="page rabbit-catalog-page"><div class="top"><button class="ghost rabbit-catalog-back" aria-label="Back to RABBIT">←</button><div class="wordmark">RABBIT<span class="accent">.</span></div><span class="muted" style="font-size:11px">DISCOVER</span></div><div class="rabbit-catalog-controls"><div class="eyebrow">FOLLOW YOUR CURIOSITY</div><h1>Go deeper into <span class="accent">the rabbit hole.</span></h1><p class="muted">Real books. New discoveries. One hop at a time.</p><input id="rabbit-catalog-search" type="search" placeholder="Search books and authors…" aria-label="Search books and authors"><div id="rabbit-catalog-genres" class="chips"></div><p id="rabbit-catalog-status" class="subtle" role="status" aria-live="polite"></p></div><div id="rabbit-catalog-feed" class="rabbit-catalog-feed"></div><button id="rabbit-catalog-more" class="primary" hidden>Discover more ↓</button></div>';document.body.append(overlay);if(typeof window.logo==="function"){const wordmark=overlay.querySelector(".wordmark");if(wordmark)wordmark.outerHTML=window.logo()}document.body.style.overflow="hidden";overlay.querySelector(".rabbit-catalog-back").onclick=close;overlay.querySelector("#rabbit-catalog-more").onclick=load;let debounce;overlay.querySelector("#rabbit-catalog-search").oninput=e=>{query=e.target.value.trim();clearTimeout(debounce);debounce=setTimeout(reset,300)};overlay.addEventListener("scroll",()=>{if(overlay.scrollTop+overlay.clientHeight>overlay.scrollHeight-1000)load()},{passive:true});start()}
