@@ -1,0 +1,33 @@
+
+name: RABBIT Book Importer
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview-books:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Get RABBIT files
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Fetch book previews
+        run: python scripts/import_books.py
+
+      - name: Save preview results
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rabbit-books-preview
+          path: rabbit_books_preview.json
+          retention-days: 7
