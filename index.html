@@ -63,6 +63,17 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
 .welcome p,.interests .chips{animation:v9-enter .7s .12s cubic-bezier(.16,1,.3,1) both}
 @keyframes v9-enter{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.welcome h1,.interests h1,.welcome p,.interests .chips{animation:none!important}*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}
+
+/* V9 genre parity: original Human Mind layout, richer previews and reader */
+.rabbit-expanded-post .insight{line-height:1.8;font-size:15px;white-space:pre-line;min-height:9.5em;max-height:18em;overflow:hidden;overflow-wrap:anywhere}
+.rabbit-expanded-post .actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.rabbit-expanded-post .readmore{margin-right:auto}
+.rabbit-reader-overlay{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.88);overflow-y:auto;-webkit-overflow-scrolling:touch;backdrop-filter:blur(12px)}
+.rabbit-reader-panel{max-width:530px;min-height:100dvh;margin:auto;padding:28px 23px 90px;background:linear-gradient(165deg,#191321,#080809 35%);color:#f5f5f5}
+.rabbit-reader-close{border:1px solid #50465d;border-radius:12px;background:#221c2b;color:#e5d9ff;padding:12px 15px;margin:0 0 35px}
+.rabbit-reader-panel h1{font-size:clamp(32px,8vw,48px);letter-spacing:-1.5px;line-height:1.08;margin:18px 0}
+.rabbit-reader-copy{font-size:17px;line-height:1.85;white-space:pre-line;overflow-wrap:anywhere;margin:30px 0}
+.rabbit-reader-panel .takeaway{padding:20px;border:1px solid #493d59;border-radius:16px;color:#d5c4f8}
 </style></head><body><div id="app"><main class="page welcome"><div class="eyebrow">WELCOME TO RABBIT</div><h1>Go down<br>the <span class="accent">rabbit hole.</span></h1><p>A feed of ideas worth getting lost in. Find your next obsession, one chapter at a time.</p><button class="primary" onclick="renderInterests()">Find your rabbit hole →</button></main></div><script>
 const icons={heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',bookmark:'<path d="M5 3h14v18l-7-5-7 5z"/>',arrow:'<path d="m15 18-6-6 6-6"/>',send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',message:'<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5Z"/>',home:'<path d="m3 10 9-7 9 7v11H3z"/><path d="M9 21v-7h6v7"/>'};const ico=(n)=>`<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[n]}</svg>`;
 const books=[
@@ -131,7 +142,7 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
         const image=document.createElement("img");image.src=book.cover_url;image.alt=book.title;image.loading="lazy";
         const label=document.createElement("span");label.textContent=book.title;
         story.append(image,label);
-        story.onclick=()=>article.scrollIntoView({behavior:"smooth",block:"start"});
+        story.onclick=()=>rabbitReader(book);
         storyRail.append(story);
       }
       const article=document.createElement("article");
@@ -148,14 +159,46 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
       const author=document.createElement("p");author.textContent=book.author;
       details.append(title,author);row.append(details);body.append(row);
       const headline=document.createElement("h2");headline.textContent=book.title;body.append(headline);
-      const info=document.createElement("div");info.className="insight";info.textContent=book.original_summary||book.description||("Explore "+book.title+" by "+book.author+". This is a book discovery preview; RABBIT’s original chapter insights have not been published for this title yet.");body.append(info);
+      const info=document.createElement("div");info.className="insight";info.textContent=rabbitOverview(book)||"A detailed book overview is being prepared. Open the book to see what is currently available.";body.append(info);if(i<12)rabbitEnrich(book,info);
       const actions=document.createElement("div");actions.className="actions";
+      const read=document.createElement("button");read.className="readmore";read.textContent="Read more ↗";read.onclick=()=>rabbitReader(book);actions.append(read);
+      const save=document.createElement("button");const sk="rabbit_save_"+book.id;save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save";save.onclick=()=>{if(localStorage.getItem(sk))localStorage.removeItem(sk);else localStorage.setItem(sk,"1");save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save"};actions.append(save);
       const follow=document.createElement("button");const k="rabbit_follow_"+book.id;follow.textContent=localStorage.getItem(k)?"♥ Following":"♡ Follow book";
       follow.onclick=()=>{if(localStorage.getItem(k))localStorage.removeItem(k);else localStorage.setItem(k,"1");follow.textContent=localStorage.getItem(k)?"♥ Following":"♡ Follow book"};actions.append(follow);body.append(actions);
       const note=document.createElement("p");note.className="muted";note.style.fontSize="11px";note.textContent="Book listing · Swipe down for another discovery ↓";body.append(note);
       article.append(body);fragment.append(article);
     });
     scroller.insertBefore(fragment,nav);
+  }
+  function rabbitOverview(book){
+    const raw=String(book.original_summary||book.description||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim();
+    return raw && !/^First published .*\\.$/.test(raw)?raw:"";
+  }
+  function rabbitReader(book){
+    const overlay=document.createElement("div");overlay.className="rabbit-reader-overlay";
+    overlay.setAttribute("role","dialog");overlay.setAttribute("aria-modal","true");overlay.setAttribute("aria-label","Book discovery");
+    const panel=document.createElement("div");panel.className="rabbit-reader-panel";
+    const close=document.createElement("button");close.className="rabbit-reader-close";close.textContent="← Back to the rabbit hole";close.onclick=()=>overlay.remove();
+    const eyebrow=document.createElement("div");eyebrow.className="eyebrow";eyebrow.textContent=(window.rabbitSelectedGenre||"BOOK DISCOVERY")+" / DEEPER LOOK";
+    const title=document.createElement("h1");title.textContent=book.title;
+    const author=document.createElement("p");author.className="muted";author.textContent="By "+book.author;
+    const copy=document.createElement("div");copy.className="rabbit-reader-copy";
+    const description=rabbitOverview(book);
+    const intro=document.createElement("p");intro.textContent=description||"A detailed, verified description of this book is not available yet.";copy.append(intro);
+    const status=document.createElement("div");status.className="takeaway";status.textContent=book.original_summary?"Original RABBIT overview":"This is a book discovery overview, not an original chapter insight. RABBIT's in-depth chapter notes will appear here after editorial review.";
+    panel.append(close,eyebrow,title,author,copy,status);overlay.append(panel);document.body.append(overlay);close.focus();
+    overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.remove()});
+    const escape=e=>{if(e.key==="Escape"){overlay.remove();document.removeEventListener("keydown",escape)}};
+    document.addEventListener("keydown",escape);
+  }
+  async function rabbitEnrich(book,info){
+    if(!String(book.id||"").startsWith("/works/"))return;
+    try{
+      const res=await fetch("https://openlibrary.org"+book.id+".json");
+      if(!res.ok)return;
+      const work=await res.json();const d=typeof work.description==="string"?work.description:work.description?.value;
+      if(d&&d.trim().length>60){book.description=d.trim();info.textContent=rabbitOverview(book)}
+    }catch(e){console.warn("Book description unavailable:",e)}
   }
   let offset=0,finished=false;
   async function loadMore(){
