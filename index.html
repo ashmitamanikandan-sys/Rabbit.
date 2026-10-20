@@ -74,6 +74,8 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
 .rabbit-reader-panel h1{font-size:clamp(32px,8vw,48px);letter-spacing:-1.5px;line-height:1.08;margin:18px 0}
 .rabbit-reader-copy{font-size:17px;line-height:1.85;white-space:pre-line;overflow-wrap:anywhere;margin:30px 0}
 .rabbit-reader-panel .takeaway{padding:20px;border:1px solid #493d59;border-radius:16px;color:#d5c4f8}
+
+.rabbit-library-search{display:flex;gap:9px;margin:8px 0 20px;align-items:center}.rabbit-library-search input{flex:1;min-width:0;padding:13px 14px;border:1px solid rgba(188,166,255,.3);border-radius:12px;background:#17131d;color:#fff;font-size:14px;outline:none}.rabbit-library-search input:focus{border-color:var(--lilac);box-shadow:0 0 0 3px rgba(188,166,255,.12)}.rabbit-library-search button{border:0;border-radius:11px;background:var(--lilac);color:#130f1b;padding:13px;font-size:13px;font-weight:800;white-space:nowrap}
 </style></head><body><div id="app"><main class="page welcome"><div class="eyebrow">WELCOME TO RABBIT</div><h1>Go down<br>the <span class="accent">rabbit hole.</span></h1><p>A feed of ideas worth getting lost in. Find your next obsession, one chapter at a time.</p><button class="primary" onclick="renderInterests()">Find your rabbit hole →</button></main></div><script>
 const icons={heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',bookmark:'<path d="M5 3h14v18l-7-5-7 5z"/>',arrow:'<path d="m15 18-6-6 6-6"/>',send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',message:'<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5Z"/>',home:'<path d="m3 10 9-7 9 7v11H3z"/><path d="M9 21v-7h6v7"/>'};const ico=(n)=>`<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[n]}</svg>`;
 const books=[
@@ -127,7 +129,7 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
 </style><script src="./rabbit-config.js"></script><script src="./rabbit-catalog.js"></script><script>
 /* Load the larger book feed into RABBIT's ORIGINAL home after entering. */
 (function(){
-  let catalogBusy=false,moreCount=0;
+  let catalogBusy=false,moreCount=0,searchTerm="",requestEpoch=0;const seenWorkIds=new Set();
   function addRealBookCards(rows){
     const scroller=document.getElementById("homeScroll");
     if(!scroller)return;
@@ -213,12 +215,12 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
     try{
       const conf=window.RABBIT_CONFIG||{},base=(conf.supabaseUrl||"").replace(/\/$/,"");
       let rows=[];
-      if(base&&conf.supabaseAnonKey&&(!window.rabbitSelectedGenre||window.rabbitSelectedGenre==="The Human Mind")){
+      if(!searchTerm&&base&&conf.supabaseAnonKey&&(!window.rabbitSelectedGenre||window.rabbitSelectedGenre==="The Human Mind")){
         const res=await fetch(base+"/rest/v1/books?select=id,title,author,cover_url,original_summary&catalog_status=eq.ready&order=created_at.desc&limit=30&offset="+offset,{headers:{apikey:conf.supabaseAnonKey,Authorization:"Bearer "+conf.supabaseAnonKey}});
         if(res.ok)rows=await res.json();
       }
       if(!rows.length){
-        const subjects={"The Human Mind":"psychology","Mystery":"mystery","Romance":"romance","Fantasy":"fantasy","History":"history","True Crime":"true_crime","Space":"astronomy","Science":"science","Philosophy":"philosophy","Poetry":"poetry","Mythology":"mythology","Adventure":"adventure","Thriller":"thriller","Technology":"technology","Art":"art","Design":"design","Music":"music","Cinema":"film","Nature":"nature","Wellness":"health","Business":"business","Politics":"politics","Culture":"culture","Biography":"biography","Psychology":"psychology","Productivity":"self_help","Relationships":"relationships","Self Discovery":"self_help","Dreams":"dreams","Neuroscience":"neuroscience"};const subject=subjects[window.rabbitSelectedGenre]||"fiction";const params=new URLSearchParams({subject,limit:"50",offset:String(offset),fields:"key,title,author_name,cover_i,language,first_sentence,first_publish_year"});
+        const subjects={"The Human Mind":"psychology","Mystery":"mystery","Romance":"romance","Fantasy":"fantasy","History":"history","True Crime":"true_crime","Space":"astronomy","Science":"science","Philosophy":"philosophy","Poetry":"poetry","Mythology":"mythology","Adventure":"adventure","Thriller":"thriller","Technology":"technology","Art":"art","Design":"design","Music":"music","Cinema":"film","Nature":"nature","Wellness":"health","Business":"business","Politics":"politics","Culture":"culture","Biography":"biography","Psychology":"psychology","Productivity":"self_help","Relationships":"relationships","Self Discovery":"self_help","Dreams":"dreams","Neuroscience":"neuroscience"};const subject=subjects[window.rabbitSelectedGenre]||"fiction";const params=new URLSearchParams({limit:"50",offset:String(offset),fields:"key,title,author_name,cover_i,language,first_sentence,first_publish_year"});if(searchTerm)params.set("q",searchTerm);else params.set("subject",subject);
         const res=await fetch("https://openlibrary.org/search.json?"+params);
         if(!res.ok)throw Error("Open Library "+res.status);
         const data=await res.json();
@@ -226,14 +228,26 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
       }
       offset+=50;
       if(!rows.length)finished=true;
+      rows=rows.filter(b=>{if(seenWorkIds.has(b.id))return false;seenWorkIds.add(b.id);return true});
       addRealBookCards(rows);
-      if(!rows.length){const rail=document.querySelector("#homeScroll .home-first .stories");if(rail)rail.textContent="No book stories found. Try another rabbit hole."}
+      if(!rows.length&&moreCount===0){const rail=document.querySelector("#homeScroll .home-first .stories");if(rail)rail.textContent="No books found. Try another genre or search."}
     }catch(err){console.warn("RABBIT catalog:",err)}
     finally{catalogBusy=false}
   }
   const originalHome=window.renderHome;
   if(typeof originalHome==="function"){
-    window.renderHome=function(){originalHome();const chosen=window.rabbitSelectedGenre||"The Human Mind";if(chosen!=="The Human Mind"){const s=document.getElementById("homeScroll");if(s){const heading=s.querySelector(".section-head .muted");if(heading)heading.textContent=chosen.toUpperCase();const oldPosts=s.querySelectorAll(".feedpost:not(.rabbit-expanded-post)");oldPosts.forEach(p=>p.remove());const first=s.querySelector(".home-first");if(first){const feature=first.querySelector(".feature");if(feature)feature.innerHTML='<div class="eyebrow">YOUR RABBIT HOLE · '+chosen.replace(/</g,"&lt;")+'</div><h2 style="font:600 27px/1.2 var(--reading-font);margin:18px 0">Follow your curiosity into '+chosen.replace(/</g,"&lt;")+'.</h2><p>Scroll to discover real books, one rabbit hole at a time.</p>';const stories=first.querySelector(".stories");if(stories){stories.replaceChildren();stories.dataset.catalog="loaded";const loading=document.createElement("span");loading.className="muted";loading.style.cssText="font-size:12px;min-width:180px;padding:20px 0";loading.textContent="Finding book stories…";stories.append(loading)}}}}offset=0;moreCount=0;finished=false;loadMore()};
+    window.renderHome=function(){originalHome();const chosen=window.rabbitSelectedGenre||"The Human Mind";if(chosen!=="The Human Mind"){const s=document.getElementById("homeScroll");if(s){const heading=s.querySelector(".section-head .muted");if(heading)heading.textContent=chosen.toUpperCase();const oldPosts=s.querySelectorAll(".feedpost:not(.rabbit-expanded-post)");oldPosts.forEach(p=>p.remove());const first=s.querySelector(".home-first");if(first){const feature=first.querySelector(".feature");if(feature)feature.innerHTML='<div class="eyebrow">YOUR RABBIT HOLE · '+chosen.replace(/</g,"&lt;")+'</div><h2 style="font:600 27px/1.2 var(--reading-font);margin:18px 0">Follow your curiosity into '+chosen.replace(/</g,"&lt;")+'.</h2><p>Scroll to discover real books, one rabbit hole at a time.</p>';const stories=first.querySelector(".stories");if(stories){stories.replaceChildren();stories.dataset.catalog="loaded";const loading=document.createElement("span");loading.className="muted";loading.style.cssText="font-size:12px;min-width:180px;padding:20px 0";loading.textContent="Finding book stories…";stories.append(loading)}}}}offset=0;moreCount=0;finished=false;searchTerm="";seenWorkIds.clear();
+      const home=document.getElementById("homeScroll");
+      const first=home?.querySelector(".home-first .section");
+      if(first){
+        const search=document.createElement("form");search.className="rabbit-library-search";
+        const input=document.createElement("input");input.type="search";input.placeholder="Search millions of books, authors, ideas…";input.setAttribute("aria-label","Search books");input.autocomplete="off";
+        const go=document.createElement("button");go.type="submit";go.textContent="Search ↗";
+        search.append(input,go);
+        search.onsubmit=e=>{e.preventDefault();const value=input.value.trim();if(!value){input.focus();return}searchTerm=value;offset=0;moreCount=0;finished=false;seenWorkIds.clear();home.querySelectorAll(".rabbit-expanded-post").forEach(el=>el.remove());const rail=home.querySelector(".home-first .stories");if(rail){rail.replaceChildren();rail.dataset.catalog="loaded";const message=document.createElement("span");message.className="muted";message.textContent="Searching the library…";rail.append(message)}loadMore()};
+        first.prepend(search);
+      }
+      loadMore()};
   }
   document.addEventListener("scroll",()=>{
     const scroller=document.getElementById("homeScroll");if(!scroller)return;
