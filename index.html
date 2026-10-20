@@ -266,6 +266,7 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
     document.addEventListener("keydown",keys);close.focus();
     if(sections.length)showSection(current);
   }
+  window.rabbitOpenBook=rabbitReader;
   async function rabbitEnrich(book,info){
     if(!String(book.id||"").startsWith("/works/"))return;
     try{
@@ -322,4 +323,4 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
     if(scroller.scrollTop+scroller.clientHeight>=scroller.scrollHeight-1400)loadMore();
   },true);
 })();
-</script></body></html>
+</script><script src="rabbit-v10.js" defer></script></body></html>
