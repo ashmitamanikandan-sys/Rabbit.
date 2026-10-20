@@ -2,6 +2,10 @@ name: RABBIT Save Books to Supabase
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/save-books.yml'
 
 permissions:
   contents: read
