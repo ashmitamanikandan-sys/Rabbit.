@@ -10,7 +10,7 @@ permissions:
 jobs:
   preview-books:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 30
 
     steps:
       - name: Get RABBIT files
@@ -21,13 +21,16 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Fetch book previews
+      - name: Fetch and check books
         run: python scripts/import_books.py
 
-      - name: Save preview results
-        if: success()
+      - name: Save book preview and quality report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: rabbit-books-preview
-          path: rabbit_books_preview.json
+          name: rabbit-import-results
+          path: |
+            rabbit_books_preview.json
+            rabbit_import_report.json
+          if-no-files-found: warn
           retention-days: 7
