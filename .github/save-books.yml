@@ -40,3 +40,5 @@ jobs:
             rabbit_import_report.json
           if-no-files-found: warn
           retention-days: 7
+
+          # RABBIT manual database import workflow
