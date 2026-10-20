@@ -51,7 +51,7 @@ def send(batch):
 
 
 def clean(value, max_length=500):
-    return re.sub(r"\\s+", " ", str(value or "")).strip()[:max_length]
+    return re.sub(r"\s+", " ", str(value or "")).strip()[:max_length]
 
 
 def work_record(record):
@@ -95,7 +95,7 @@ def main():
                 continue
             try:
                 # Open Library dump rows: type TAB key TAB revision TAB last_modified TAB JSON
-                data = json.loads(line.rstrip("\\n").split("\\t", 4)[-1])
+                data = json.loads(line.rstrip("\n").split("\t", 4)[-1])
                 item = work_record(data)
             except (ValueError, TypeError, IndexError, AttributeError):
                 continue
