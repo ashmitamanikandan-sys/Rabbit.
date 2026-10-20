@@ -61,10 +61,10 @@ for book in books:
         rows = existing
     else:
         rows = request(
-            "books?on_conflict=open_library_work_id",
+            "books",
             method="POST",
             data=payload,
-            prefer="resolution=ignore-duplicates,return=representation"
+            prefer="return=representation"
         )
 
         if not rows:
