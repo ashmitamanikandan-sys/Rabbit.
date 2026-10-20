@@ -158,8 +158,8 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
       const title=document.createElement("h3");title.textContent=book.title;
       const author=document.createElement("p");author.textContent=book.author;
       details.append(title,author);row.append(details);body.append(row);
-      const headline=document.createElement("h2");headline.textContent=book.title;body.append(headline);
-      const info=document.createElement("div");info.className="insight";info.textContent=rabbitOverview(book)||"A detailed book overview is being prepared. Open the book to see what is currently available.";body.append(info);if(i<12)rabbitEnrich(book,info);
+      const headline=document.createElement("h2");headline.textContent=rabbitInsight(book)?.heading||book.title;body.append(headline);
+      const info=document.createElement("div");info.className="insight";info.textContent=rabbitOverview(book)||"A detailed book overview is being prepared. Open the book to see what is currently available.";body.append(info);if(rabbitInsight(book))meta.textContent="ORIGINAL RABBIT INSIGHT · "+(window.rabbitSelectedGenre||"BOOKS").toUpperCase();if(i<12)rabbitEnrich(book,info);
       const actions=document.createElement("div");actions.className="actions";
       const read=document.createElement("button");read.className="readmore";read.textContent="Read more ↗";read.onclick=()=>rabbitReader(book);actions.append(read);
       const save=document.createElement("button");const sk="rabbit_save_"+book.id;save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save";save.onclick=()=>{if(localStorage.getItem(sk))localStorage.removeItem(sk);else localStorage.setItem(sk,"1");save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save"};actions.append(save);
@@ -170,7 +170,13 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
     });
     scroller.insertBefore(fragment,nav);
   }
+  const rabbitOriginalInsights={
+  "atomic habits":{heading:"Why tiny habits change more than big promises",preview:"Big changes rarely begin with a dramatic decision. They begin with a small action you can repeat on an ordinary day. James Clear explains how habits compound when tiny improvements are repeated. Instead of relying on motivation alone, build an environment that makes the useful action easier. Make the cue obvious and the first step simple. Make the behavior satisfying enough to return to tomorrow. Your identity matters too: each repetition is evidence of the person you are becoming. Missing once does not erase progress; returning matters more than perfection. The question is not how intensely you can change today, but what you can keep doing next month.",deep:"Atomic Habits explores how small, repeated behaviors shape larger outcomes. A goal describes an outcome, while a system describes the actions that help you reach it. Clear discusses a habit loop involving cue, craving, response, and reward. That framework helps explain why an environment can make one behavior easy and another difficult. If you want to read at night, try leaving a book beside your bed instead of relying on a burst of motivation. Start with two pages and notice what makes it easier to begin. Progress is not guaranteed by any one small action. The larger lesson is to build a repeatable process you can return to after interruptions."},
+  "the power of your subconscious mind":{heading:"Can the stories you tell yourself change your choices?",preview:"A thought repeated often can start to feel like a fact, even when it has never been tested. Joseph Murphy's book explores beliefs, suggestion, and mental imagery. Its most useful invitation is to notice the stories you tell yourself. If you expect failure before trying, you may hesitate or avoid practice. If you adopt a more constructive expectation, your behavior can change. This does not mean thoughts magically control events. It means an interpretation can influence choices, persistence, and emotional responses. Notice one belief that guides your day, and ask what evidence supports it. A healthier belief should help you act more clearly, not deny reality.",deep:"The Power of Your Subconscious Mind argues that repeated thoughts can shape experience. Some of its stronger claims are not supported by modern scientific evidence, so it deserves critical reading. Yet a useful question remains: what happens when an assumption becomes an automatic response? Someone who believes they are terrible at speaking might avoid opportunities to practice. That avoidance can reinforce the original belief. A more testable idea, such as 'I can improve with preparation,' may lead to different actions. Feedback and practice matter more than repeating an affirmation alone. Read the book as an invitation to examine self-talk, not as proof that thought alone changes reality."}
+  };
+  function rabbitInsight(book){return rabbitOriginalInsights[String(book.title||"").toLowerCase().trim()]||null}
   function rabbitOverview(book){
+    const curated=rabbitInsight(book);if(curated)return curated.preview;
     const raw=String(book.original_summary||book.description||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim();
     return raw && !/^First published .*\\.$/.test(raw)?raw:"";
   }
@@ -184,8 +190,8 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
     const author=document.createElement("p");author.className="muted";author.textContent="By "+book.author;
     const copy=document.createElement("div");copy.className="rabbit-reader-copy";
     const description=rabbitOverview(book);
-    const intro=document.createElement("p");intro.textContent=description||"A detailed, verified description of this book is not available yet.";copy.append(intro);
-    const status=document.createElement("div");status.className="takeaway";status.textContent=book.original_summary?"Original RABBIT overview":"This is a book discovery overview, not an original chapter insight. RABBIT's in-depth chapter notes will appear here after editorial review.";
+    const intro=document.createElement("p");intro.textContent=rabbitInsight(book)?.deep||description||"A detailed, verified description of this book is not available yet.";copy.append(intro);
+    const status=document.createElement("div");status.className="takeaway";status.textContent=rabbitInsight(book)?"Original RABBIT editorial explanation inspired by this book; not a verbatim chapter excerpt.":book.original_summary?"Original RABBIT overview":"This is a book discovery overview, not an original chapter insight. RABBIT's in-depth chapter notes will appear here after editorial review.";
     panel.append(close,eyebrow,title,author,copy,status);overlay.append(panel);document.body.append(overlay);close.focus();
     overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.remove()});
     const escape=e=>{if(e.key==="Escape"){overlay.remove();document.removeEventListener("keydown",escape)}};
