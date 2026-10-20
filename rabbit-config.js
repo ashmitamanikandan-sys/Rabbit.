@@ -1,5 +1,5 @@
-// Public browser configuration only. Never put a Supabase service-role or secret key here.
+// Public browser configuration. Never put secret or service-role keys here.
 window.RABBIT_CONFIG = {
-  supabaseUrl: "",
-  supabaseAnonKey: ""
+  supabaseUrl: "https://nstwkunhfyriwvgnuhfy.supabase.co",
+  supabaseAnonKey: "sb_publishable_NQTjXwKr11wJLSu9aPnCKg_c6KxDgZE"
 };
