@@ -11,7 +11,7 @@ const button=(txt,fn,cls)=>{const b=make("button",cls,txt);b.type="button";b.onc
 const title=(label,h,sub)=>{const x=make("section","v10-heading");x.append(make("small","",label),make("h1","",h),make("p","",sub));return x};
 let shell,content,tab="home",genre="The Human Mind",search="",offset=0,busy=false,finished=false,epoch=0,observer,seen=new Set();
 function openBook(b){if(window.rabbitOpenBook)window.rabbitOpenBook(b)}
-function open(page){if(!shell)mount();tab=page;shell.hidden=page==="home";if(page==="home")return;content.replaceChildren();content.scrollTop=0;epoch++;if(observer)observer.disconnect();busy=false;if(page==="explore")explore();if(page==="profile")profile();if(page==="social")social();if(page==="warren")warren()}
+function open(page){if(page==="warren"){window.location.href="./warren.html?v=529129a3";return}if(!shell)mount();tab=page;shell.hidden=page==="home";if(page==="home")return;content.replaceChildren();content.scrollTop=0;epoch++;if(observer)observer.disconnect();busy=false;if(page==="explore")explore();if(page==="profile")profile();if(page==="social")social();if(page==="warren")warren()}
 window.rabbitV10Open=open;
 function mount(){if(document.getElementById("rabbit-v10-nav"))return;const nav=make("nav","v10-nav");nav.id="rabbit-v10-nav";nav.setAttribute("aria-label","RABBIT navigation");[["home","⌂ Home"],["explore","⌕ Explore"],["profile","♙ Profile"],["warren","✦ Warren"],["social","♡ Social"]].forEach(([k,v])=>nav.append(button(v,()=>open(k))));document.body.append(nav);shell=make("div","v10-shell");shell.hidden=true;shell.setAttribute("role","dialog");shell.setAttribute("aria-label","RABBIT Explore and Community");const header=make("header","v10-head");header.append(button("← Home",()=>open("home")),make("strong","","RABBIT / FOLLOW YOUR CURIOSITY"));content=make("main","v10-content");shell.append(header,content);document.body.append(shell)}
 function card(b){const c=make("article","v10-card");const open=button("",()=>openBook(b),"v10-book");const cover=make("div","v10-cover");if(b.cover_url){const img=make("img");img.src=b.cover_url;img.loading="lazy";img.alt="Cover of "+b.title;cover.append(img)}else cover.textContent="RABBIT";open.append(cover,make("strong","",b.title),make("small","",b.author));const actions=make("div","v10-actions");actions.append(button("Read ↗",()=>openBook(b)),button("＋ Shelf",()=>{data.shelves[b.id]={...b,status:"Want to Read",updated:Date.now()};save();alert("Saved to Want to Read")}));c.append(open,actions);return c}
@@ -85,5 +85,5 @@ const css=`
 `;
 const style=make("style");style.textContent=css;document.head.append(style);
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",mount,{once:true});else mount();
-if(new URLSearchParams(location.search).get("tab")==="warren"){if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>open("warren"),{once:true});else open("warren")}
+if(new URLSearchParams(location.search).get("tab")==="warren"){window.location.replace("./warren.html?v=529129a3")}
 })();
