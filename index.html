@@ -76,6 +76,23 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
 .rabbit-reader-panel .takeaway{padding:20px;border:1px solid #493d59;border-radius:16px;color:#d5c4f8}
 
 .rabbit-library-search{display:flex;gap:9px;margin:8px 0 20px;align-items:center}.rabbit-library-search input{flex:1;min-width:0;padding:13px 14px;border:1px solid rgba(188,166,255,.3);border-radius:12px;background:#17131d;color:#fff;font-size:14px;outline:none}.rabbit-library-search input:focus{border-color:var(--lilac);box-shadow:0 0 0 3px rgba(188,166,255,.12)}.rabbit-library-search button{border:0;border-radius:11px;background:var(--lilac);color:#130f1b;padding:13px;font-size:13px;font-weight:800;white-space:nowrap}
+
+/* RABBIT V9 touch-first editorial chapter reader */
+.rabbit-chapter-reader{max-width:900px;width:min(94vw,900px);min-height:75vh;padding:clamp(20px,4vw,46px);box-sizing:border-box}
+.rabbit-chapter-intro{color:#c5bdce;line-height:1.7;max-width:680px}
+.rabbit-chapter-status{display:inline-block;border:1px solid rgba(188,166,255,.38);background:rgba(188,166,255,.09);border-radius:99px;padding:9px 13px;font-size:11px;letter-spacing:.06em;color:#dfccff;margin:15px 0 22px}
+.rabbit-chapter-layout{display:grid;grid-template-columns:minmax(190px,260px) minmax(0,1fr);gap:24px;align-items:start}
+.rabbit-chapter-nav{display:flex;flex-direction:column;gap:9px}
+.rabbit-chapter-link{text-align:left;border:1px solid rgba(188,166,255,.18);background:#15111d;color:#dcd4e7;padding:15px;border-radius:13px;line-height:1.45;min-height:48px;font:inherit;cursor:pointer}
+.rabbit-chapter-link[aria-current=true]{background:rgba(188,166,255,.18);border-color:#bca6ff;color:white}
+.rabbit-chapter-page,.rabbit-chapter-empty{background:linear-gradient(145deg,#17121f,#0e0b14);border:1px solid rgba(188,166,255,.16);border-radius:18px;padding:clamp(20px,3vw,32px)}
+.rabbit-chapter-page h2,.rabbit-chapter-empty h2{font-size:clamp(24px,3vw,35px);line-height:1.2;margin:14px 0 20px}
+.rabbit-chapter-body{font-size:17px;line-height:1.95;color:#e8e1ed;white-space:pre-line}
+.rabbit-chapter-disclaimer{font-size:12px;color:#aea5b8;line-height:1.6;border-top:1px solid rgba(188,166,255,.18);padding-top:17px}
+.rabbit-chapter-controls{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+.rabbit-chapter-controls button{border:1px solid #8e72c7;background:#251b37;color:white;border-radius:12px;min-height:46px;padding:10px 15px;cursor:pointer}
+.rabbit-chapter-controls button:disabled{opacity:.35;cursor:default}
+@media(max-width:680px){.rabbit-chapter-layout{grid-template-columns:1fr}.rabbit-chapter-nav{flex-direction:row;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}.rabbit-chapter-link{flex:0 0 200px;scroll-snap-align:start}.rabbit-chapter-reader{width:100%;min-height:100vh;border-radius:0}}
 </style></head><body><div id="app"><main class="page welcome"><div class="eyebrow">WELCOME TO RABBIT</div><h1>Go down<br>the <span class="accent">rabbit hole.</span></h1><p>A feed of ideas worth getting lost in. Find your next obsession, one chapter at a time.</p><button class="primary" onclick="renderInterests()">Find your rabbit hole →</button></main></div><script>
 const icons={heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',bookmark:'<path d="M5 3h14v18l-7-5-7 5z"/>',arrow:'<path d="m15 18-6-6 6-6"/>',send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',message:'<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5Z"/>',home:'<path d="m3 10 9-7 9 7v11H3z"/><path d="M9 21v-7h6v7"/>'};const ico=(n)=>`<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[n]}</svg>`;
 const books=[
@@ -182,22 +199,72 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
     const raw=String(book.original_summary||book.description||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim();
     return raw && !/^First published .*\\.$/.test(raw)?raw:"";
   }
+  // Original RABBIT reading sections are editorial topics, NOT verified book chapters.
+  const rabbitReadingSections={
+    "atomic habits":[
+      {title:"The power of small repetitions",body:"A small action looks insignificant when judged by one day. Its value emerges through repetition. Think of a reader who manages two pages each evening. Two pages are not a dramatic achievement, but the action makes reading part of ordinary life. The practical challenge is to make the first step easy enough to repeat even when motivation is low. Choose one behavior, shrink it to a manageable starting point, and decide when it will happen. This is an original RABBIT interpretation of the book's ideas, not a reproduction of its chapters."},
+      {title:"Design the environment",body:"Willpower is not the only influence on behavior. Objects, places and routines can make an action more or less likely. A visible book invites reading; a phone within reach invites scrolling. Instead of blaming yourself for every distraction, experiment with the space around you. Put the useful choice closer and the distracting choice farther away. Notice what actually changes over a week. A supportive environment is not a guarantee, but it reduces the number of decisions required to begin."},
+      {title:"Identity, setbacks and returning",body:"The identity you build is influenced by what you repeatedly do. Each time you practice, you collect a small piece of evidence about what kind of person you are becoming. Yet missing a day does not invalidate the pattern. The meaningful question after an interruption is how to return. Create a restart rule you can use without shame or perfectionism. Focus on a system you can sustain rather than an ideal streak that collapses after one difficult day."}
+    ],
+    "the power of your subconscious mind":[
+      {title:"The stories we repeat",body:"Repeated beliefs can shape what we notice and how we respond. Someone who expects embarrassment may avoid speaking up, losing chances to practice and gather new evidence. RABBIT's useful takeaway is to identify a recurring assumption and ask whether it is actually true. This is a psychological reflection, not proof that thoughts control external events. A belief becomes more helpful when it encourages practical, testable action."},
+      {title:"Mental rehearsal and real action",body:"Imagining a difficult conversation may help you prepare words and anticipate emotions. But imagination cannot replace the conversation itself. When you use mental rehearsal, connect it to a concrete next step: prepare, practice, ask for feedback and adjust. Some claims in Joseph Murphy's book go beyond what scientific evidence supports. RABBIT treats those claims critically rather than promising that positive thinking alone produces success."},
+      {title:"Challenge automatic assumptions",body:"An automatic thought can feel like a fact because it arrives quickly and often. Try writing down one thought that limits you, the evidence for it, the evidence against it and a more balanced alternative. Then choose one small experiment. The aim is not to force optimism or deny a real problem. It is to make room for clearer judgment and behavior informed by what happens in the world."}
+    ]
+  };
   function rabbitReader(book){
+    const old=document.querySelector(".rabbit-reader-overlay");if(old)old.remove();
     const overlay=document.createElement("div");overlay.className="rabbit-reader-overlay";
-    overlay.setAttribute("role","dialog");overlay.setAttribute("aria-modal","true");overlay.setAttribute("aria-label","Book discovery");
-    const panel=document.createElement("div");panel.className="rabbit-reader-panel";
-    const close=document.createElement("button");close.className="rabbit-reader-close";close.textContent="← Back to the rabbit hole";close.onclick=()=>overlay.remove();
-    const eyebrow=document.createElement("div");eyebrow.className="eyebrow";eyebrow.textContent=(window.rabbitSelectedGenre||"BOOK DISCOVERY")+" / DEEPER LOOK";
+    overlay.setAttribute("role","dialog");overlay.setAttribute("aria-modal","true");overlay.setAttribute("aria-label","RABBIT book reader");
+    const panel=document.createElement("div");panel.className="rabbit-reader-panel rabbit-chapter-reader";
+    const close=document.createElement("button");close.className="rabbit-reader-close";close.type="button";close.textContent="← Back to the rabbit hole";
+    const eyebrow=document.createElement("div");eyebrow.className="eyebrow";eyebrow.textContent=(window.rabbitSelectedGenre||"BOOK DISCOVERY")+" / RABBIT READER";
     const title=document.createElement("h1");title.textContent=book.title;
     const author=document.createElement("p");author.className="muted";author.textContent="By "+book.author;
-    const copy=document.createElement("div");copy.className="rabbit-reader-copy";
-    const description=rabbitOverview(book);
-    const intro=document.createElement("p");intro.textContent=rabbitInsight(book)?.deep||description||"A detailed, verified description of this book is not available yet.";copy.append(intro);
-    const status=document.createElement("div");status.className="takeaway";status.textContent=rabbitInsight(book)?"Original RABBIT editorial explanation inspired by this book; not a verbatim chapter excerpt.":book.original_summary?"Original RABBIT overview":"This is a book discovery overview, not an original chapter insight. RABBIT's in-depth chapter notes will appear here after editorial review.";
-    panel.append(close,eyebrow,title,author,copy,status);overlay.append(panel);document.body.append(overlay);close.focus();
-    overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.remove()});
-    const escape=e=>{if(e.key==="Escape"){overlay.remove();document.removeEventListener("keydown",escape)}};
-    document.addEventListener("keydown",escape);
+    const intro=document.createElement("p");intro.className="rabbit-chapter-intro";intro.textContent="Explore original RABBIT explanations. Verified chapter structures are identified separately from editorial reading topics.";
+    const sections=rabbitReadingSections[String(book.title||"").toLowerCase().trim()]||[];
+    const label=document.createElement("div");label.className="rabbit-chapter-status";
+    label.textContent=sections.length?"EDITORIAL READING TOPICS · Chapter structure not verified":"CHAPTER STRUCTURE UNVERIFIED · Editorial sections not yet available";
+    const layout=document.createElement("div");layout.className="rabbit-chapter-layout";
+    const nav=document.createElement("nav");nav.className="rabbit-chapter-nav";nav.setAttribute("aria-label","Reading sections");
+    const page=document.createElement("section");page.className="rabbit-chapter-page";page.setAttribute("aria-live","polite");
+    const storageKey="rabbit-reader-progress:"+String(book.id||book.title).slice(0,140);
+    let current=0;try{current=Math.max(0,Math.min(sections.length-1,Number(localStorage.getItem(storageKey))||0))}catch(e){current=0}
+    const buttons=[];
+    function showSection(index){
+      if(index<0||index>=sections.length)return;
+      current=index;page.replaceChildren();
+      const counter=document.createElement("div");counter.className="eyebrow";counter.textContent="RABBIT ORIGINAL · READING TOPIC "+(index+1)+" OF "+sections.length;
+      const heading=document.createElement("h2");heading.textContent=sections[index].title;
+      const copy=document.createElement("p");copy.className="rabbit-chapter-body";copy.textContent=sections[index].body;
+      const note=document.createElement("p");note.className="rabbit-chapter-disclaimer";note.textContent="Original RABBIT editorial explanation. This is not an official chapter title, chapter summary, or excerpt from the book.";
+      const controls=document.createElement("div");controls.className="rabbit-chapter-controls";
+      const previous=document.createElement("button");previous.type="button";previous.textContent="← Previous";previous.disabled=index===0;previous.onclick=()=>showSection(current-1);
+      const next=document.createElement("button");next.type="button";next.textContent=index===sections.length-1?"Finished ✓":"Next topic →";next.disabled=index===sections.length-1;next.onclick=()=>showSection(current+1);
+      controls.append(previous,next);page.append(counter,heading,copy,note,controls);
+      buttons.forEach((button,i)=>{button.setAttribute("aria-current",i===index?"true":"false")});
+      try{localStorage.setItem(storageKey,String(index))}catch(e){}
+    }
+    if(sections.length){
+      sections.forEach((section,i)=>{const button=document.createElement("button");button.type="button";button.className="rabbit-chapter-link";button.textContent=String(i+1).padStart(2,"0")+"  "+section.title;button.onclick=()=>showSection(i);nav.append(button);buttons.push(button)});
+      layout.append(nav,page);
+    }else{
+      const empty=document.createElement("div");empty.className="rabbit-chapter-empty";
+      const heading=document.createElement("h2");heading.textContent="A chapter guide is being researched";
+      const description=document.createElement("p");description.textContent="RABBIT hasn't verified this book's chapter structure or published original section-by-section explanations. We won't invent chapter names or summaries.";
+      empty.append(heading,description);
+      const overview=rabbitOverview(book);
+      if(overview){const sub=document.createElement("h3");sub.textContent="Book overview";const copy=document.createElement("p");copy.textContent=overview;empty.append(sub,copy)}
+      layout.append(empty);
+    }
+    panel.append(close,eyebrow,title,author,intro,label,layout);overlay.append(panel);
+    document.body.append(overlay);
+    const previouslyFocused=document.activeElement;
+    function dismiss(){overlay.remove();document.removeEventListener("keydown",keys);if(previouslyFocused&&previouslyFocused.focus)previouslyFocused.focus()}
+    close.onclick=dismiss;overlay.addEventListener("click",e=>{if(e.target===overlay)dismiss()});
+    function keys(e){if(e.key==="Escape")dismiss();if(e.key==="Tab"){const focusables=[...panel.querySelectorAll("button:not([disabled])")];if(!focusables.length)return;const first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}}
+    document.addEventListener("keydown",keys);close.focus();
+    if(sections.length)showSection(current);
   }
   async function rabbitEnrich(book,info){
     if(!String(book.id||"").startsWith("/works/"))return;
