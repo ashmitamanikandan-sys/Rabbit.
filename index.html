@@ -85,10 +85,20 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
   function addRealBookCards(rows){
     const scroller=document.getElementById("homeScroll");
     if(!scroller)return;
+    const storyRail=scroller.querySelector(".home-first .stories");
+    if(storyRail&&storyRail.dataset.catalog!=="loaded"){storyRail.replaceChildren();storyRail.dataset.catalog="loaded"}
     const nav=scroller.querySelector(".footnav");
     const fragment=document.createDocumentFragment();
     rows.forEach((book,i)=>{
       if(!book||!book.title||!book.author)return;
+      if(storyRail&&storyRail.children.length<18&&book.cover_url){
+        const story=document.createElement("button");story.className="story";story.type="button";
+        const image=document.createElement("img");image.src=book.cover_url;image.alt=book.title;image.loading="lazy";
+        const label=document.createElement("span");label.textContent=book.title;
+        story.append(image,label);
+        story.onclick=()=>article.scrollIntoView({behavior:"smooth",block:"start"});
+        storyRail.append(story);
+      }
       const article=document.createElement("article");
       article.className="feedpost rabbit-expanded-post";
       const top=document.createElement("div");top.className="top";
@@ -103,7 +113,7 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
       const author=document.createElement("p");author.textContent=book.author;
       details.append(title,author);row.append(details);body.append(row);
       const headline=document.createElement("h2");headline.textContent=book.title;body.append(headline);
-      const info=document.createElement("div");info.className="insight";info.textContent=book.original_summary||"Discover this book and follow your curiosity. Original RABBIT insights are coming soon.";body.append(info);
+      const info=document.createElement("div");info.className="insight";info.textContent=book.original_summary||book.description||("Explore "+book.title+" by "+book.author+". This is a book discovery preview; RABBIT’s original chapter insights have not been published for this title yet.");body.append(info);
       const actions=document.createElement("div");actions.className="actions";
       const follow=document.createElement("button");const k="rabbit_follow_"+book.id;follow.textContent=localStorage.getItem(k)?"♥ Following":"♡ Follow book";
       follow.onclick=()=>{if(localStorage.getItem(k))localStorage.removeItem(k);else localStorage.setItem(k,"1");follow.textContent=localStorage.getItem(k)?"♥ Following":"♡ Follow book"};actions.append(follow);body.append(actions);
@@ -124,11 +134,11 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
         if(res.ok)rows=await res.json();
       }
       if(!rows.length){
-        const subjects={"The Human Mind":"psychology","Mystery":"mystery","Romance":"romance","Fantasy":"fantasy","History":"history","True Crime":"true_crime","Space":"astronomy","Science":"science","Philosophy":"philosophy","Poetry":"poetry","Mythology":"mythology","Adventure":"adventure","Thriller":"thriller","Technology":"technology","Art":"art","Design":"design","Music":"music","Cinema":"film","Nature":"nature","Wellness":"health","Business":"business","Politics":"politics","Culture":"culture","Biography":"biography","Psychology":"psychology","Productivity":"self_help","Relationships":"relationships","Self Discovery":"self_help","Dreams":"dreams","Neuroscience":"neuroscience"};const subject=subjects[window.rabbitSelectedGenre]||"fiction";const params=new URLSearchParams({subject,limit:"50",offset:String(offset),fields:"key,title,author_name,cover_i,language"});
+        const subjects={"The Human Mind":"psychology","Mystery":"mystery","Romance":"romance","Fantasy":"fantasy","History":"history","True Crime":"true_crime","Space":"astronomy","Science":"science","Philosophy":"philosophy","Poetry":"poetry","Mythology":"mythology","Adventure":"adventure","Thriller":"thriller","Technology":"technology","Art":"art","Design":"design","Music":"music","Cinema":"film","Nature":"nature","Wellness":"health","Business":"business","Politics":"politics","Culture":"culture","Biography":"biography","Psychology":"psychology","Productivity":"self_help","Relationships":"relationships","Self Discovery":"self_help","Dreams":"dreams","Neuroscience":"neuroscience"};const subject=subjects[window.rabbitSelectedGenre]||"fiction";const params=new URLSearchParams({subject,limit:"50",offset:String(offset),fields:"key,title,author_name,cover_i,language,first_sentence,first_publish_year"});
         const res=await fetch("https://openlibrary.org/search.json?"+params);
         if(!res.ok)throw Error("Open Library "+res.status);
         const data=await res.json();
-        rows=(data.docs||[]).filter(b=>b.key&&b.title&&b.author_name?.length&&b.cover_i&&(!b.language||b.language.includes("eng"))).map(b=>({id:b.key,title:b.title,author:b.author_name[0],cover_url:"https://covers.openlibrary.org/b/id/"+b.cover_i+"-M.jpg"}));
+        rows=(data.docs||[]).filter(b=>b.key&&b.title&&b.author_name?.length&&b.cover_i&&(!b.language||b.language.includes("eng"))).map(b=>({id:b.key,title:b.title,author:b.author_name[0],cover_url:"https://covers.openlibrary.org/b/id/"+b.cover_i+"-M.jpg",description:(Array.isArray(b.first_sentence)?b.first_sentence[0]:b.first_sentence)||("First published "+(b.first_publish_year||"date unknown")+".")}));
       }
       offset+=50;
       if(!rows.length)finished=true;
@@ -138,7 +148,7 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
   }
   const originalHome=window.renderHome;
   if(typeof originalHome==="function"){
-    window.renderHome=function(){originalHome();const chosen=window.rabbitSelectedGenre||"The Human Mind";if(chosen!=="The Human Mind"){const s=document.getElementById("homeScroll");if(s){const heading=s.querySelector(".section-head .muted");if(heading)heading.textContent=chosen.toUpperCase();const oldPosts=s.querySelectorAll(".feedpost:not(.rabbit-expanded-post)");oldPosts.forEach(p=>p.remove());const first=s.querySelector(".home-first");if(first){const feature=first.querySelector(".feature");if(feature)feature.innerHTML='<div class="eyebrow">YOUR RABBIT HOLE · '+chosen.replace(/</g,"&lt;")+'</div><h2 style="font:600 27px/1.2 var(--reading-font);margin:18px 0">Follow your curiosity into '+chosen.replace(/</g,"&lt;")+'.</h2><p>Scroll to discover real books, one rabbit hole at a time.</p>';const stories=first.querySelector(".stories");if(stories)stories.remove()}}}offset=0;moreCount=0;finished=false;loadMore()};
+    window.renderHome=function(){originalHome();const chosen=window.rabbitSelectedGenre||"The Human Mind";if(chosen!=="The Human Mind"){const s=document.getElementById("homeScroll");if(s){const heading=s.querySelector(".section-head .muted");if(heading)heading.textContent=chosen.toUpperCase();const oldPosts=s.querySelectorAll(".feedpost:not(.rabbit-expanded-post)");oldPosts.forEach(p=>p.remove());const first=s.querySelector(".home-first");if(first){const feature=first.querySelector(".feature");if(feature)feature.innerHTML='<div class="eyebrow">YOUR RABBIT HOLE · '+chosen.replace(/</g,"&lt;")+'</div><h2 style="font:600 27px/1.2 var(--reading-font);margin:18px 0">Follow your curiosity into '+chosen.replace(/</g,"&lt;")+'.</h2><p>Scroll to discover real books, one rabbit hole at a time.</p>';const stories=first.querySelector(".stories");if(stories){stories.replaceChildren();stories.dataset.catalog="loaded"}}}}offset=0;moreCount=0;finished=false;loadMore()};
   }
   document.addEventListener("scroll",()=>{
     const scroller=document.getElementById("homeScroll");if(!scroller)return;
