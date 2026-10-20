@@ -48,12 +48,30 @@ for book in books:
         "catalog_status": "pending"
     }
 
-    rows = request(
-        "books?on_conflict=open_library_work_id",
-        method="POST",
-        data=payload,
-        prefer="resolution=merge-duplicates,return=representation"
+        lookup = urllib.parse.quote(
+        work_id, safe=""
     )
+
+    existing = request(
+        "books?select=id&open_library_work_id=eq."
+        + lookup
+    )
+
+    if existing:
+        rows = existing
+    else:
+        rows = request(
+            "books?on_conflict=open_library_work_id",
+            method="POST",
+            data=payload,
+            prefer="resolution=ignore-duplicates,return=representation"
+        )
+
+        if not rows:
+            rows = request(
+                "books?select=id&open_library_work_id=eq."
+                + lookup
+            )
 
     if not rows:
         raise RuntimeError(f"Book not saved: {work_id}")
