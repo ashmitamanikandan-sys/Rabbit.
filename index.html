@@ -161,7 +161,7 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
       const author=document.createElement("p");author.textContent=book.author;
       details.append(title,author);row.append(details);body.append(row);
       const headline=document.createElement("h2");headline.textContent=rabbitInsight(book)?.heading||book.title;body.append(headline);
-      const info=document.createElement("div");info.className="insight";info.textContent=rabbitOverview(book)||"A detailed book overview is being prepared. Open the book to see what is currently available.";body.append(info);if(rabbitInsight(book))meta.textContent="ORIGINAL RABBIT INSIGHT · "+(window.rabbitSelectedGenre||"BOOKS").toUpperCase();if(i<12)rabbitEnrich(book,info);
+      const info=document.createElement("div");info.className="insight";info.textContent=rabbitOverview(book)||"A detailed book overview is being prepared. Open the book to see what is currently available.";body.append(info);if(rabbitInsight(book))meta.textContent="ORIGINAL RABBIT INSIGHT · "+(window.rabbitSelectedGenre||"BOOKS").toUpperCase();/* Work descriptions load only when the reader opens a book, avoiding per-card API requests. */
       const actions=document.createElement("div");actions.className="actions";
       const read=document.createElement("button");read.className="readmore";read.textContent="Read more ↗";read.onclick=()=>rabbitReader(book);actions.append(read);
       const save=document.createElement("button");const sk="rabbit_save_"+book.id;save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save";save.onclick=()=>{if(localStorage.getItem(sk))localStorage.removeItem(sk);else localStorage.setItem(sk,"1");save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save"};actions.append(save);
@@ -224,7 +224,7 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
         const res=await fetch("https://openlibrary.org/search.json?"+params);
         if(!res.ok)throw Error("Open Library "+res.status);
         const data=await res.json();
-        rows=(data.docs||[]).filter(b=>b.key&&b.title&&b.author_name?.length&&b.cover_i&&(!b.language||b.language.includes("eng"))).map(b=>({id:b.key,title:b.title,author:b.author_name[0],cover_url:"https://covers.openlibrary.org/b/id/"+b.cover_i+"-M.jpg",description:(Array.isArray(b.first_sentence)?b.first_sentence[0]:b.first_sentence)||("First published "+(b.first_publish_year||"date unknown")+".")}));
+        rows=(data.docs||[]).filter(b=>b.key&&b.title&&b.author_name?.length&&(!b.language||b.language.includes("eng"))).map(b=>({id:b.key,title:b.title,author:b.author_name[0],cover_url:b.cover_i?"https://covers.openlibrary.org/b/id/"+b.cover_i+"-M.jpg":"",description:(Array.isArray(b.first_sentence)?b.first_sentence[0]:b.first_sentence)||("First published "+(b.first_publish_year||"date unknown")+".")}));
       }
       if(epoch!==requestEpoch)return;
       offset+=50;
