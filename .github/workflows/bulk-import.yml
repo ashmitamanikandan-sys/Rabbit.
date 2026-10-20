@@ -1,0 +1,39 @@
+name: RABBIT Bulk Catalog Import
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_records:
+        description: "Maximum works to import (1000-50000 per run)"
+        required: true
+        default: "10000"
+        type: choice
+        options: ["1000", "10000", "50000"]
+
+permissions:
+  contents: read
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download current Open Library works dump
+        run: |
+          curl --fail --location --retry 3 --continue-at - \
+            --output ol_dump_works_latest.txt.gz \
+            https://openlibrary.org/data/ol_dump_works_latest.txt.gz
+          gzip -t ol_dump_works_latest.txt.gz
+      - name: Import metadata as pending
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          MAX_RECORDS: ${{ inputs.max_records }}
+        run: |
+          python scripts/import_openlibrary_dump.py \
+            --file ol_dump_works_latest.txt.gz \
+            --max-records "$MAX_RECORDS"
