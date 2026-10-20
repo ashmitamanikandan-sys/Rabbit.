@@ -74,4 +74,71 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
 .rabbit-catalog-feed .insight{font-size:17px;line-height:1.75}
 #rabbit-catalog-more{max-width:470px;margin:20px auto 60px;display:block}
 #rabbit-catalog-more[hidden]{display:none}
-</style><script src="./rabbit-config.js"></script><script src="./rabbit-catalog.js"></script><button type="button" onclick="rabbitOpenCatalog()" aria-label="Explore RABBIT book catalog" style="position:fixed;right:16px;bottom:90px;z-index:60;background:#bca6ff;color:#160c23;padding:11px 15px;border:0;border-radius:999px;font:700 13px -apple-system,BlinkMacSystemFont,Arial,sans-serif;box-shadow:0 6px 25px #0009">Explore books ↗</button></body></html>
+</style><script src="./rabbit-config.js"></script><script src="./rabbit-catalog.js"></script><script>
+/* Load the larger book feed into RABBIT's ORIGINAL home after entering. */
+(function(){
+  let catalogBusy=false,moreCount=0;
+  function addRealBookCards(rows){
+    const scroller=document.getElementById("homeScroll");
+    if(!scroller)return;
+    const nav=scroller.querySelector(".footnav");
+    const fragment=document.createDocumentFragment();
+    rows.forEach((book,i)=>{
+      if(!book||!book.title||!book.author)return;
+      const article=document.createElement("article");
+      article.className="feedpost rabbit-expanded-post";
+      const top=document.createElement("div");top.className="top";
+      if(typeof logo==="function")top.innerHTML='<span class="muted" style="font-size:11px;letter-spacing:1px">FOLLOW YOUR CURIOSITY</span>'+logo();
+      article.append(top);
+      const body=document.createElement("div");body.className="postbody";
+      const meta=document.createElement("div");meta.className="postmeta";meta.textContent="RABBIT BOOK DISCOVERY · HOP "+String(++moreCount).padStart(2,"0");body.append(meta);
+      const row=document.createElement("div");row.className="bookrow";row.style.marginTop="22px";
+      if(book.cover_url&&book.cover_url.startsWith("https://")){const cover=document.createElement("img");cover.className="cover";cover.src=book.cover_url;cover.alt="Cover of "+book.title;cover.loading="lazy";row.append(cover)}
+      const details=document.createElement("div");details.style.flex="1";details.style.minWidth="0";
+      const title=document.createElement("h3");title.textContent=book.title;
+      const author=document.createElement("p");author.textContent=book.author;
+      details.append(title,author);row.append(details);body.append(row);
+      const headline=document.createElement("h2");headline.textContent=book.title;body.append(headline);
+      const info=document.createElement("div");info.className="insight";info.textContent=book.original_summary||"Discover this book and follow your curiosity. Original RABBIT insights are coming soon.";body.append(info);
+      const actions=document.createElement("div");actions.className="actions";
+      const follow=document.createElement("button");const k="rabbit_follow_"+book.id;follow.textContent=localStorage.getItem(k)?"♥ Following":"♡ Follow book";
+      follow.onclick=()=>{if(localStorage.getItem(k))localStorage.removeItem(k);else localStorage.setItem(k,"1");follow.textContent=localStorage.getItem(k)?"♥ Following":"♡ Follow book"};actions.append(follow);body.append(actions);
+      const note=document.createElement("p");note.className="muted";note.style.fontSize="11px";note.textContent="Book listing · Swipe down for another discovery ↓";body.append(note);
+      article.append(body);fragment.append(article);
+    });
+    scroller.insertBefore(fragment,nav);
+  }
+  let offset=0,finished=false;
+  async function loadMore(){
+    if(catalogBusy||finished||!document.getElementById("homeScroll"))return;
+    catalogBusy=true;
+    try{
+      const conf=window.RABBIT_CONFIG||{},base=(conf.supabaseUrl||"").replace(/\/$/,"");
+      let rows=[];
+      if(base&&conf.supabaseAnonKey){
+        const res=await fetch(base+"/rest/v1/books?select=id,title,author,cover_url,original_summary&catalog_status=eq.ready&order=created_at.desc&limit=30&offset="+offset,{headers:{apikey:conf.supabaseAnonKey,Authorization:"Bearer "+conf.supabaseAnonKey}});
+        if(res.ok)rows=await res.json();
+      }
+      if(!rows.length){
+        const params=new URLSearchParams({subject:"fiction",limit:"50",offset:String(offset),fields:"key,title,author_name,cover_i,language"});
+        const res=await fetch("https://openlibrary.org/search.json?"+params);
+        if(!res.ok)throw Error("Open Library "+res.status);
+        const data=await res.json();
+        rows=(data.docs||[]).filter(b=>b.key&&b.title&&b.author_name?.length&&b.cover_i&&(!b.language||b.language.includes("eng"))).map(b=>({id:b.key,title:b.title,author:b.author_name[0],cover_url:"https://covers.openlibrary.org/b/id/"+b.cover_i+"-M.jpg"}));
+      }
+      offset+=50;
+      if(!rows.length)finished=true;
+      addRealBookCards(rows);
+    }catch(err){console.warn("RABBIT catalog:",err)}
+    finally{catalogBusy=false}
+  }
+  const originalHome=window.renderHome;
+  if(typeof originalHome==="function"){
+    window.renderHome=function(){originalHome();offset=0;moreCount=0;finished=false;loadMore()};
+  }
+  document.addEventListener("scroll",()=>{
+    const scroller=document.getElementById("homeScroll");if(!scroller)return;
+    if(scroller.scrollTop+scroller.clientHeight>=scroller.scrollHeight-1400)loadMore();
+  },true);
+})();
+</script></body></html>
