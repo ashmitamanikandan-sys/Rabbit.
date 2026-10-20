@@ -220,7 +220,7 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
         if(res.ok)rows=await res.json();
       }
       if(!rows.length){
-        const subjects={"The Human Mind":"psychology","Mystery":"mystery","Romance":"romance","Fantasy":"fantasy","History":"history","True Crime":"true_crime","Space":"astronomy","Science":"science","Philosophy":"philosophy","Poetry":"poetry","Mythology":"mythology","Adventure":"adventure","Thriller":"thriller","Technology":"technology","Art":"art","Design":"design","Music":"music","Cinema":"film","Nature":"nature","Wellness":"health","Business":"business","Politics":"politics","Culture":"culture","Biography":"biography","Psychology":"psychology","Productivity":"self_help","Relationships":"relationships","Self Discovery":"self_help","Dreams":"dreams","Neuroscience":"neuroscience"};const subject=subjects[window.rabbitSelectedGenre]||"fiction";const params=new URLSearchParams({limit:"50",offset:String(offset),fields:"key,title,author_name,cover_i,language,first_sentence,first_publish_year"});if(searchTerm)params.set("q",searchTerm);else params.set("subject",subject);
+        const subjects={"The Human Mind":"psychology","Mystery":"mystery","Romance":"romance","Fantasy":"fantasy","History":"history","True Crime":"true_crime","Space":"astronomy","Science":"science","Philosophy":"philosophy","Poetry":"poetry","Mythology":"mythology","Adventure":"adventure","Thriller":"thriller","Technology":"technology","Art":"art","Design":"design","Music":"music","Cinema":"film","Nature":"nature","Wellness":"health","Business":"business","Politics":"politics","Culture":"culture","Biography":"biography","Psychology":"psychology","Productivity":"self_help","Relationships":"relationships","Self Discovery":"self_help","Dreams":"dreams","Neuroscience":"neuroscience","Economics":"economics","Sociology":"sociology","Travel":"travel","Architecture":"architecture","Food":"cooking","Sports":"sports","Creativity":"creativity","Leadership":"leadership","Ethics":"ethics","Ancient Civilizations":"ancient_history","Artificial Intelligence":"artificial_intelligence","Environment":"environment","Horror":"horror","Classics":"classics","Feminism":"feminism","Entrepreneurship":"entrepreneurship","Photography":"photography","Languages":"linguistics"};const subject=subjects[window.rabbitSelectedGenre]||"fiction";const params=new URLSearchParams({limit:"50",offset:String(offset),fields:"key,title,author_name,cover_i,language,first_sentence,first_publish_year"});if(searchTerm)params.set("q",searchTerm);else params.set("subject",subject);
         const res=await fetch("https://openlibrary.org/search.json?"+params);
         if(!res.ok)throw Error("Open Library "+res.status);
         const data=await res.json();
@@ -228,7 +228,7 @@ function toggleFollow(id){followed=followed.includes(id)?followed.filter(x=>x!==
       }
       if(epoch!==requestEpoch)return;
       offset+=50;
-      if(!rows.length)finished=true;
+      if(!rows.length&&offset>=50)finished=true;
       rows=rows.filter(b=>{if(seenWorkIds.has(b.id))return false;seenWorkIds.add(b.id);return true});
       addRealBookCards(rows);
       if(!rows.length&&moreCount===0){const rail=document.querySelector("#homeScroll .home-first .stories");if(rail)rail.textContent="No books found. Try another genre or search."}
