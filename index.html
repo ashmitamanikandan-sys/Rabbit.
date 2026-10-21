@@ -204,23 +204,18 @@ function toggleFollow(id){if(!followed.includes(id))rabbitTrack(id,'follow');fol
   };
   function rabbitInsight(book){return rabbitOriginalInsights[String(book.title||"").toLowerCase().trim()]||null}
   // Feed copy must be grounded in real editorial text or verified book metadata.
+  const rabbitPlaceholder=/^\\s*(?:first published|published in|publication date|date unknown|discover this book|a new rabbit hole|a detailed book overview)/i;
   function rabbitFeedCopy(book){
-    const curated=rabbitInsight(book);
-    if(curated)return curated.preview;
+    const curated=rabbitInsight(book);if(curated)return curated.preview;
     const raw=String(book.original_summary||book.description||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim();
-    if(!raw||/^First published .*\\.$/.test(raw))return "";
-    return raw;
+    return raw&&!rabbitPlaceholder.test(raw)?raw:"";
   }
   function rabbitSetFeedCopy(book,info){
     const raw=rabbitFeedCopy(book);
     if(raw){info.textContent=raw;info.classList.remove("rabbit-awaiting-overview")}
-    else {info.textContent="Finding the real story behind this book. Its full overview hasn't been verified yet.";info.classList.add("rabbit-awaiting-overview")}
+    else{info.textContent="Looking for a reliable introduction to this book…";info.classList.add("rabbit-awaiting-overview")}
   }
-  function rabbitOverview(book){
-    const curated=rabbitInsight(book);if(curated)return curated.preview;
-    const raw=String(book.original_summary||book.description||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim();
-    return raw && !/^First published .*\\.$/.test(raw)?raw:"";
-  }
+  function rabbitOverview(book){return rabbitFeedCopy(book)}
   // Original RABBIT reading sections are editorial topics, NOT verified book chapters.
   const rabbitReadingSections={
     "atomic habits":[
@@ -310,15 +305,18 @@ function toggleFollow(id){if(!followed.includes(id))rabbitTrack(id,'follow');fol
     if(rabbitPreviewObserver){info.__rabbitPreviewTask={book,info};rabbitPreviewObserver.observe(info)}
     else{rabbitEnrichQueue.push({book,info});rabbitPumpEnrichment()}
   }
+  const rabbitDescriptionCache=new Map();
   async function rabbitEnrich(book,info){
-    if(!String(book.id||"").startsWith("/works/"))return;
+    const id=String(book.id||"");if(!/^\\/works\\/OL\\d+W$/.test(id))return;
     try{
-      const res=await fetch("https://openlibrary.org"+book.id+".json");
-      if(!res.ok)return;
-      const work=await res.json();const d=typeof work.description==="string"?work.description:work.description?.value;
-      if(d&&d.trim().length>60){book.description=d.trim();if(info.isConnected)rabbitSetFeedCopy(book,info)}
+      if(!rabbitDescriptionCache.has(id))rabbitDescriptionCache.set(id,fetch("https://openlibrary.org"+id+".json").then(r=>r.ok?r.json():null).then(work=>{const d=typeof work?.description==="string"?work.description:work?.description?.value;return typeof d==="string"&&d.trim().length>60?d.trim():""}).catch(()=>""));
+      const d=await rabbitDescriptionCache.get(id);
+      if(d){book.description=d;if(info.isConnected)rabbitSetFeedCopy(book,info)}
+      else if(info.isConnected&&!rabbitFeedCopy(book)){info.textContent="No verified synopsis is available for this title yet.";info.classList.add("rabbit-awaiting-overview")}
     }catch(e){console.warn("Book description unavailable:",e)}
   }
+  const rabbitDescriptionObserver="IntersectionObserver" in window?new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;rabbitDescriptionObserver.unobserve(entry.target);if(entry.target._rabbitBook)rabbitEnrich(entry.target._rabbitBook,entry.target)})},{rootMargin:"550px"}):null;
+  function rabbitQueueDescription(book,info){if(rabbitFeedCopy(book))return;if(rabbitDescriptionObserver){info._rabbitBook=book;rabbitDescriptionObserver.observe(info)}else rabbitEnrich(book,info)}
   let offset=0,finished=false;
   async function loadMore(){
     if(catalogBusy||finished||!document.getElementById("homeScroll"))return;
