@@ -93,6 +93,13 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
 .rabbit-chapter-controls button{border:1px solid #8e72c7;background:#251b37;color:white;border-radius:12px;min-height:46px;padding:10px 15px;cursor:pointer}
 .rabbit-chapter-controls button:disabled{opacity:.35;cursor:default}
 @media(max-width:680px){.rabbit-chapter-layout{grid-template-columns:1fr}.rabbit-chapter-nav{flex-direction:row;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}.rabbit-chapter-link{flex:0 0 200px;scroll-snap-align:start}.rabbit-chapter-reader{width:100%;min-height:100vh;border-radius:0}}
+</style><style id="rabbit-longform-feed-v1">
+/* An actual readable 8–10-line editorial preview before Read more, without invented filler. */
+#homeScroll .feedpost .insight.teaser,#feed .feedpost .insight.teaser{font-size:15px!important;line-height:1.65!important;max-width:62ch!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:10;line-clamp:10;overflow:hidden;white-space:normal!important;min-height:calc(1.65em * 8);margin-bottom:10px}
+#homeScroll .feature>p{font-size:15px;line-height:1.65;max-width:62ch;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:10;line-clamp:10;overflow:hidden;min-height:calc(1.65em * 8)}
+.rabbit-expanded-post .insight{font-size:15px;line-height:1.65;max-width:62ch;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:10;line-clamp:10;overflow:hidden;white-space:normal;min-height:calc(1.65em * 8);margin:16px 0}
+.rabbit-expanded-post .insight.rabbit-awaiting-overview{min-height:0;color:#b8a9c5;font-style:italic}
+@media(max-width:600px){#homeScroll .feedpost .insight.teaser,#feed .feedpost .insight.teaser,.rabbit-expanded-post .insight{max-width:100%}}
 </style></head><body><div id="app"><main class="page welcome"><div class="eyebrow">WELCOME TO RABBIT</div><h1>Go down<br>the <span class="accent">rabbit hole.</span></h1><p>A feed of ideas worth getting lost in. Find your next obsession, one chapter at a time.</p><button class="primary" onclick="renderInterests()">Find your rabbit hole →</button></main></div><script>
 const icons={heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',bookmark:'<path d="M5 3h14v18l-7-5-7 5z"/>',arrow:'<path d="m15 18-6-6 6-6"/>',send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',message:'<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5Z"/>',home:'<path d="m3 10 9-7 9 7v11H3z"/><path d="M9 21v-7h6v7"/>'};const ico=(n)=>`<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[n]}</svg>`;
 const books=[
@@ -180,7 +187,7 @@ function toggleFollow(id){if(!followed.includes(id))rabbitTrack(id,'follow');fol
       const author=document.createElement("p");author.textContent=book.author;
       details.append(title,author);row.append(details);body.append(row);
       const headline=document.createElement("h2");headline.textContent=rabbitInsight(book)?.heading||book.title;body.append(headline);
-      const info=document.createElement("div");info.className="insight";info.textContent=rabbitOverview(book)||"A detailed book overview is being prepared. Open the book to see what is currently available.";body.append(info);if(rabbitInsight(book))meta.textContent="ORIGINAL RABBIT INSIGHT · "+(window.rabbitSelectedGenre||"BOOKS").toUpperCase();/* Work descriptions load only when the reader opens a book, avoiding per-card API requests. */
+      const info=document.createElement("div");info.className="insight";rabbitSetFeedCopy(book,info);body.append(info);if(!rabbitInsight(book)&&!rabbitFeedCopy(book))rabbitEnrich(book,info);if(rabbitInsight(book))meta.textContent="ORIGINAL RABBIT INSIGHT · "+(window.rabbitSelectedGenre||"BOOKS").toUpperCase();/* Work descriptions load only when the reader opens a book, avoiding per-card API requests. */
       const actions=document.createElement("div");actions.className="actions";
       const read=document.createElement("button");read.className="readmore";read.textContent="Read more ↗";read.onclick=()=>rabbitReader(book);actions.append(read);
       const save=document.createElement("button");const sk="rabbit_save_"+book.id;save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save";save.onclick=()=>{if(localStorage.getItem(sk))localStorage.removeItem(sk);else localStorage.setItem(sk,"1");save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save"};actions.append(save);
@@ -196,6 +203,19 @@ function toggleFollow(id){if(!followed.includes(id))rabbitTrack(id,'follow');fol
   "the power of your subconscious mind":{heading:"Can the stories you tell yourself change your choices?",preview:"A thought repeated often can start to feel like a fact, even when it has never been tested. Joseph Murphy's book explores beliefs, suggestion, and mental imagery. Its most useful invitation is to notice the stories you tell yourself. If you expect failure before trying, you may hesitate or avoid practice. If you adopt a more constructive expectation, your behavior can change. This does not mean thoughts magically control events. It means an interpretation can influence choices, persistence, and emotional responses. Notice one belief that guides your day, and ask what evidence supports it. A healthier belief should help you act more clearly, not deny reality.",deep:"The Power of Your Subconscious Mind argues that repeated thoughts can shape experience. Some of its stronger claims are not supported by modern scientific evidence, so it deserves critical reading. Yet a useful question remains: what happens when an assumption becomes an automatic response? Someone who believes they are terrible at speaking might avoid opportunities to practice. That avoidance can reinforce the original belief. A more testable idea, such as 'I can improve with preparation,' may lead to different actions. Feedback and practice matter more than repeating an affirmation alone. Read the book as an invitation to examine self-talk, not as proof that thought alone changes reality."}
   };
   function rabbitInsight(book){return rabbitOriginalInsights[String(book.title||"").toLowerCase().trim()]||null}
+  // Feed copy must be grounded in real editorial text or verified book metadata.
+  function rabbitFeedCopy(book){
+    const curated=rabbitInsight(book);
+    if(curated)return curated.preview;
+    const raw=String(book.original_summary||book.description||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim();
+    if(!raw||/^First published .*\\.$/.test(raw))return "";
+    return raw;
+  }
+  function rabbitSetFeedCopy(book,info){
+    const raw=rabbitFeedCopy(book);
+    if(raw){info.textContent=raw;info.classList.remove("rabbit-awaiting-overview")}
+    else {info.textContent="Finding the real story behind this book. Its full overview hasn't been verified yet.";info.classList.add("rabbit-awaiting-overview")}
+  }
   function rabbitOverview(book){
     const curated=rabbitInsight(book);if(curated)return curated.preview;
     const raw=String(book.original_summary||book.description||"").replace(/<[^>]*>/g," ").replace(/\\s+/g," ").trim();
@@ -275,7 +295,7 @@ function toggleFollow(id){if(!followed.includes(id))rabbitTrack(id,'follow');fol
       const res=await fetch("https://openlibrary.org"+book.id+".json");
       if(!res.ok)return;
       const work=await res.json();const d=typeof work.description==="string"?work.description:work.description?.value;
-      if(d&&d.trim().length>60){book.description=d.trim();info.textContent=rabbitOverview(book)}
+      if(d&&d.trim().length>60){book.description=d.trim();rabbitSetFeedCopy(book,info)}
     }catch(e){console.warn("Book description unavailable:",e)}
   }
   let offset=0,finished=false;
