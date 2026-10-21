@@ -95,9 +95,9 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
 @media(max-width:680px){.rabbit-chapter-layout{grid-template-columns:1fr}.rabbit-chapter-nav{flex-direction:row;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}.rabbit-chapter-link{flex:0 0 200px;scroll-snap-align:start}.rabbit-chapter-reader{width:100%;min-height:100vh;border-radius:0}}
 </style><style id="rabbit-longform-feed-v1">
 /* An actual readable 8–10-line editorial preview before Read more, without invented filler. */
-#homeScroll .feedpost .insight.teaser,#feed .feedpost .insight.teaser{font-size:15px!important;line-height:1.65!important;max-width:62ch!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:10;line-clamp:10;overflow:hidden;white-space:normal!important;min-height:calc(1.65em * 8);margin-bottom:10px}
+#homeScroll .feedpost .insight.teaser,#feed .feedpost .insight.teaser{font-size:15px!important;line-height:1.65!important;max-width:62ch!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:10;line-clamp:10;overflow:hidden;white-space:normal!important;margin-bottom:10px}
 #homeScroll .feature>p{font-size:15px;line-height:1.65;max-width:62ch;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:10;line-clamp:10;overflow:hidden;min-height:calc(1.65em * 8)}
-.rabbit-expanded-post .insight{font-size:15px;line-height:1.65;max-width:62ch;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:10;line-clamp:10;overflow:hidden;white-space:normal;min-height:calc(1.65em * 8);margin:16px 0}
+.rabbit-expanded-post .insight{font-size:15px;line-height:1.65;max-width:62ch;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:10;line-clamp:10;overflow:hidden;white-space:normal;margin:16px 0}
 .rabbit-expanded-post .insight.rabbit-awaiting-overview{min-height:0;color:#b8a9c5;font-style:italic}
 @media(max-width:600px){#homeScroll .feedpost .insight.teaser,#feed .feedpost .insight.teaser,.rabbit-expanded-post .insight{max-width:100%}}
 </style></head><body><div id="app"><main class="page welcome"><div class="eyebrow">WELCOME TO RABBIT</div><h1>Go down<br>the <span class="accent">rabbit hole.</span></h1><p>A feed of ideas worth getting lost in. Find your next obsession, one chapter at a time.</p><button class="primary" onclick="renderInterests()">Find your rabbit hole →</button></main></div><script>
@@ -187,7 +187,7 @@ function toggleFollow(id){if(!followed.includes(id))rabbitTrack(id,'follow');fol
       const author=document.createElement("p");author.textContent=book.author;
       details.append(title,author);row.append(details);body.append(row);
       const headline=document.createElement("h2");headline.textContent=rabbitInsight(book)?.heading||book.title;body.append(headline);
-      const info=document.createElement("div");info.className="insight";rabbitSetFeedCopy(book,info);body.append(info);if(!rabbitInsight(book)&&!rabbitFeedCopy(book))rabbitEnrich(book,info);if(rabbitInsight(book))meta.textContent="ORIGINAL RABBIT INSIGHT · "+(window.rabbitSelectedGenre||"BOOKS").toUpperCase();/* Work descriptions load only when the reader opens a book, avoiding per-card API requests. */
+      const info=document.createElement("div");info.className="insight";rabbitSetFeedCopy(book,info);body.append(info);if(!rabbitInsight(book)&&(!rabbitFeedCopy(book)||rabbitFeedCopy(book).length<420))rabbitQueueEnrichment(book,info);if(rabbitInsight(book))meta.textContent="ORIGINAL RABBIT INSIGHT · "+(window.rabbitSelectedGenre||"BOOKS").toUpperCase();/* Verified descriptions now load lazily for visible cards in every genre. */
       const actions=document.createElement("div");actions.className="actions";
       const read=document.createElement("button");read.className="readmore";read.textContent="Read more ↗";read.onclick=()=>rabbitReader(book);actions.append(read);
       const save=document.createElement("button");const sk="rabbit_save_"+book.id;save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save";save.onclick=()=>{if(localStorage.getItem(sk))localStorage.removeItem(sk);else localStorage.setItem(sk,"1");save.textContent=localStorage.getItem(sk)?"◆ Saved":"◇ Save"};actions.append(save);
@@ -289,13 +289,34 @@ function toggleFollow(id){if(!followed.includes(id))rabbitTrack(id,'follow');fol
     if(sections.length)showSection(current);
   }
   window.rabbitOpenBook=rabbitReader;
+  // All genres use the same verified-preview pipeline. Limit parallel requests
+  // and only enrich cards when they approach the viewport.
+  const rabbitEnrichQueue=[];let rabbitEnrichActive=0;
+  function rabbitPumpEnrichment(){
+    while(rabbitEnrichActive<3&&rabbitEnrichQueue.length){
+      const item=rabbitEnrichQueue.shift();rabbitEnrichActive++;
+      rabbitEnrich(item.book,item.info).finally(()=>{rabbitEnrichActive--;rabbitPumpEnrichment()});
+    }
+  }
+  const rabbitPreviewObserver=("IntersectionObserver" in window)?new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{if(!entry.isIntersecting)return;
+      rabbitPreviewObserver.unobserve(entry.target);
+      const task=entry.target.__rabbitPreviewTask;
+      if(task){rabbitEnrichQueue.push(task);rabbitPumpEnrichment()}
+    });
+  },{rootMargin:"500px"}):null;
+  function rabbitQueueEnrichment(book,info){
+    if(!String(book.id||"").startsWith("/works/"))return;
+    if(rabbitPreviewObserver){info.__rabbitPreviewTask={book,info};rabbitPreviewObserver.observe(info)}
+    else{rabbitEnrichQueue.push({book,info});rabbitPumpEnrichment()}
+  }
   async function rabbitEnrich(book,info){
     if(!String(book.id||"").startsWith("/works/"))return;
     try{
       const res=await fetch("https://openlibrary.org"+book.id+".json");
       if(!res.ok)return;
       const work=await res.json();const d=typeof work.description==="string"?work.description:work.description?.value;
-      if(d&&d.trim().length>60){book.description=d.trim();rabbitSetFeedCopy(book,info)}
+      if(d&&d.trim().length>60){book.description=d.trim();if(info.isConnected)rabbitSetFeedCopy(book,info)}
     }catch(e){console.warn("Book description unavailable:",e)}
   }
   let offset=0,finished=false;
@@ -314,7 +335,7 @@ function toggleFollow(id){if(!followed.includes(id))rabbitTrack(id,'follow');fol
         const res=await fetch("https://openlibrary.org/search.json?"+params);
         if(!res.ok)throw Error("Open Library "+res.status);
         const data=await res.json();
-        rows=(data.docs||[]).filter(b=>b.key&&b.title&&b.author_name?.length&&(!b.language||b.language.includes("eng"))).map(b=>({id:b.key,title:b.title,author:b.author_name[0],cover_url:b.cover_i?"https://covers.openlibrary.org/b/id/"+b.cover_i+"-M.jpg":"",description:(Array.isArray(b.first_sentence)?b.first_sentence[0]:b.first_sentence)||("First published "+(b.first_publish_year||"date unknown")+".")}));
+        rows=(data.docs||[]).filter(b=>b.key&&b.title&&b.author_name?.length&&(!b.language||b.language.includes("eng"))).map(b=>({id:b.key,title:b.title,author:b.author_name[0],cover_url:b.cover_i?"https://covers.openlibrary.org/b/id/"+b.cover_i+"-M.jpg":"",description:(Array.isArray(b.first_sentence)?b.first_sentence[0]:b.first_sentence)||""}));
       }
       if(epoch!==requestEpoch)return;
       offset+=50;
