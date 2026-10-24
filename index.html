@@ -426,13 +426,17 @@ window.rabbitNavTo = function(dest) {
       renderInterests();
     }
   } else if (dest === 'library') {
-    if (typeof renderSaved === 'function' && typeof saved !== 'undefined' && saved.length) {
+    if (typeof window.renderUserLibrary === 'function') {
+      window.renderUserLibrary();
+    } else if (typeof renderSaved === 'function' && typeof saved !== 'undefined' && saved.length) {
       renderSaved();
     } else {
       location.assign('./account.html#library');
     }
   } else if (dest === 'following') {
-    if (typeof followed !== 'undefined' && !followed.length) {
+    if (typeof window.renderUserFollowing === 'function') {
+      window.renderUserFollowing();
+    } else if (typeof followed !== 'undefined' && !followed.length) {
       toast('Follow books by tapping ♡ on any insight card');
     } else {
       renderHome();

@@ -124,6 +124,144 @@
   }
   window.rabbitMixMode = window.rabbitMixMode || false;
 
+  
+  // Global Local Search Helper across all 1,050 Landmark Books
+  function searchMasterworkCatalog(query) {
+    if (!query || !query.trim()) return [];
+    const q = query.toLowerCase().trim();
+    const results = [];
+    const seen = new Set();
+    const catalog = window.RABBIT_GENRES_CATALOG || {};
+    for (const genreKey in catalog) {
+      const list = catalog[genreKey] || [];
+      for (const b of list) {
+        const matchTitle = (b.title || "").toLowerCase().includes(q);
+        const matchAuthor = (b.author || "").toLowerCase().includes(q);
+        const matchHook = (b.hook || "").toLowerCase().includes(q);
+        const matchGenre = (b.genre || "").toLowerCase().includes(q);
+        if (matchTitle || matchAuthor || matchHook || matchGenre) {
+          const id = b.id || b.title;
+          if (!seen.has(id)) {
+            seen.add(id);
+            results.push(b);
+          }
+        }
+      }
+    }
+    return results;
+  }
+
+  // Persistent User Library Storage
+  function getSavedBooksList() {
+    try {
+      const list = JSON.parse(localStorage.getItem("rabbit_user_library") || "[]");
+      if (list.length > 0) return list;
+
+      // Migrate from rabbit_save_ keys if empty
+      const catalog = window.RABBIT_GENRES_CATALOG || {};
+      const migrated = [];
+      const seen = new Set();
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith("rabbit_save_")) {
+          const idOrTitle = k.replace("rabbit_save_", "");
+          for (const g in catalog) {
+            const found = (catalog[g] || []).find(b => (b.id === idOrTitle || b.title === idOrTitle));
+            if (found && !seen.has(found.id || found.title)) {
+              seen.add(found.id || found.title);
+              migrated.push(found);
+            }
+          }
+        }
+      }
+      if (migrated.length > 0) {
+        localStorage.setItem("rabbit_user_library", JSON.stringify(migrated));
+        return migrated;
+      }
+      return [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveBookToLibrary(book) {
+    if (!book) return;
+    try {
+      const list = getSavedBooksList();
+      const id = book.id || book.title;
+      if (!list.some(b => (b.id && b.id === id) || b.title === book.title)) {
+        list.unshift(Object.assign({}, book, { savedAt: Date.now() }));
+        localStorage.setItem("rabbit_user_library", JSON.stringify(list));
+      }
+      localStorage.setItem("rabbit_save_" + id, "1");
+    } catch (e) {}
+  }
+
+  function removeBookFromLibrary(book) {
+    if (!book) return;
+    try {
+      const id = book.id || book.title;
+      let list = getSavedBooksList();
+      list = list.filter(b => (b.id && b.id !== id) && b.title !== book.title);
+      localStorage.setItem("rabbit_user_library", JSON.stringify(list));
+      localStorage.removeItem("rabbit_save_" + id);
+    } catch (e) {}
+  }
+
+  function getFollowedBooksList() {
+    try {
+      const list = JSON.parse(localStorage.getItem("rabbit_user_followed") || "[]");
+      if (list.length > 0) return list;
+      const catalog = window.RABBIT_GENRES_CATALOG || {};
+      const migrated = [];
+      const seen = new Set();
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && k.startsWith("rabbit_follow_")) {
+          const idOrTitle = k.replace("rabbit_follow_", "");
+          for (const g in catalog) {
+            const found = (catalog[g] || []).find(b => (b.id === idOrTitle || b.title === idOrTitle));
+            if (found && !seen.has(found.id || found.title)) {
+              seen.add(found.id || found.title);
+              migrated.push(found);
+            }
+          }
+        }
+      }
+      if (migrated.length > 0) {
+        localStorage.setItem("rabbit_user_followed", JSON.stringify(migrated));
+        return migrated;
+      }
+      return [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function followBook(book) {
+    if (!book) return;
+    try {
+      const list = getFollowedBooksList();
+      const id = book.id || book.title;
+      if (!list.some(b => (b.id && b.id === id) || b.title === book.title)) {
+        list.unshift(Object.assign({}, book, { followedAt: Date.now() }));
+        localStorage.setItem("rabbit_user_followed", JSON.stringify(list));
+      }
+      localStorage.setItem("rabbit_follow_" + id, "1");
+    } catch (e) {}
+  }
+
+  function unfollowBook(book) {
+    if (!book) return;
+    try {
+      const id = book.id || book.title;
+      let list = getFollowedBooksList();
+      list = list.filter(b => (b.id && b.id !== id) && b.title !== book.title);
+      localStorage.setItem("rabbit_user_followed", JSON.stringify(list));
+      localStorage.removeItem("rabbit_follow_" + id);
+    } catch (e) {}
+  }
+
   function getInstantBooks(genreName) {
     if (!genreName) return [];
     const list = [];
@@ -361,21 +499,33 @@
 
       const save = document.createElement("button");
       const sk = "rabbit_save_" + (book.id || book.title);
-      save.textContent = localStorage.getItem(sk) ? "◆ Saved" : "◇ Save";
+      const isSaved = !!localStorage.getItem(sk);
+      save.textContent = isSaved ? "◆ Saved" : "◇ Save";
       save.onclick = () => {
-        if (localStorage.getItem(sk)) localStorage.removeItem(sk);
-        else localStorage.setItem(sk, "1");
-        save.textContent = localStorage.getItem(sk) ? "◆ Saved" : "◇ Save";
+        const currentlySaved = !!localStorage.getItem(sk);
+        if (currentlySaved) {
+          removeBookFromLibrary(book);
+          save.textContent = "◇ Save";
+        } else {
+          saveBookToLibrary(book);
+          save.textContent = "◆ Saved";
+        }
       };
       actions.append(save);
 
       const follow = document.createElement("button");
       const fk = "rabbit_follow_" + (book.id || book.title);
-      follow.textContent = localStorage.getItem(fk) ? "♥ Following" : "♡ Follow book";
+      const isFollowed = !!localStorage.getItem(fk);
+      follow.textContent = isFollowed ? "♥ Following" : "♡ Follow book";
       follow.onclick = () => {
-        if (localStorage.getItem(fk)) localStorage.removeItem(fk);
-        else localStorage.setItem(fk, "1");
-        follow.textContent = localStorage.getItem(fk) ? "♥ Following" : "♡ Follow book";
+        const currentlyFollowed = !!localStorage.getItem(fk);
+        if (currentlyFollowed) {
+          unfollowBook(book);
+          follow.textContent = "♡ Follow book";
+        } else {
+          followBook(book);
+          follow.textContent = "♥ Following";
+        }
       };
       actions.append(follow);
 
@@ -417,6 +567,24 @@
     close.className = "rabbit-reader-close";
     close.type = "button";
     close.textContent = "← Back to the rabbit hole";
+
+    // Quick Save button in Reader Header
+    const readerSaveBtn = document.createElement("button");
+    readerSaveBtn.type = "button";
+    readerSaveBtn.className = "rabbit-reader-save-btn";
+    const rsk = "rabbit_save_" + (book.id || book.title);
+    readerSaveBtn.style.cssText = "float:right;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:rgba(168,85,247,0.18);color:#d8b4fe;border:1px solid rgba(168,85,247,0.4);transition:all 0.2s ease;";
+    readerSaveBtn.textContent = localStorage.getItem(rsk) ? "◆ Saved in Library" : "◇ Save to Library";
+    readerSaveBtn.onclick = () => {
+      if (localStorage.getItem(rsk)) {
+        removeBookFromLibrary(book);
+        readerSaveBtn.textContent = "◇ Save to Library";
+      } else {
+        saveBookToLibrary(book);
+        readerSaveBtn.textContent = "◆ Saved in Library";
+      }
+    };
+    panel.append(readerSaveBtn);
 
     const eyebrow = document.createElement("div");
     eyebrow.className = "eyebrow";
@@ -972,6 +1140,122 @@
   window.toggleGenre = toggleGenre;
   window.resetToSingleGenre = resetToSingleGenre;
   window.renderFeedForCurrentSelection = renderFeedForCurrentSelection;
+
+  window.renderUserLibrary = function() {
+    const scroller = document.getElementById("homeScroll");
+    if (!scroller) return;
+
+    if (currentAbortController) currentAbortController.abort();
+    requestEpoch++;
+    currentOffset = 0;
+    moreCount = 0;
+    catalogBusy = false;
+    searchTerm = "";
+    seenWorkIds.clear();
+
+    const savedBooks = getSavedBooksList();
+    const heading = scroller.querySelector(".section-head .muted");
+    if (heading) heading.textContent = `MY LIBRARY (${savedBooks.length} SAVED)`;
+
+    // Update active top nav tab highlight
+    document.querySelectorAll(".rabbit-top-nav-item").forEach(btn => {
+      btn.classList.toggle("active", btn.getAttribute("onclick")?.includes("'library'"));
+    });
+
+    scroller.querySelectorAll(".rabbit-expanded-post").forEach(el => el.remove());
+    const firstSec = scroller.querySelector(".home-first");
+    if (firstSec) {
+      const stories = firstSec.querySelector(".stories");
+      if (stories) stories.replaceChildren();
+    }
+
+    if (savedBooks.length === 0) {
+      const slot = document.getElementById("rabbit-first-book-slot");
+      if (slot) {
+        slot.replaceChildren();
+        const emptyCard = document.createElement("div");
+        emptyCard.className = "feedpost rabbit-expanded-post";
+        emptyCard.style.cssText = "padding:48px 24px;text-align:center;background:rgba(20,20,24,0.7);border-radius:18px;border:1px solid rgba(255,255,255,0.08);margin-top:20px;";
+        emptyCard.innerHTML = `
+          <div style="font-size:36px;margin-bottom:14px;">📚</div>
+          <h2 style="font-size:20px;color:#f3f4f6;margin-bottom:8px;">Your Library Burrow is Empty</h2>
+          <p style="font-size:14px;color:#9ca3af;line-height:1.6;max-width:380px;margin:0 auto 20px;">
+            Tap <strong style="color:#c4b5fd;">◇ Save</strong> on any book insight card or reader overlay to preserve your favorite reads here.
+          </p>
+          <button type="button" class="primary" style="padding:10px 20px;border-radius:24px;cursor:pointer;font-weight:600;" onclick="window.switchSingleGenre('The Human Mind')">
+            ✦ Explore Masterworks Feed
+          </button>
+        `;
+        slot.append(emptyCard);
+      }
+    } else {
+      renderFirstBookSlot(savedBooks[0], "MY LIBRARY");
+      seenWorkIds.add(savedBooks[0].id || savedBooks[0].title);
+      if (savedBooks.length > 1) {
+        const rest = savedBooks.slice(1);
+        rest.forEach(b => seenWorkIds.add(b.id || b.title));
+        addRealBookCards(rest);
+      }
+    }
+  };
+
+  window.renderUserFollowing = function() {
+    const scroller = document.getElementById("homeScroll");
+    if (!scroller) return;
+
+    if (currentAbortController) currentAbortController.abort();
+    requestEpoch++;
+    currentOffset = 0;
+    moreCount = 0;
+    catalogBusy = false;
+    searchTerm = "";
+    seenWorkIds.clear();
+
+    const followedBooks = getFollowedBooksList();
+    const heading = scroller.querySelector(".section-head .muted");
+    if (heading) heading.textContent = `FOLLOWED BOOKS (${followedBooks.length})`;
+
+    document.querySelectorAll(".rabbit-top-nav-item").forEach(btn => {
+      btn.classList.toggle("active", btn.getAttribute("onclick")?.includes("'following'"));
+    });
+
+    scroller.querySelectorAll(".rabbit-expanded-post").forEach(el => el.remove());
+    const firstSec = scroller.querySelector(".home-first");
+    if (firstSec) {
+      const stories = firstSec.querySelector(".stories");
+      if (stories) stories.replaceChildren();
+    }
+
+    if (followedBooks.length === 0) {
+      const slot = document.getElementById("rabbit-first-book-slot");
+      if (slot) {
+        slot.replaceChildren();
+        const emptyCard = document.createElement("div");
+        emptyCard.className = "feedpost rabbit-expanded-post";
+        emptyCard.style.cssText = "padding:48px 24px;text-align:center;background:rgba(20,20,24,0.7);border-radius:18px;border:1px solid rgba(255,255,255,0.08);margin-top:20px;";
+        emptyCard.innerHTML = `
+          <div style="font-size:36px;margin-bottom:14px;">♥</div>
+          <h2 style="font-size:20px;color:#f3f4f6;margin-bottom:8px;">No Followed Books Yet</h2>
+          <p style="font-size:14px;color:#9ca3af;line-height:1.6;max-width:380px;margin:0 auto 20px;">
+            Tap <strong style="color:#f43f5e;">♡ Follow book</strong> on any insight card to track authors and future community discussions.
+          </p>
+          <button type="button" class="primary" style="padding:10px 20px;border-radius:24px;cursor:pointer;font-weight:600;" onclick="window.switchSingleGenre('The Human Mind')">
+            ✦ Explore Masterworks Feed
+          </button>
+        `;
+        slot.append(emptyCard);
+      }
+    } else {
+      renderFirstBookSlot(followedBooks[0], "FOLLOWED BOOKS");
+      seenWorkIds.add(followedBooks[0].id || followedBooks[0].title);
+      if (followedBooks.length > 1) {
+        const rest = followedBooks.slice(1);
+        rest.forEach(b => seenWorkIds.add(b.id || b.title));
+        addRealBookCards(rest);
+      }
+    }
+  };
+
   window.renderFirstBookSlot = renderFirstBookSlot;
 
   function switchGenre(targetGenre) {
@@ -1102,31 +1386,117 @@
 
       const first = s.querySelector(".home-first .section");
       if (first) {
-        // 1. Add Search Form
+        // 1. Add Search Form with Live Instant Autocomplete
         if (!first.querySelector(".rabbit-library-search")) {
           const search = document.createElement("form");
           search.className = "rabbit-library-search";
-          search.style.marginBottom = "8px";
+          search.style.cssText = "margin-bottom:8px;position:relative;display:flex;gap:6px;align-items:center;";
+
+          const inputWrap = document.createElement("div");
+          inputWrap.style.cssText = "position:relative;flex:1;";
 
           const input = document.createElement("input");
           input.type = "search";
-          input.placeholder = "Search millions of books, authors, ideas…";
+          input.placeholder = "Search 1,050+ masterworks, authors, concepts…";
           input.setAttribute("aria-label", "Search books");
           input.autocomplete = "off";
+          input.style.cssText = "width:100%;box-sizing:border-box;padding:10px 14px;border-radius:24px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:14px;outline:none;";
+
+          // Autocomplete Dropdown
+          const dropdown = document.createElement("div");
+          dropdown.className = "rabbit-search-autocomplete";
+          dropdown.style.cssText = "display:none;position:absolute;top:100%;left:0;right:0;margin-top:6px;background:#131318;border:1px solid rgba(168,85,247,0.3);border-radius:14px;box-shadow:0 12px 30px rgba(0,0,0,0.8);z-index:999;max-height:320px;overflow-y:auto;padding:6px 0;";
+
+          inputWrap.append(input, dropdown);
 
           const go = document.createElement("button");
           go.type = "submit";
+          go.className = "primary";
+          go.style.cssText = "padding:9px 16px;border-radius:24px;cursor:pointer;flex-shrink:0;font-size:13px;font-weight:600;";
           go.textContent = "Search ↗";
 
-          search.append(input, go);
+          const clearSearchBtn = document.createElement("button");
+          clearSearchBtn.type = "button";
+          clearSearchBtn.style.cssText = "display:none;padding:8px 12px;border-radius:20px;background:rgba(239,68,68,0.15);color:#fca5a5;border:1px solid rgba(239,68,68,0.3);font-size:12px;font-weight:600;cursor:pointer;flex-shrink:0;";
+          clearSearchBtn.innerHTML = "✕ Clear";
+          clearSearchBtn.onclick = () => {
+            input.value = "";
+            dropdown.style.display = "none";
+            clearSearchBtn.style.display = "none";
+            searchTerm = "";
+            renderFeedForCurrentSelection();
+          };
+
+          search.append(inputWrap, go, clearSearchBtn);
+
+          // Live debounced autocomplete
+          let searchTimer = null;
+          input.oninput = () => {
+            const val = input.value.trim();
+            clearSearchBtn.style.display = val ? "inline-block" : "none";
+            clearTimeout(searchTimer);
+            if (val.length < 2) {
+              dropdown.style.display = "none";
+              dropdown.replaceChildren();
+              return;
+            }
+            searchTimer = setTimeout(() => {
+              const matches = searchMasterworkCatalog(val).slice(0, 6);
+              if (matches.length === 0) {
+                dropdown.style.display = "none";
+                return;
+              }
+              dropdown.replaceChildren();
+              matches.forEach(b => {
+                const item = document.createElement("div");
+                item.style.cssText = "display:flex;align-items:center;gap:10px;padding:8px 14px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.04);transition:background 0.15s ease;";
+                item.onmouseenter = () => item.style.background = "rgba(168,85,247,0.15)";
+                item.onmouseleave = () => item.style.background = "transparent";
+
+                const thumb = document.createElement("img");
+                thumb.src = b.cover_url || "https://covers.openlibrary.org/b/id/8231998-M.jpg";
+                thumb.style.cssText = "width:28px;height:40px;object-fit:cover;border-radius:4px;flex-shrink:0;";
+
+                const textCol = document.createElement("div");
+                textCol.style.cssText = "flex:1;min-width:0;";
+                const t = document.createElement("div");
+                t.style.cssText = "font-size:13px;font-weight:600;color:#f3f4f6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;";
+                t.textContent = b.title;
+                const sub = document.createElement("div");
+                sub.style.cssText = "font-size:11px;color:#9ca3af;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;";
+                sub.textContent = `${b.author} · ${b.genre}`;
+                textCol.append(t, sub);
+
+                item.append(thumb, textCol);
+                item.onclick = () => {
+                  dropdown.style.display = "none";
+                  rabbitReader(b);
+                };
+                dropdown.append(item);
+              });
+              dropdown.style.display = "block";
+            }, 180);
+          };
+
+          // Close dropdown on click outside
+          document.addEventListener("click", e => {
+            if (!search.contains(e.target)) {
+              dropdown.style.display = "none";
+            }
+          });
+
+          // Full search submission
           search.onsubmit = e => {
             e.preventDefault();
+            dropdown.style.display = "none";
             const value = input.value.trim();
             if (!value) {
               input.focus();
               return;
             }
             searchTerm = value;
+            clearSearchBtn.style.display = "inline-block";
+
             if (currentAbortController) currentAbortController.abort();
             requestEpoch++;
             const searchEpoch = requestEpoch;
@@ -1134,14 +1504,39 @@
             moreCount = 0;
             catalogBusy = false;
             seenWorkIds.clear();
-            s.querySelectorAll(".rabbit-expanded-post").forEach(el => el.remove());
-            const rail = s.querySelector(".home-first .stories");
+
+            const scroller = document.getElementById("homeScroll");
+            if (!scroller) return;
+            scroller.querySelectorAll(".rabbit-expanded-post").forEach(el => el.remove());
+            const rail = scroller.querySelector(".home-first .stories");
             if (rail) {
               rail.replaceChildren();
               rail.dataset.catalog = "loaded";
             }
+
+            // 1. Instant local search across 1,050 masterworks (0ms!)
+            const localMatches = searchMasterworkCatalog(value);
+            const heading = scroller.querySelector(".section-head .muted");
+
+            if (localMatches.length > 0) {
+              if (heading) heading.textContent = `SEARCH: "${value.toUpperCase()}" (${localMatches.length} MASTERWORKS)`;
+              renderFirstBookSlot(localMatches[0], `SEARCH: "${value.toUpperCase()}"`);
+              seenWorkIds.add(localMatches[0].id || localMatches[0].title);
+              if (localMatches.length > 1) {
+                const rest = localMatches.slice(1);
+                rest.forEach(b => seenWorkIds.add(b.id || b.title));
+                addRealBookCards(rest);
+              }
+              window.RabbitSmartLoader.done();
+            } else {
+              if (heading) heading.textContent = `SEARCH: "${value.toUpperCase()}"`;
+              window.RabbitSmartLoader.start(`Search: ${value}`, () => search.onsubmit(new Event("submit")));
+            }
+
+            // 2. Background Open Library query to expand results beyond local catalog
             loadBackgroundBooks(chosen, searchEpoch);
           };
+
           first.prepend(search);
         }
 
