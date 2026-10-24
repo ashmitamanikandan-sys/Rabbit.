@@ -112,21 +112,34 @@
     return resolveGenreKey(window.rabbitSelectedGenre || "The Human Mind");
   }
 
-  // Retrieve instant books (curated masterworks + localStorage cache)
-  function getInstantBooks(genreName) {
-    const list = [];
-    const key = genreName.toLowerCase();
+  // Retrieve instant books (curated masterworks from 1,050 landmark catalog + localStorage cache)
+  window.RABBIT_GENRES_CATALOG = window.RABBIT_GENRES_CATALOG || window.RABBIT_CURATED_CATALOG || {};
+  window.RABBIT_CURATED_CATALOG = window.RABBIT_GENRES_CATALOG;
 
-    // 1. Curated masterworks from static catalog
-    const catalog = window.RABBIT_CURATED_CATALOG || {};
-    const curated = catalog[key] || catalog[key.replace(/\s+/g, "-")] || [];
+  // Multi-genre selection state & Mix Mode
+  window.rabbitSelectedGenres = window.rabbitSelectedGenres || new Set();
+  const initSavedGenre = resolveGenreKey(localStorage.getItem("rabbit_selected_genre") || "The Human Mind");
+  if (window.rabbitSelectedGenres.size === 0) {
+    window.rabbitSelectedGenres.add(initSavedGenre);
+  }
+  window.rabbitMixMode = window.rabbitMixMode || false;
+
+  function getInstantBooks(genreName) {
+    if (!genreName) return [];
+    const list = [];
+    const key = genreName.toLowerCase().trim();
+
+    // 1. Curated masterworks from static 1,050-book catalog
+    const catalog = window.RABBIT_GENRES_CATALOG || window.RABBIT_CURATED_CATALOG || {};
+    const curated = (typeof window.getRabbitInstantBooks === "function" ? window.getRabbitInstantBooks(key) : null) ||
+                    catalog[key] || catalog[key.replace(/\s+/g, "-")] || [];
     curated.forEach(b => {
-      list.push(Object.assign({}, b, { isCurated: true }));
+      list.push(Object.assign({}, b, { isCurated: true, genre: b.genre || genreName }));
     });
 
     // 2. Cached books from previous sessions
     try {
-      const cacheStr = localStorage.getItem("rabbit_cache_" + genreName);
+      const cacheStr = localStorage.getItem("rabbit_cache_" + key) || localStorage.getItem("rabbit_cache_" + genreName);
       if (cacheStr) {
         const cached = JSON.parse(cacheStr);
         if (Array.isArray(cached)) {
@@ -140,6 +153,58 @@
     } catch (e) {}
 
     return list;
+  }
+
+  // Mixed-Genre Round-Robin Interleaving Engine with 1-in-8 Serendipity Injection
+  function getBlendedMixedBooks(genresArray) {
+    if (!genresArray || !genresArray.length) return [];
+    if (genresArray.length === 1) return getInstantBooks(genresArray[0]);
+
+    const mixedBooks = [];
+    const seen = new Set();
+    const queues = {};
+    genresArray.forEach(g => {
+      queues[g] = [...getInstantBooks(g)];
+    });
+
+    let hasMore = true;
+    let cardCount = 0;
+    while (hasMore) {
+      hasMore = false;
+      for (const g of genresArray) {
+        const q = queues[g];
+        while (q && q.length > 0) {
+          const candidate = q.shift();
+          const key = candidate.id || candidate.title;
+          if (!seen.has(key)) {
+            seen.add(key);
+            candidate.mixedGenre = g;
+            mixedBooks.push(candidate);
+            cardCount++;
+            hasMore = true;
+
+            // 1-in-8 Serendipity Injection from an unexpected unselected genre
+            if (cardCount % 8 === 0) {
+              const unselected = AUTHORITATIVE_GENRES.filter(x => !genresArray.includes(x));
+              if (unselected.length > 0) {
+                const randomGenre = unselected[Math.floor(Math.random() * unselected.length)];
+                const serenPool = getInstantBooks(randomGenre);
+                const pick = serenPool.find(p => !seen.has(p.id || p.title));
+                if (pick) {
+                  seen.add(pick.id || pick.title);
+                  pick.isSerendipity = true;
+                  pick.mixedGenre = randomGenre;
+                  mixedBooks.push(pick);
+                  cardCount++;
+                }
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+    return mixedBooks;
   }
 
   // Save successful discoveries to localStorage
@@ -232,8 +297,15 @@
 
       const meta = document.createElement("div");
       meta.className = "postmeta";
+      const displayGenre = (book.genre || book.mixedGenre || getActiveGenre()).toUpperCase();
       meta.textContent = (enriched.isCurated ? "ORIGINAL RABBIT MASTERWORK" : "RABBIT BOOK DISCOVERY") +
-        " · HOP " + String(++moreCount).padStart(2, "0") + " / " + getActiveGenre().toUpperCase();
+        " · HOP " + String(++moreCount).padStart(2, "0") + " / " + displayGenre;
+      if (book.isSerendipity) {
+        const serenTag = document.createElement("div");
+        serenTag.style.cssText = "font-size:11px;font-weight:700;letter-spacing:0.06em;color:#fcd34d;margin-top:4px;display:flex;align-items:center;gap:4px;";
+        serenTag.textContent = "✨ SERENDIPITY PICK · " + displayGenre;
+        body.append(serenTag);
+      }
       body.append(meta);
 
       const row = document.createElement("div");
@@ -361,7 +433,7 @@
     intro.className = "rabbit-chapter-intro";
     intro.textContent = "Original RABBIT editorial breakdown. Explore the core premise, key themes, and actionable insights from this work.";
 
-    const sections = book.__rabbitSections || (window.RABBIT_ENRICH ? window.RABBIT_ENRICH.getEnrichedBook(book, getActiveGenre()).sections : []);
+    const sections = (book.sections && book.sections.length ? book.sections : null) || book.__rabbitSections || (window.RABBIT_ENRICH ? window.RABBIT_ENRICH.getEnrichedBook(book, getActiveGenre()).sections : []);
 
     const label = document.createElement("div");
     label.className = "rabbit-chapter-status";
@@ -578,19 +650,49 @@
 
     const bar = document.createElement("div");
     bar.className = "rabbit-genre-nav-bar";
-    bar.style.cssText = "display:flex;overflow-x:auto;white-space:nowrap;gap:8px;padding:12px 0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch;";
+    bar.style.cssText = "display:flex;overflow-x:auto;white-space:nowrap;gap:8px;padding:12px 0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:center;";
+
+    // If multiple genres are selected, prepend [ ✕ Clear Mix (N) ] button
+    if (window.rabbitSelectedGenres && window.rabbitSelectedGenres.size > 1) {
+      const clearBtn = document.createElement("button");
+      clearBtn.type = "button";
+      clearBtn.className = "chip rabbit-mix-clear-chip";
+      clearBtn.style.cssText = "flex-shrink:0;cursor:pointer;font-size:12px;padding:6px 14px;border-radius:20px;background:rgba(239,68,68,0.18);color:#fca5a5;border:1px solid rgba(239,68,68,0.4);font-weight:700;display:inline-flex;align-items:center;gap:5px;transition:all 0.2s ease;";
+      clearBtn.innerHTML = "<span>✕</span> Clear Mix (" + window.rabbitSelectedGenres.size + ")";
+      clearBtn.onclick = () => {
+        resetToSingleGenre();
+      };
+      bar.append(clearBtn);
+    } else {
+      // Single genre mode: show a chic "+ Mix" trigger chip
+      const mixTrigger = document.createElement("button");
+      mixTrigger.type = "button";
+      mixTrigger.className = "chip rabbit-mix-toggle-chip";
+      mixTrigger.style.cssText = "flex-shrink:0;cursor:pointer;font-size:12px;padding:6px 12px;border-radius:20px;background:rgba(168,85,247,0.12);color:#d8b4fe;border:1px dashed rgba(168,85,247,0.45);font-weight:600;display:inline-flex;align-items:center;gap:4px;transition:all 0.2s ease;";
+      mixTrigger.innerHTML = window.rabbitMixMode ? "✓ Mixing Active" : "<span>+</span> Mix Genres";
+      mixTrigger.onclick = () => {
+        window.rabbitMixMode = !window.rabbitMixMode;
+        renderGenreBar(container);
+      };
+      bar.append(mixTrigger);
+    }
 
     AUTHORITATIVE_GENRES.forEach(g => {
+      const isSelected = window.rabbitSelectedGenres && window.rabbitSelectedGenres.has(g);
       const btn = document.createElement("button");
       btn.type = "button";
-      btn.className = "chip" + (getActiveGenre() === g ? " active" : "");
+      btn.className = "chip" + (isSelected ? " active" : "");
       btn.style.cssText = "flex-shrink:0;cursor:pointer;font-size:12px;padding:6px 14px;border-radius:20px;transition:all 0.2s ease;";
       btn.textContent = g;
       btn.dataset.genre = g;
 
-      btn.onclick = () => {
-        if (getActiveGenre() === g) return;
-        switchGenre(g);
+      btn.onclick = (e) => {
+        const isMulti = e.shiftKey || e.ctrlKey || e.metaKey || window.rabbitMixMode || (window.rabbitSelectedGenres && window.rabbitSelectedGenres.size > 1);
+        if (isMulti) {
+          toggleGenre(g);
+        } else {
+          switchSingleGenre(g);
+        }
       };
       bar.append(btn);
     });
@@ -866,13 +968,57 @@
 
   // Instant zero-latency switch between genres
   window.switchGenre = switchGenre;
+  window.switchSingleGenre = switchSingleGenre;
+  window.toggleGenre = toggleGenre;
+  window.resetToSingleGenre = resetToSingleGenre;
+  window.renderFeedForCurrentSelection = renderFeedForCurrentSelection;
   window.renderFirstBookSlot = renderFirstBookSlot;
+
   function switchGenre(targetGenre) {
+    switchSingleGenre(targetGenre);
+  }
+
+  function switchSingleGenre(targetGenre) {
     const resolved = resolveGenreKey(targetGenre);
+    window.rabbitMixMode = false;
+    window.rabbitSelectedGenres = new Set([resolved]);
     window.rabbitSelectedGenre = resolved;
     try {
       localStorage.setItem("rabbit_selected_genre", resolved);
     } catch (e) {}
+    renderFeedForCurrentSelection();
+  }
+
+  function toggleGenre(targetGenre) {
+    const resolved = resolveGenreKey(targetGenre);
+    window.rabbitSelectedGenres = window.rabbitSelectedGenres || new Set();
+    if (window.rabbitSelectedGenres.has(resolved)) {
+      if (window.rabbitSelectedGenres.size > 1) {
+        window.rabbitSelectedGenres.delete(resolved);
+      }
+    } else {
+      window.rabbitSelectedGenres.add(resolved);
+    }
+    if (window.rabbitSelectedGenres.size > 1) {
+      window.rabbitMixMode = true;
+    }
+    const first = Array.from(window.rabbitSelectedGenres)[0];
+    window.rabbitSelectedGenre = first;
+    try {
+      localStorage.setItem("rabbit_selected_genre", first);
+    } catch (e) {}
+    renderFeedForCurrentSelection();
+  }
+
+  function resetToSingleGenre(optionalTarget) {
+    window.rabbitMixMode = false;
+    const target = optionalTarget || Array.from(window.rabbitSelectedGenres)[0] || "The Human Mind";
+    switchSingleGenre(target);
+  }
+
+  function renderFeedForCurrentSelection() {
+    const scroller = document.getElementById("homeScroll");
+    if (!scroller) return;
 
     // 1. Cancel in-flight network requests
     if (currentAbortController) {
@@ -887,19 +1033,20 @@
     searchTerm = "";
     seenWorkIds.clear();
 
-    const scroller = document.getElementById("homeScroll");
-    if (!scroller) return;
+    const selectedArr = Array.from(window.rabbitSelectedGenres || ["The Human Mind"]);
+    const isMixed = selectedArr.length > 1;
 
     // 2. Update heading
     const heading = scroller.querySelector(".section-head .muted");
-    if (heading) heading.textContent = resolved.toUpperCase();
+    const headingText = isMixed
+      ? selectedArr.join(" + ").toUpperCase() + " (MIXED FEED)"
+      : selectedArr[0].toUpperCase();
+    if (heading) heading.textContent = headingText;
 
-    // 3. Update active pill highlight
-    const bar = scroller.querySelector(".rabbit-genre-nav-bar");
-    if (bar) {
-      bar.querySelectorAll(".chip").forEach(c => {
-        c.classList.toggle("active", c.dataset.genre === resolved || c.textContent === resolved);
-      });
+    // 3. Re-render genre bar
+    const barContainer = scroller.querySelector(".home-first .section");
+    if (barContainer) {
+      renderGenreBar(barContainer);
     }
 
     // 4. Clear old expanded cards
@@ -915,36 +1062,32 @@
       }
     }
 
-    // Start Smart Rabbit Loader (with 500ms delay & retry capability)
-    window.RabbitSmartLoader.start(resolved, () => switchGenre(targetGenre));
+    // 6. Start Smart Rabbit Loader
+    window.RabbitSmartLoader.start(isMixed ? "Mixed Genres" : selectedArr[0], () => renderFeedForCurrentSelection());
 
-    // 6. ZERO-LATENCY INSTANT FIRST RENDER: Show real book insights directly! (0ms)
-    // Completely replaces the unwanted instructional card with the first real book insight!
-    const instantBooks = getInstantBooks(resolved);
-    if (instantBooks && instantBooks.length > 0) {
-      renderFirstBookSlot(instantBooks[0], resolved);
-      seenWorkIds.add(instantBooks[0].id || instantBooks[0].title);
+    // 7. Get books (Curated 1,050 landmark catalog)
+    const booksToRender = isMixed
+      ? getBlendedMixedBooks(selectedArr)
+      : getInstantBooks(selectedArr[0]);
 
-      if (instantBooks.length > 1) {
-        const rest = instantBooks.slice(1);
+    if (booksToRender && booksToRender.length > 0) {
+      renderFirstBookSlot(booksToRender[0], isMixed ? headingText : selectedArr[0]);
+      seenWorkIds.add(booksToRender[0].id || booksToRender[0].title);
+
+      if (booksToRender.length > 1) {
+        const rest = booksToRender.slice(1);
         rest.forEach(b => seenWorkIds.add(b.id || b.title));
         addRealBookCards(rest);
       }
       window.RabbitSmartLoader.done();
     } else {
-      // If no instant books, show gentle status
-      const stories = first?.querySelector(".stories");
-      if (stories && !stories.children.length) {
-        const loading = document.createElement("span");
-        loading.className = "muted";
-        loading.style.cssText = "font-size:12px;padding:20px 0";
-        loading.textContent = "Connecting to library burrow…";
-        stories.append(loading);
-      }
+      window.RabbitSmartLoader.done();
     }
 
-    // 7. Non-blocking progressive background fetch
-    loadBackgroundBooks(resolved, thisEpoch);
+    // 8. If single genre, progressive background fetch for serendipity
+    if (!isMixed) {
+      loadBackgroundBooks(selectedArr[0], thisEpoch);
+    }
   }
 
   // Intercept renderHome to add search, genre bar, and trigger instant discovery
@@ -1006,54 +1149,8 @@
         renderGenreBar(first);
       }
 
-      // If user selected non-Human Mind genre, render real book insights directly!
-      if (chosen !== "The Human Mind") {
-        const heading = s.querySelector(".section-head .muted");
-        if (heading) heading.textContent = chosen.toUpperCase();
-
-        const oldPosts = s.querySelectorAll(".feedpost:not(.rabbit-expanded-post)");
-        oldPosts.forEach(p => p.remove());
-
-        const firstSec = s.querySelector(".home-first");
-        if (firstSec) {
-          const stories = firstSec.querySelector(".stories");
-          if (stories) {
-            stories.replaceChildren();
-            stories.dataset.catalog = "loaded";
-          }
-        }
-
-        requestEpoch++;
-        const thisEpoch = requestEpoch;
-        currentOffset = 0;
-        moreCount = 0;
-        catalogBusy = false;
-        seenWorkIds.clear();
-
-        window.RabbitSmartLoader.start(chosen, () => switchGenre(chosen));
-
-        const instantBooks = getInstantBooks(chosen);
-        if (instantBooks && instantBooks.length > 0) {
-          renderFirstBookSlot(instantBooks[0], chosen);
-          seenWorkIds.add(instantBooks[0].id || instantBooks[0].title);
-          if (instantBooks.length > 1) {
-            const rest = instantBooks.slice(1);
-            rest.forEach(b => seenWorkIds.add(b.id || b.title));
-            addRealBookCards(rest);
-          }
-          window.RabbitSmartLoader.done();
-        }
-
-        loadBackgroundBooks(chosen, thisEpoch);
-      } else {
-        // If Human Mind, ensure first slot has real book and background fetch additional titles
-        requestEpoch++;
-        const instantBooks = getInstantBooks("The Human Mind");
-        if (instantBooks && instantBooks.length > 0) {
-          renderFirstBookSlot(instantBooks[0], "The Human Mind");
-        }
-        loadBackgroundBooks("The Human Mind", requestEpoch);
-      }
+      // Instantly render real book insights for the active genre or mixed genres!
+      renderFeedForCurrentSelection();
     };
   }
 
