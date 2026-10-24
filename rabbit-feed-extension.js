@@ -78,14 +78,16 @@
   }
 
   // Robust genre resolver: maps aliases to standard genre names
+  // NEVER silently defaults to "The Human Mind" when genreName is falsy or invalid!
   function resolveGenreKey(genreName) {
-    if (!genreName) return "The Human Mind";
+    if (!genreName) return null;
     const g = String(genreName).trim();
+    if (!g) return null;
     const lower = g.toLowerCase();
 
     if (lower.includes("self discovery") || lower.includes("self-discovery")) return "Self Discovery";
     if (lower.includes("self-help") || lower.includes("self help") || lower.includes("productivity")) return "Self-Help";
-    if (lower.includes("mind") || lower.includes("psychology") || lower.includes("neuroscience") || lower.includes("behavior")) return "The Human Mind";
+    if (lower.includes("human mind") || lower === "the human mind" || lower.includes("psychology") || lower.includes("neuroscience") || lower.includes("behavior")) return "The Human Mind";
     if (lower.includes("sci-fi") || lower.includes("science fiction") || lower.includes("space") || lower.includes("technology") || lower.includes("artificial intelligence")) return "Science Fiction";
     if (lower.includes("fantasy") || lower.includes("mythology")) return "Fantasy";
     if (lower.includes("mystery") || lower.includes("thriller") || (lower.includes("crime") && !lower.includes("true crime"))) return "Mystery & Thriller";
@@ -105,24 +107,88 @@
     if (lower.includes("poetry")) return "Poetry";
     if (lower.includes("literary") || lower.includes("fiction")) return "Literary Fiction";
 
-    return g;
+    if (window.RABBIT_GENRES_CATALOG && window.RABBIT_GENRES_CATALOG[g]) {
+      return g;
+    }
+    if (typeof AUTHORITATIVE_GENRES !== "undefined" && AUTHORITATIVE_GENRES.includes(g)) {
+      return g;
+    }
+    return null;
   }
 
   function getActiveGenre() {
-    return resolveGenreKey(window.rabbitSelectedGenre || "The Human Mind");
+    if (window.rabbitSelectedGenre) {
+      const resolved = resolveGenreKey(window.rabbitSelectedGenre);
+      if (resolved) return resolved;
+    }
+    if (window.rabbitSelectedGenres && window.rabbitSelectedGenres.size > 0) {
+      const first = Array.from(window.rabbitSelectedGenres)[0];
+      const resolved = resolveGenreKey(first);
+      if (resolved) return resolved;
+    }
+    try {
+      const saved = localStorage.getItem("rabbit_selected_genre");
+      if (saved) {
+        const resolved = resolveGenreKey(saved);
+        if (resolved) return resolved;
+      }
+    } catch (e) {}
+    return "Self Discovery";
   }
 
   // Retrieve instant books (curated masterworks from 1,050 landmark catalog + localStorage cache)
   window.RABBIT_GENRES_CATALOG = window.RABBIT_GENRES_CATALOG || window.RABBIT_CURATED_CATALOG || {};
   window.RABBIT_CURATED_CATALOG = window.RABBIT_GENRES_CATALOG;
 
-  // Multi-genre selection state & Mix Mode
-  window.rabbitSelectedGenres = window.rabbitSelectedGenres || new Set();
-  const initSavedGenre = resolveGenreKey(localStorage.getItem("rabbit_selected_genre") || "The Human Mind");
-  if (window.rabbitSelectedGenres.size === 0) {
-    window.rabbitSelectedGenres.add(initSavedGenre);
+  // Multi-genre selection state & Mix Mode: Initialize with robust persistence and URL routing
+  let initialGenre = null;
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const genreParam = urlParams.get("genre");
+    if (genreParam) initialGenre = resolveGenreKey(genreParam);
+  } catch(e) {}
+
+  if (!initialGenre) {
+    try {
+      const saved = localStorage.getItem("rabbit_selected_genre");
+      if (saved) initialGenre = resolveGenreKey(saved);
+    } catch (e) {}
   }
-  window.rabbitMixMode = window.rabbitMixMode || false;
+
+  let initialGenresList = [];
+  try {
+    const savedList = JSON.parse(localStorage.getItem("rabbit_selected_genres") || "[]");
+    if (Array.isArray(savedList) && savedList.length > 0) {
+      initialGenresList = savedList.map(resolveGenreKey).filter(Boolean);
+    }
+  } catch (e) {}
+
+  window.rabbitSelectedGenres = window.rabbitSelectedGenres || new Set();
+  if (initialGenresList.length > 0) {
+    initialGenresList.forEach(g => window.rabbitSelectedGenres.add(g));
+    window.rabbitSelectedGenre = initialGenresList[0];
+  } else if (initialGenre) {
+    window.rabbitSelectedGenres.add(initialGenre);
+    window.rabbitSelectedGenre = initialGenre;
+  } else {
+    window.rabbitSelectedGenre = "Self Discovery";
+    window.rabbitSelectedGenres.add("Self Discovery");
+  }
+  window.rabbitMixMode = (window.rabbitSelectedGenres.size > 1);
+
+  // Sync browser popstate (Back/Forward navigation)
+  window.addEventListener("popstate", (e) => {
+    let target = null;
+    if (e.state && e.state.genre) {
+      target = e.state.genre;
+    } else {
+      const urlParams = new URLSearchParams(window.location.search);
+      target = urlParams.get("genre") || localStorage.getItem("rabbit_selected_genre");
+    }
+    if (target && typeof window.switchSingleGenre === "function") {
+      window.switchSingleGenre(target, false);
+    }
+  });
 
   
   // Global Local Search Helper across all 1,050 Landmark Books
@@ -1182,7 +1248,7 @@
           <p style="font-size:14px;color:#9ca3af;line-height:1.6;max-width:380px;margin:0 auto 20px;">
             Tap <strong style="color:#c4b5fd;">◇ Save</strong> on any book insight card or reader overlay to preserve your favorite reads here.
           </p>
-          <button type="button" class="primary" style="padding:10px 20px;border-radius:24px;cursor:pointer;font-weight:600;" onclick="window.switchSingleGenre('The Human Mind')">
+          <button type="button" class="primary" style="padding:10px 20px;border-radius:24px;cursor:pointer;font-weight:600;" onclick="window.resetToSingleGenre()">
             ✦ Explore Masterworks Feed
           </button>
         `;
@@ -1239,7 +1305,7 @@
           <p style="font-size:14px;color:#9ca3af;line-height:1.6;max-width:380px;margin:0 auto 20px;">
             Tap <strong style="color:#f43f5e;">♡ Follow book</strong> on any insight card to track authors and future community discussions.
           </p>
-          <button type="button" class="primary" style="padding:10px 20px;border-radius:24px;cursor:pointer;font-weight:600;" onclick="window.switchSingleGenre('The Human Mind')">
+          <button type="button" class="primary" style="padding:10px 20px;border-radius:24px;cursor:pointer;font-weight:600;" onclick="window.resetToSingleGenre()">
             ✦ Explore Masterworks Feed
           </button>
         `;
@@ -1259,22 +1325,53 @@
   window.renderFirstBookSlot = renderFirstBookSlot;
 
   function switchGenre(targetGenre) {
-    switchSingleGenre(targetGenre);
+    switchSingleGenre(targetGenre, true);
   }
 
-  function switchSingleGenre(targetGenre) {
-    const resolved = resolveGenreKey(targetGenre);
+  function switchSingleGenre(targetGenre, updateHistory = true) {
+    const prevGenre = window.rabbitSelectedGenre || "None";
+    const prevStored = (function(){ try { return localStorage.getItem("rabbit_selected_genre") || "None"; } catch(e){ return "None"; } })();
+    let resolved = resolveGenreKey(targetGenre);
+    let fallbackTriggered = false;
+    let fallbackReason = "none";
+
+    if (!resolved) {
+      fallbackTriggered = true;
+      fallbackReason = `Invalid or unmapped genre "${targetGenre}". Preserving current active genre "${prevGenre}".`;
+      console.warn(`[RABBIT WARN] ${fallbackReason}`);
+      resolved = prevGenre !== "None" ? prevGenre : "Self Discovery";
+    }
+
     window.rabbitMixMode = false;
     window.rabbitSelectedGenres = new Set([resolved]);
     window.rabbitSelectedGenre = resolved;
     try {
       localStorage.setItem("rabbit_selected_genre", resolved);
+      localStorage.setItem("rabbit_selected_genres", JSON.stringify([resolved]));
+      if (updateHistory) {
+        const url = new URL(window.location);
+        url.searchParams.set("genre", resolved);
+        history.pushState({ genre: resolved }, "", url.toString());
+      }
     } catch (e) {}
-    renderFeedForCurrentSelection();
+
+    renderFeedForCurrentSelection({
+      event: "switchSingleGenre",
+      targetGenre,
+      resolved,
+      prevGenre,
+      prevStored,
+      fallbackTriggered,
+      fallbackReason
+    });
   }
 
   function toggleGenre(targetGenre) {
+    const prevGenre = window.rabbitSelectedGenre || "None";
+    const prevStored = (function(){ try { return localStorage.getItem("rabbit_selected_genre") || "None"; } catch(e){ return "None"; } })();
     const resolved = resolveGenreKey(targetGenre);
+    if (!resolved) return;
+
     window.rabbitSelectedGenres = window.rabbitSelectedGenres || new Set();
     if (window.rabbitSelectedGenres.has(resolved)) {
       if (window.rabbitSelectedGenres.size > 1) {
@@ -1283,24 +1380,43 @@
     } else {
       window.rabbitSelectedGenres.add(resolved);
     }
+
     if (window.rabbitSelectedGenres.size > 1) {
       window.rabbitMixMode = true;
+    } else {
+      window.rabbitMixMode = false;
     }
-    const first = Array.from(window.rabbitSelectedGenres)[0];
+
+    const selectedList = Array.from(window.rabbitSelectedGenres);
+    const first = selectedList[0] || resolved;
     window.rabbitSelectedGenre = first;
     try {
       localStorage.setItem("rabbit_selected_genre", first);
+      localStorage.setItem("rabbit_selected_genres", JSON.stringify(selectedList));
+      const url = new URL(window.location);
+      url.searchParams.set("genre", selectedList.join(","));
+      history.replaceState({ genre: selectedList }, "", url.toString());
     } catch (e) {}
-    renderFeedForCurrentSelection();
+
+    renderFeedForCurrentSelection({
+      event: "toggleGenre",
+      targetGenre,
+      resolved,
+      prevGenre,
+      prevStored,
+      fallbackTriggered: false,
+      fallbackReason: "none"
+    });
   }
 
   function resetToSingleGenre(optionalTarget) {
     window.rabbitMixMode = false;
-    const target = optionalTarget || Array.from(window.rabbitSelectedGenres)[0] || "The Human Mind";
-    switchSingleGenre(target);
+    const currentActive = window.rabbitSelectedGenre || (window.rabbitSelectedGenres ? Array.from(window.rabbitSelectedGenres)[0] : "");
+    const target = optionalTarget || currentActive || "Self Discovery";
+    switchSingleGenre(target, true);
   }
 
-  function renderFeedForCurrentSelection() {
+  function renderFeedForCurrentSelection(diagnosticInfo = null) {
     const scroller = document.getElementById("homeScroll");
     if (!scroller) return;
 
@@ -1317,7 +1433,7 @@
     searchTerm = "";
     seenWorkIds.clear();
 
-    const selectedArr = Array.from(window.rabbitSelectedGenres || ["The Human Mind"]);
+    const selectedArr = Array.from(window.rabbitSelectedGenres || [getActiveGenre()]);
     const isMixed = selectedArr.length > 1;
 
     // 2. Update heading
@@ -1333,8 +1449,8 @@
       renderGenreBar(barContainer);
     }
 
-    // 4. Clear old expanded cards
-    scroller.querySelectorAll(".rabbit-expanded-post").forEach(el => el.remove());
+    // 4. Clear ALL old expanded cards AND any residual feedposts from index.html
+    scroller.querySelectorAll(".feedpost, .rabbit-expanded-post").forEach(el => el.remove());
 
     // 5. Clear story rail
     const first = scroller.querySelector(".home-first");
@@ -1367,6 +1483,23 @@
     } else {
       window.RabbitSmartLoader.done();
     }
+
+    // Structured Diagnostic Logging (Fulfilling Section 3 User Specification)
+    try {
+      const storedAfter = localStorage.getItem("rabbit_selected_genre");
+      console.log("%c[RABBIT GENRE DISCOVERY EVENT]%c", "background:#9333ea;color:#fff;font-weight:bold;padding:2px 8px;border-radius:4px;", "", {
+        genreSelectedByUser: diagnosticInfo?.targetGenre || selectedArr.join(" + "),
+        selectedGenreId: selectedArr[0].toLowerCase().replace(/[^a-z0-9]/g, "_"),
+        previousActiveGenre: diagnosticInfo?.prevGenre || "N/A",
+        urlRoute: window.location.href,
+        storedPreferencesBefore: diagnosticInfo?.prevStored || "N/A",
+        storedPreferencesAfter: storedAfter,
+        resolvedGenreUsedForFetching: isMixed ? selectedArr : selectedArr[0],
+        fallbackTriggered: diagnosticInfo?.fallbackTriggered ? `YES: ${diagnosticInfo.fallbackReason}` : "NO",
+        booksReturnedCount: booksToRender ? booksToRender.length : 0,
+        feedRenderedToUser: headingText
+      });
+    } catch (e) {}
 
     // 8. If single genre, progressive background fetch for serendipity
     if (!isMixed) {
@@ -1557,5 +1690,11 @@
       loadBackgroundBooks(getActiveGenre(), requestEpoch);
     }
   }, true);
+
+  // If home is already mounted (e.g. initial load or reload when entered=true),
+  // immediately mount the search bar, genre navigation bar, and book feed!
+  if (document.getElementById("homeScroll") && typeof window.renderHome === "function") {
+    window.renderHome();
+  }
 
 })();
