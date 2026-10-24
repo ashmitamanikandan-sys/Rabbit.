@@ -535,13 +535,26 @@
 
       if (toRender.length > 0) {
         currentOffset += toRender.length;
-        addRealBookCards(toRender);
+        const slot = document.getElementById("rabbit-first-book-slot");
+        if (slot && !slot.querySelector(".feature")) {
+          const firstBook = toRender.shift();
+          renderFirstBookSlot(firstBook, targetGenre);
+        }
+        if (toRender.length > 0) {
+          addRealBookCards(toRender);
+        }
         saveToLocalCache(targetGenre, toRender);
+        window.RabbitSmartLoader.done();
       }
     } catch (err) {
-      // Graceful handling of network timeout, rate-limit, or abort:
-      // The user ALREADY has instant books rendered. Never crash or freeze!
       console.warn("Background fetch completed or timed out for:", targetGenre);
+      const scroller = document.getElementById("homeScroll");
+      const hasCards = scroller && scroller.querySelectorAll(".feedpost, .rabbit-featured-insight-card").length > 0;
+      if (!hasCards) {
+        window.RabbitSmartLoader.fail();
+      } else {
+        window.RabbitSmartLoader.done();
+      }
     } finally {
       clearTimeout(timeoutId);
       catalogBusy = false;
@@ -585,7 +598,275 @@
     container.append(bar);
   }
 
+
+  // ========================================================
+  // Phase 2: SMART RABBIT LOADING SCREEN
+  // ========================================================
+  window.RabbitSmartLoader = (function() {
+    let loaderEl = null;
+    let timerId = null;
+    let messageInterval = null;
+    let timeoutId = null;
+    let currentRetryFn = null;
+    let currentGenre = "";
+
+    const messages = [
+      "Digging into the library burrow…",
+      "Sniffing out rare ideas and hidden chapters…",
+      "Unearthing books worth falling into…",
+      "Filtering through thousands of thoughts…",
+      "Curating your next great curiosity…",
+      "Almost there — preparing your rabbit hole…"
+    ];
+    let msgIndex = 0;
+
+    function ensureMounted() {
+      if (loaderEl && document.body.contains(loaderEl)) return loaderEl;
+      const existing = document.getElementById("rabbit-smart-loader");
+      if (existing) {
+        loaderEl = existing;
+        return loaderEl;
+      }
+
+      loaderEl = document.createElement("div");
+      loaderEl.id = "rabbit-smart-loader";
+      loaderEl.className = "rabbit-smart-loader";
+      loaderEl.setAttribute("aria-live", "polite");
+      loaderEl.innerHTML = `
+        <div class="rabbit-smart-loader-card">
+          <div class="rabbit-hopper-container">
+            <svg class="rabbit-hopper-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g class="rabbit-hopper-body">
+                <path d="M34 26C34 16 38 8 42 8C46 8 46 16 44 26" stroke="#bca6ff" stroke-width="2.8" stroke-linecap="round" fill="rgba(188,166,255,0.18)"/>
+                <path d="M40 24C42 14 47 7 51 8C55 9 53 18 49 26" stroke="#bca6ff" stroke-width="3" stroke-linecap="round" fill="rgba(188,166,255,0.3)"/>
+                <circle cx="44" cy="32" r="9" fill="#181622" stroke="#bca6ff" stroke-width="2.5"/>
+                <circle cx="47" cy="30" r="1.6" fill="#bca6ff"/>
+                <circle cx="53" cy="33" r="1.2" fill="#e8e4f5"/>
+                <path d="M52 35L57 36M52 34L58 33" stroke="rgba(188,166,255,0.6)" stroke-width="1.2" stroke-linecap="round"/>
+                <ellipse cx="33" cy="46" rx="15" ry="12" fill="#181622" stroke="#bca6ff" stroke-width="2.5"/>
+                <circle cx="17" cy="46" r="4.5" fill="#bca6ff" stroke="#e8e4f5" stroke-width="1.5"/>
+                <ellipse cx="44" cy="56" rx="4" ry="2.5" fill="#bca6ff"/>
+                <ellipse cx="28" cy="56" rx="6" ry="3.5" fill="#bca6ff"/>
+              </g>
+              <ellipse class="rabbit-hopper-shadow" cx="36" cy="68" rx="20" ry="4" fill="rgba(188,166,255,0.25)"/>
+            </svg>
+          </div>
+          <div class="rabbit-loader-status" id="rabbit-loader-status">
+            <div class="rabbit-loader-genre-badge" id="rabbit-loader-genre">THE BURROW</div>
+            <p class="rabbit-loader-message" id="rabbit-loader-msg">Digging into the library burrow…</p>
+          </div>
+          <div class="rabbit-loader-error" id="rabbit-loader-error" hidden>
+            <p class="rabbit-error-text">The library burrow took too long to respond.</p>
+            <button type="button" class="rabbit-retry-btn" id="rabbit-loader-retry">Try Again ↻</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(loaderEl);
+
+      const retryBtn = loaderEl.querySelector("#rabbit-loader-retry");
+      if (retryBtn) {
+        retryBtn.onclick = () => {
+          if (typeof currentRetryFn === "function") {
+            currentRetryFn();
+          }
+        };
+      }
+      return loaderEl;
+    }
+
+    function start(genre, retryFn) {
+      clearTimers();
+      currentGenre = genre || "Curiosity Feed";
+      currentRetryFn = retryFn;
+      msgIndex = 0;
+
+      // Strict 500ms threshold: Content loaded under 500ms NEVER shows the loader!
+      timerId = setTimeout(() => {
+        show();
+      }, 500);
+    }
+
+    function show() {
+      const el = ensureMounted();
+      const genreBadge = el.querySelector("#rabbit-loader-genre");
+      if (genreBadge) genreBadge.textContent = currentGenre.toUpperCase();
+
+      const msgEl = el.querySelector("#rabbit-loader-msg");
+      if (msgEl) msgEl.textContent = messages[0];
+
+      const errEl = el.querySelector("#rabbit-loader-error");
+      if (errEl) errEl.hidden = true;
+      const statusEl = el.querySelector("#rabbit-loader-status");
+      if (statusEl) statusEl.hidden = false;
+
+      el.classList.add("visible");
+
+      if (messageInterval) clearInterval(messageInterval);
+      messageInterval = setInterval(() => {
+        msgIndex = (msgIndex + 1) % messages.length;
+        if (msgEl) {
+          msgEl.classList.add("swapping");
+          setTimeout(() => {
+            msgEl.textContent = messages[msgIndex];
+            msgEl.classList.remove("swapping");
+          }, 280);
+        }
+      }, 1800);
+
+      timeoutId = setTimeout(() => {
+        fail();
+      }, 4500);
+    }
+
+    function done() {
+      clearTimers();
+      if (loaderEl && loaderEl.classList.contains("visible")) {
+        loaderEl.classList.remove("visible");
+        if (messageInterval) {
+          clearInterval(messageInterval);
+          messageInterval = null;
+        }
+      }
+    }
+
+    function fail() {
+      if (messageInterval) {
+        clearInterval(messageInterval);
+        messageInterval = null;
+      }
+      const el = ensureMounted();
+      el.classList.add("visible");
+      const statusEl = el.querySelector("#rabbit-loader-status");
+      if (statusEl) statusEl.hidden = true;
+      const errEl = el.querySelector("#rabbit-loader-error");
+      if (errEl) errEl.hidden = false;
+    }
+
+    function clearTimers() {
+      if (timerId) {
+        clearTimeout(timerId);
+        timerId = null;
+      }
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+        timeoutId = null;
+      }
+      if (messageInterval) {
+        clearInterval(messageInterval);
+        messageInterval = null;
+      }
+    }
+
+    return {
+      start,
+      done,
+      fail
+    };
+  })();
+
+  // ========================================================
+  // Phase 2: RENDER FIRST REAL BOOK INSIGHT (NO UNWANTED CARD!)
+  // ========================================================
+  function renderFirstBookSlot(book, genreName) {
+    const scroller = document.getElementById("homeScroll");
+    if (!scroller || !book) return;
+
+    let slot = scroller.querySelector("#rabbit-first-book-slot");
+    if (!slot) {
+      const oldFeature = scroller.querySelector(".home-first .feature");
+      if (oldFeature) {
+        slot = document.createElement("div");
+        slot.id = "rabbit-first-book-slot";
+        slot.className = "rabbit-first-book-slot";
+        oldFeature.replaceWith(slot);
+      } else {
+        const sec = scroller.querySelector(".home-first .section");
+        if (!sec) return;
+        slot = document.createElement("div");
+        slot.id = "rabbit-first-book-slot";
+        slot.className = "rabbit-first-book-slot";
+        sec.appendChild(slot);
+      }
+    }
+
+    // Synthesize editorial preview using RABBIT_ENRICH engine
+    const enriched = window.RABBIT_ENRICH
+      ? window.RABBIT_ENRICH.getEnrichedBook(book, genreName)
+      : {
+          hook: book.title,
+          preview: book.description || book.original_summary || "Explore this book in the RABBIT catalog.",
+          sections: []
+        };
+
+    book.__rabbitSections = enriched.sections;
+    book.__rabbitHook = enriched.hook;
+    book.__rabbitPreview = enriched.preview;
+
+    const sk = "rabbit_save_" + (book.id || book.title);
+    const isSaved = localStorage.getItem(sk);
+    const lk = "rabbit_like_" + (book.id || book.title);
+    const isLiked = localStorage.getItem(lk);
+
+    slot.innerHTML = `
+      <div class="feature rabbit-featured-insight-card">
+        <div class="bookrow" style="display:flex;align-items:center;gap:14px;margin-top:6px">
+          ${book.cover_url ? `<img src="${escapeHtml(book.cover_url)}" alt="${escapeHtml(book.title)}" class="cover" style="width:52px;height:74px;object-fit:cover;border-radius:6px;box-shadow:0 6px 16px rgba(0,0,0,0.55);flex-shrink:0" loading="lazy" decoding="async">` : `<div style="width:52px;height:74px;background:#242428;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#bca6ff;font-weight:700">R</div>`}
+          <div style="flex:1;min-width:0">
+            <h3 style="font-size:17px;font-weight:600;margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(book.title)}</h3>
+            <p class="muted" style="font-size:13px;margin:0">${escapeHtml(book.author || "RABBIT Curator")}</p>
+            <span class="chip" style="font-size:10px;padding:3px 10px;margin-top:6px;display:inline-block;background:rgba(188,166,255,0.12);border-color:rgba(188,166,255,0.3)">${escapeHtml(genreName)}</span>
+          </div>
+        </div>
+        <div class="eyebrow" style="margin-top:16px;font-size:11px;letter-spacing:1px;color:#bca6ff">THE FIRST HOP · 001</div>
+        <h3 style="font-size:22px;letter-spacing:-0.4px;line-height:1.24;margin:10px 0;font-weight:600">${escapeHtml(enriched.hook || book.title)}</h3>
+        <div class="insight" style="white-space:pre-line;line-height:1.62;margin:12px 0;font-size:14px;color:#dedede">${escapeHtml(enriched.preview)}</div>
+        <div class="actions" style="display:flex;align-items:center;gap:10px;margin-top:16px">
+          <button class="rabbit-card-btn ${isLiked ? 'active' : ''}" id="rabbit-featured-like-btn" aria-label="Like book" style="background:rgba(255,255,255,0.06);border:1px solid #333;color:#ddd;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:5px">${isLiked ? '♥ Liked' : '♡ Like'}</button>
+          <button class="rabbit-card-btn ${isSaved ? 'active' : ''}" id="rabbit-featured-save-btn" aria-label="Save book" style="background:rgba(255,255,255,0.06);border:1px solid #333;color:#ddd;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:5px">${isSaved ? '◆ Saved' : '◇ Save'}</button>
+          <button class="readmore" id="rabbit-featured-read-btn" style="margin-left:auto;background:transparent;border:1px solid #bca6ff;color:#bca6ff;padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:500">Read more ↗</button>
+        </div>
+        <div class="subtle" style="margin-top:14px;font-size:11px;color:#888;text-align:center">↓ Scroll to fall deeper into the rabbit hole</div>
+      </div>
+    `;
+
+    const readBtn = slot.querySelector("#rabbit-featured-read-btn");
+    if (readBtn) readBtn.onclick = () => rabbitReader(book);
+
+    const likeBtn = slot.querySelector("#rabbit-featured-like-btn");
+    if (likeBtn) {
+      likeBtn.onclick = () => {
+        if (localStorage.getItem(lk)) {
+          localStorage.removeItem(lk);
+          likeBtn.classList.remove("active");
+          likeBtn.textContent = "♡ Like";
+        } else {
+          localStorage.setItem(lk, "1");
+          likeBtn.classList.add("active");
+          likeBtn.textContent = "♥ Liked";
+        }
+      };
+    }
+
+    const saveBtn = slot.querySelector("#rabbit-featured-save-btn");
+    if (saveBtn) {
+      saveBtn.onclick = () => {
+        if (localStorage.getItem(sk)) {
+          localStorage.removeItem(sk);
+          saveBtn.classList.remove("active");
+          saveBtn.textContent = "◇ Save";
+        } else {
+          localStorage.setItem(sk, "1");
+          saveBtn.classList.add("active");
+          saveBtn.textContent = "◆ Saved";
+        }
+      };
+    }
+  }
+
+
   // Instant zero-latency switch between genres
+  window.switchGenre = switchGenre;
+  window.renderFirstBookSlot = renderFirstBookSlot;
   function switchGenre(targetGenre) {
     const resolved = resolveGenreKey(targetGenre);
     window.rabbitSelectedGenre = resolved;
@@ -624,17 +905,9 @@
     // 4. Clear old expanded cards
     scroller.querySelectorAll(".rabbit-expanded-post").forEach(el => el.remove());
 
-    // 5. Update feature box and clear story rail
+    // 5. Clear story rail
     const first = scroller.querySelector(".home-first");
     if (first) {
-      const feature = first.querySelector(".feature");
-      if (feature) {
-        feature.innerHTML = `
-          <div class="eyebrow">YOUR RABBIT HOLE · ${escapeHtml(resolved)}</div>
-          <h2 style="font:600 27px/1.2 var(--reading-font);margin:16px 0">Follow your curiosity into ${escapeHtml(resolved)}.</h2>
-          <p class="muted">Instant ideas, 8–10 line curious previews, and deep chapter insights. Swipe down to discover.</p>
-        `;
-      }
       const stories = first.querySelector(".stories");
       if (stories) {
         stories.replaceChildren();
@@ -642,19 +915,30 @@
       }
     }
 
-    // 6. ZERO-LATENCY INSTANT FIRST RENDER: Show instant books immediately! (0ms)
+    // Start Smart Rabbit Loader (with 500ms delay & retry capability)
+    window.RabbitSmartLoader.start(resolved, () => switchGenre(targetGenre));
+
+    // 6. ZERO-LATENCY INSTANT FIRST RENDER: Show real book insights directly! (0ms)
+    // Completely replaces the unwanted instructional card with the first real book insight!
     const instantBooks = getInstantBooks(resolved);
     if (instantBooks && instantBooks.length > 0) {
-      instantBooks.forEach(b => seenWorkIds.add(b.id || b.title));
-      addRealBookCards(instantBooks);
+      renderFirstBookSlot(instantBooks[0], resolved);
+      seenWorkIds.add(instantBooks[0].id || instantBooks[0].title);
+
+      if (instantBooks.length > 1) {
+        const rest = instantBooks.slice(1);
+        rest.forEach(b => seenWorkIds.add(b.id || b.title));
+        addRealBookCards(rest);
+      }
+      window.RabbitSmartLoader.done();
     } else {
-      // If no instant books, show clean placeholder
+      // If no instant books, show gentle status
       const stories = first?.querySelector(".stories");
       if (stories && !stories.children.length) {
         const loading = document.createElement("span");
         loading.className = "muted";
         loading.style.cssText = "font-size:12px;padding:20px 0";
-        loading.textContent = "Connecting to library…";
+        loading.textContent = "Connecting to library burrow…";
         stories.append(loading);
       }
     }
@@ -722,7 +1006,7 @@
         renderGenreBar(first);
       }
 
-      // If user selected non-Human Mind genre, customize feature card and show instant books
+      // If user selected non-Human Mind genre, render real book insights directly!
       if (chosen !== "The Human Mind") {
         const heading = s.querySelector(".section-head .muted");
         if (heading) heading.textContent = chosen.toUpperCase();
@@ -732,14 +1016,6 @@
 
         const firstSec = s.querySelector(".home-first");
         if (firstSec) {
-          const feature = firstSec.querySelector(".feature");
-          if (feature) {
-            feature.innerHTML = `
-              <div class="eyebrow">YOUR RABBIT HOLE · ${escapeHtml(chosen)}</div>
-              <h2 style="font:600 27px/1.2 var(--reading-font);margin:16px 0">Follow your curiosity into ${escapeHtml(chosen)}.</h2>
-              <p class="muted">Instant ideas, 8–10 line curious previews, and deep chapter insights. Swipe down to discover.</p>
-            `;
-          }
           const stories = firstSec.querySelector(".stories");
           if (stories) {
             stories.replaceChildren();
@@ -747,7 +1023,6 @@
           }
         }
 
-        // Render instant books immediately
         requestEpoch++;
         const thisEpoch = requestEpoch;
         currentOffset = 0;
@@ -755,16 +1030,28 @@
         catalogBusy = false;
         seenWorkIds.clear();
 
+        window.RabbitSmartLoader.start(chosen, () => switchGenre(chosen));
+
         const instantBooks = getInstantBooks(chosen);
         if (instantBooks && instantBooks.length > 0) {
-          instantBooks.forEach(b => seenWorkIds.add(b.id || b.title));
-          addRealBookCards(instantBooks);
+          renderFirstBookSlot(instantBooks[0], chosen);
+          seenWorkIds.add(instantBooks[0].id || instantBooks[0].title);
+          if (instantBooks.length > 1) {
+            const rest = instantBooks.slice(1);
+            rest.forEach(b => seenWorkIds.add(b.id || b.title));
+            addRealBookCards(rest);
+          }
+          window.RabbitSmartLoader.done();
         }
 
         loadBackgroundBooks(chosen, thisEpoch);
       } else {
-        // If Human Mind, background fetch additional titles progressively
+        // If Human Mind, ensure first slot has real book and background fetch additional titles
         requestEpoch++;
+        const instantBooks = getInstantBooks("The Human Mind");
+        if (instantBooks && instantBooks.length > 0) {
+          renderFirstBookSlot(instantBooks[0], "The Human Mind");
+        }
         loadBackgroundBooks("The Human Mind", requestEpoch);
       }
     };
