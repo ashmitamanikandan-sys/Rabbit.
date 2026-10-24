@@ -101,7 +101,12 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
 .rabbit-expanded-post .insight.rabbit-awaiting-overview{min-height:0;color:#b8a9c5;font-style:italic}
 @media(max-width:600px){#homeScroll .feedpost .insight.teaser,#feed .feedpost .insight.teaser,.rabbit-expanded-post .insight{max-width:100%}}
 </style>
+<style id="rabbit-phase2-styles">
 /* Phase 2: Top Main Navigation & Smart Rabbit Loading Screen */
+body:not([data-rabbit-stage="curiosity"]):not([data-rabbit-stage="feed"]):not([data-rabbit-stage="reader"]) #rabbit-top-main-nav {
+  display: none !important;
+}
+
 .rabbit-top-nav {
   position: relative;
   z-index: 25;
@@ -110,9 +115,14 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
   backdrop-filter: blur(24px);
   border-bottom: 1px solid rgba(188, 166, 255, 0.14);
   width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
+
 .rabbit-top-nav-inner {
-  display: flex;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   align-items: center;
   gap: 7px;
   padding: 8px 16px;
@@ -121,63 +131,73 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
   -webkit-overflow-scrolling: touch;
   max-width: 680px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
+
 .rabbit-top-nav-inner::-webkit-scrollbar {
   display: none;
 }
+
 .rabbit-top-nav-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  background: transparent;
-  border: 1px solid transparent;
-  color: #a6a6a6;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.25px;
-  padding: 6px 13px;
-  border-radius: 9999px;
-  cursor: pointer;
-  white-space: nowrap;
-  flex-shrink: 0;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  -webkit-tap-highlight-color: transparent;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  border: 1px solid rgba(188, 166, 255, 0.18) !important;
+  color: #a6a6a6 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.25px !important;
+  padding: 6px 13px !important;
+  border-radius: 9999px !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  box-sizing: border-box !important;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
+
 .rabbit-top-nav-item:hover {
-  color: #f5f5f5;
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(188, 166, 255, 0.22);
+  color: #f5f5f5 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(188, 166, 255, 0.35) !important;
 }
+
 .rabbit-top-nav-item:active {
-  transform: scale(0.95);
+  transform: scale(0.95) !important;
 }
+
 .rabbit-top-nav-item.active {
-  color: #ffffff;
-  background: linear-gradient(135deg, rgba(188, 166, 255, 0.24), rgba(138, 110, 240, 0.18));
-  border-color: rgba(188, 166, 255, 0.5);
-  box-shadow: 0 0 14px rgba(188, 166, 255, 0.22);
+  color: #ffffff !important;
+  background: linear-gradient(135deg, rgba(188, 166, 255, 0.24), rgba(138, 110, 240, 0.18)) !important;
+  border-color: rgba(188, 166, 255, 0.55) !important;
+  box-shadow: 0 0 14px rgba(188, 166, 255, 0.25) !important;
 }
+
 .rabbit-nav-ico {
-  width: 14px;
-  height: 14px;
-  flex-shrink: 0;
-  transition: transform 0.2s ease, stroke 0.2s ease;
+  width: 14px !important;
+  height: 14px !important;
+  max-width: 14px !important;
+  max-height: 14px !important;
+  flex-shrink: 0 !important;
+  stroke: currentColor !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  transition: transform 0.2s ease, stroke 0.2s ease !important;
 }
+
 .rabbit-top-nav-item.active .rabbit-nav-ico,
 .rabbit-top-nav-item:hover .rabbit-nav-ico {
-  stroke: #bca6ff;
+  stroke: #bca6ff !important;
 }
+
 .rabbit-top-nav-item:hover .rabbit-nav-ico {
-  transform: scale(1.1);
-}
-.rabbit-pulse-highlight {
-  animation: rabbit-genre-pulse 1.2s ease;
-}
-@keyframes rabbit-genre-pulse {
-  0% { box-shadow: 0 0 0 rgba(188, 166, 255, 0); }
-  50% { box-shadow: 0 0 20px rgba(188, 166, 255, 0.45); border-color: rgba(188, 166, 255, 0.7); }
-  100% { box-shadow: 0 0 0 rgba(188, 166, 255, 0); }
+  transform: scale(1.1) !important;
 }
 
 /* Hide duplicate bottom floating toggles */
@@ -198,10 +218,12 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
   pointer-events: none;
   transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .rabbit-smart-loader.visible {
   opacity: 1;
   pointer-events: auto;
 }
+
 .rabbit-smart-loader-card {
   display: flex;
   flex-direction: column;
@@ -212,6 +234,7 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
   width: 90%;
   background: radial-gradient(circle at 50% 30%, rgba(188, 166, 255, 0.08), transparent 70%);
 }
+
 .rabbit-hopper-container {
   width: 90px;
   height: 90px;
@@ -220,56 +243,41 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
   justify-content: center;
   margin-bottom: 24px;
 }
+
 .rabbit-hopper-svg {
   width: 80px;
   height: 80px;
   overflow: visible;
 }
+
 .rabbit-hopper-body {
   transform-origin: 36px 60px;
   animation: rabbit-hop-anim 0.8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
+
 .rabbit-hopper-shadow {
   transform-origin: 36px 68px;
   animation: rabbit-shadow-anim 0.8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
 }
+
 @keyframes rabbit-hop-anim {
-  0%, 100% {
-    transform: translateY(0) scale(1, 1);
-  }
-  30% {
-    transform: translateY(-22px) scale(0.92, 1.08) rotate(-3deg);
-  }
-  50% {
-    transform: translateY(-26px) scale(0.96, 1.04) rotate(2deg);
-  }
-  75% {
-    transform: translateY(-6px) scale(1.02, 0.98);
-  }
-  90% {
-    transform: translateY(2px) scale(1.08, 0.92);
-  }
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  30% { transform: translateY(-22px) scale(0.92, 1.08) rotate(-3deg); }
+  50% { transform: translateY(-26px) scale(0.96, 1.04) rotate(2deg); }
+  75% { transform: translateY(-6px) scale(1.02, 0.98); }
+  90% { transform: translateY(2px) scale(1.08, 0.92); }
 }
+
 @keyframes rabbit-shadow-anim {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.35;
-  }
-  40% {
-    transform: scale(0.45);
-    opacity: 0.1;
-  }
+  0%, 100% { transform: scale(1); opacity: 0.35; }
+  40% { transform: scale(0.45); opacity: 0.1; }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  .rabbit-hopper-body {
-    animation: none;
-    transform: none;
-  }
-  .rabbit-hopper-shadow {
-    animation: none;
-    opacity: 0.25;
-  }
+  .rabbit-hopper-body { animation: none; transform: none; }
+  .rabbit-hopper-shadow { animation: none; opacity: 0.25; }
 }
+
 .rabbit-loader-genre-badge {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 10px;
@@ -279,6 +287,7 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
   text-transform: uppercase;
   margin-bottom: 10px;
 }
+
 .rabbit-loader-message {
   font-family: var(--reading-font), Georgia, serif;
   font-size: 17px;
@@ -288,18 +297,22 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
   min-height: 48px;
   transition: opacity 0.28s ease, transform 0.28s ease;
 }
+
 .rabbit-loader-message.swapping {
   opacity: 0;
   transform: translateY(4px);
 }
+
 .rabbit-loader-error {
   margin-top: 18px;
 }
+
 .rabbit-error-text {
   font-size: 13px;
   color: #ff9d9d;
   margin: 0 0 14px;
 }
+
 .rabbit-retry-btn {
   background: linear-gradient(135deg, rgba(188, 166, 255, 0.2), rgba(138, 110, 240, 0.25));
   border: 1px solid rgba(188, 166, 255, 0.45);
@@ -312,22 +325,15 @@ body{background:radial-gradient(ellipse 75% 35% at 50% -15%,rgba(118,79,195,.12)
   cursor: pointer;
   transition: all 0.2s ease;
 }
-.rabbit-retry-btn:hover {
-  background: linear-gradient(135deg, rgba(188, 166, 255, 0.35), rgba(138, 110, 240, 0.4));
-  border-color: rgba(188, 166, 255, 0.7);
-  box-shadow: 0 0 16px rgba(188, 166, 255, 0.3);
-}
-.rabbit-retry-btn:active {
-  transform: scale(0.96);
-}
 
 .rabbit-first-book-slot {
   width: 100%;
 }
+
 .rabbit-first-book-slot .feature {
   margin-top: 14px;
 }
-
+</style>
 </head><body><div id="app"><main class="page welcome"><div class="eyebrow">WELCOME TO RABBIT</div><h1>Go down<br>the <span class="accent">rabbit hole.</span></h1><p>A feed of ideas worth getting lost in. Find your next obsession, one chapter at a time.</p><button class="primary" onclick="renderInterests()">Find your rabbit hole →</button></main></div><script>
 const icons={heart:'<path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 1 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/>',bookmark:'<path d="M5 3h14v18l-7-5-7 5z"/>',arrow:'<path d="m15 18-6-6 6-6"/>',send:'<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',message:'<path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5 9 9 0 0 1-4-.9L3 21l1.9-5.5a9 9 0 0 1-.9-4A8.5 8.5 0 0 1 12.5 3 8.5 8.5 0 0 1 21 11.5Z"/>',home:'<path d="m3 10 9-7 9 7v11H3z"/><path d="M9 21v-7h6v7"/>'};const ico=(n)=>`<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[n]}</svg>`;
 const books=[
