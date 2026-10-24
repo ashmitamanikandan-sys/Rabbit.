@@ -1,0 +1,153 @@
+{
+  "total_genres": 21,
+  "total_books": 1050,
+  "genres": [
+    {
+      "name": "The Human Mind",
+      "slug": "the-human-mind",
+      "count": 50,
+      "file": "data/genres/the-human-mind.json",
+      "size_kb": 160.6
+    },
+    {
+      "name": "Self Discovery",
+      "slug": "self-discovery",
+      "count": 50,
+      "file": "data/genres/self-discovery.json",
+      "size_kb": 159.7
+    },
+    {
+      "name": "Philosophy",
+      "slug": "philosophy",
+      "count": 50,
+      "file": "data/genres/philosophy.json",
+      "size_kb": 158.9
+    },
+    {
+      "name": "Science Fiction",
+      "slug": "science-fiction",
+      "count": 50,
+      "file": "data/genres/science-fiction.json",
+      "size_kb": 158.4
+    },
+    {
+      "name": "Business & Money",
+      "slug": "business-and-money",
+      "count": 50,
+      "file": "data/genres/business-and-money.json",
+      "size_kb": 160.6
+    },
+    {
+      "name": "Fantasy",
+      "slug": "fantasy",
+      "count": 50,
+      "file": "data/genres/fantasy.json",
+      "size_kb": 158.0
+    },
+    {
+      "name": "Mystery & Thriller",
+      "slug": "mystery-and-thriller",
+      "count": 50,
+      "file": "data/genres/mystery-and-thriller.json",
+      "size_kb": 158.9
+    },
+    {
+      "name": "Romance",
+      "slug": "romance",
+      "count": 50,
+      "file": "data/genres/romance.json",
+      "size_kb": 158.5
+    },
+    {
+      "name": "Horror",
+      "slug": "horror",
+      "count": 50,
+      "file": "data/genres/horror.json",
+      "size_kb": 158.4
+    },
+    {
+      "name": "Historical Fiction",
+      "slug": "historical-fiction",
+      "count": 50,
+      "file": "data/genres/historical-fiction.json",
+      "size_kb": 159.5
+    },
+    {
+      "name": "Classics",
+      "slug": "classics",
+      "count": 50,
+      "file": "data/genres/classics.json",
+      "size_kb": 158.0
+    },
+    {
+      "name": "Science",
+      "slug": "science",
+      "count": 50,
+      "file": "data/genres/science.json",
+      "size_kb": 159.2
+    },
+    {
+      "name": "History",
+      "slug": "history",
+      "count": 50,
+      "file": "data/genres/history.json",
+      "size_kb": 159.6
+    },
+    {
+      "name": "Adventure",
+      "slug": "adventure",
+      "count": 50,
+      "file": "data/genres/adventure.json",
+      "size_kb": 159.0
+    },
+    {
+      "name": "Young Adult",
+      "slug": "young-adult",
+      "count": 50,
+      "file": "data/genres/young-adult.json",
+      "size_kb": 158.2
+    },
+    {
+      "name": "True Crime",
+      "slug": "true-crime",
+      "count": 50,
+      "file": "data/genres/true-crime.json",
+      "size_kb": 158.9
+    },
+    {
+      "name": "Poetry",
+      "slug": "poetry",
+      "count": 50,
+      "file": "data/genres/poetry.json",
+      "size_kb": 158.3
+    },
+    {
+      "name": "Literary Fiction",
+      "slug": "literary-fiction",
+      "count": 50,
+      "file": "data/genres/literary-fiction.json",
+      "size_kb": 159.3
+    },
+    {
+      "name": "Biography & Memoir",
+      "slug": "biography-and-memoir",
+      "count": 50,
+      "file": "data/genres/biography-and-memoir.json",
+      "size_kb": 160.0
+    },
+    {
+      "name": "Politics & Society",
+      "slug": "politics-and-society",
+      "count": 50,
+      "file": "data/genres/politics-and-society.json",
+      "size_kb": 161.3
+    },
+    {
+      "name": "Self-Help",
+      "slug": "self-help",
+      "count": 50,
+      "file": "data/genres/self-help.json",
+      "size_kb": 160.4
+    }
+  ]
+}
