@@ -564,6 +564,37 @@
           { title: "Embrace boredom", body: "You cannot expect to focus deeply on work if your brain is conditioned to reach for a phone at the first second of boredom in an elevator. Mental stillness must be trained like a muscle." }
         ]
       }
+    ],
+    // 21. SELF DISCOVERY
+    "self discovery": [
+      {
+        id: "the-mountain-is-you",
+        title: "The Mountain Is You",
+        author: "Brianna Wiest",
+        cover_url: "https://covers.openlibrary.org/b/id/11186816-M.jpg",
+        genre: "Self Discovery",
+        hook: "Your self-sabotage is not a character flaw; it is an unconscious attempt to meet an unmet emotional need",
+        preview: "We often believe our biggest obstacles are external circumstances, demanding bosses, or bad luck.\nBrianna Wiest reveals that the mountain standing between you and the life you want is almost always your own subconscious resistance.\nSelf-sabotage occurs when an internal desire conflicts with an unconscious need for safety or emotional familiarity.\nProcrastination, perfectionism, and picking fights right when life is going well are not failures of willpower; they are protective defense mechanisms.\nTrue personal breakthrough does not come from punishing yourself into discipline, but from mastering emotional literacy.\nBy learning to listen to what your resistance is trying to protect you from, you transform self-sabotage into authentic self-mastery.\nThe mountain is not in your way; the mountain is the path.",
+        sections: [
+          { title: "The anatomy of self-sabotage", body: "Self-sabotage is simply the presence of two conflicting desires: a conscious yearning for growth and an unconscious demand for safety. When unfamiliar success threatens your emotional comfort zone, self-sabotage acts to return you to familiar ground." },
+          { title: "Emotional breakdown as breakthrough", body: "Emotional crises are not failures; they are the psyche's way of forcing you to shed behaviors, relationships, and identities that you have outgrown. Discomfort is the biological signal of imminent personal expansion." },
+          { title: "Building emotional stamina", body: "True self-discovery requires sitting with uncomfortable emotions without immediately reaching for distraction, numbing habits, or premature solutions. Emotional resilience is cultivated through stillness and self-compassion." }
+        ]
+      },
+      {
+        id: "mans-search-for-meaning",
+        title: "Man's Search for Meaning",
+        author: "Viktor E. Frankl",
+        cover_url: "https://covers.openlibrary.org/b/id/8226196-M.jpg",
+        genre: "Self Discovery",
+        hook: "Those who have a 'why' to live, can bear with almost any 'how'",
+        preview: "Psychiatrist Viktor Frankl survived the unimaginable horrors of Auschwitz and Dachau, observing human psychology stripped down to naked biological survival.\nIn the death camps, he discovered that what separated those who gave up from those who persevered was not physical strength or youth, but a sense of future purpose.\nFrankl founded Logotherapy, the psychological philosophy that man's primary motivational force is not the pursuit of pleasure or power, but the discovery of personal meaning.\nMeaning is not something waiting to be passively discovered; it is actively forged through creative work, authentic love, and the courage to endure unavoidable suffering.\nEverything can be taken from a human being except one thing: the last of human freedoms—to choose one's attitude in any given set of circumstances.\nWhen we are no longer able to change a situation, we are challenged to change ourselves.",
+        sections: [
+          { title: "The last human freedom", body: "Between stimulus and response there is a space. In that space is our power to choose our response. In our response lies our growth and our ultimate freedom." },
+          { title: "The three avenues to meaning", body: "Frankl identifies three ways to discover meaning in life: by creating a work or doing a deed; by experiencing something or encountering someone (love); and by the attitude we take toward unavoidable suffering." },
+          { title: "The tragic optimism", body: "Tragic optimism is the capacity to remain hopeful and find purpose despite the inescapable realities of pain, guilt, and death. It transforms despair into conscious, heroic action." }
+        ]
+      }
     ]
   };
 

@@ -314,6 +314,23 @@
         "Meaningful societal progress is always achieved through persistent, unglamorous coalitions across divides."
       ]
     },
+
+    "Self Discovery": {
+      focus: "authentic identity, breaking self-sabotage, emotional courage, and personal transformation",
+      hookPrefixes: [
+        "What if the habits you can't break are secretly trying to protect you from an old emotional wound?",
+        "Finding yourself does not mean inventing a new person; it means shedding who you thought you had to be.",
+        "The mountain in your path is not an obstacle to your growth—it is the exact arena where you transform.",
+        "Why do we repeatedly sabotage our happiest moments right when life begins to go well?",
+        "The courageous question is not what other people expect of you, but what you are willing to let go of."
+      ],
+      insightAngles: [
+        "Self-sabotage is simply a protective mechanism born from a time when hiding felt safer than being seen.",
+        "You cannot hate yourself into a version of yourself that you love; transformation requires compassionate curiosity.",
+        "Emotional discomfort is not a sign that something has gone wrong; it is the physical sensation of outgrowing a former life.",
+        "True authenticity begins when the exhausting performance of pleasing everyone finally collapses."
+      ]
+    },
     "The Human Mind": {
       focus: "cognitive biases, emotional resilience, unconscious drivers, and behavior change",
       hookPrefixes: [

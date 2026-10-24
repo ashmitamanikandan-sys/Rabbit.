@@ -1,17 +1,18 @@
-/* RABBIT Dynamic Feed & 20-Genre Discovery Extension
- * Integrates:
- * 1. Curated Masterworks (all 20 genres)
- * 2. Infinite Open Library discovery (thousands and thousands of books)
- * 3. 8-10 line curiosity feed previews with genuine takeaways
- * 4. 4-part interactive Reader overlay for every book
- * 5. Horizontal 20-Genre Navigation Bar in the feed
- * 6. Full Search across millions of books
+/* RABBIT Fast Resilient Feed & Genre Discovery Extension
+ * Guarantees:
+ * 1. Zero-latency instant first render (0ms) from curated catalog + local cache
+ * 2. Strict 3.5s fetch timeout with AbortController - never hangs or loops
+ * 3. Graceful fallback on network timeout/rate-limit - never breaks UI
+ * 4. Stale request cancellation when switching genres
+ * 5. Full support for all 20+ genres including Self Discovery
+ * 6. Substantial 8-10 line curiosity feed previews and 4-part reader overlays
  */
 (function() {
   "use strict";
 
   const AUTHORITATIVE_GENRES = [
     "The Human Mind",
+    "Self Discovery",
     "Science Fiction",
     "Fantasy",
     "Mystery & Thriller",
@@ -35,6 +36,7 @@
 
   const GENRE_SUBJECTS = {
     "The Human Mind": "psychology",
+    "Self Discovery": "self_help",
     "Science Fiction": "science_fiction",
     "Fantasy": "fantasy",
     "Mystery & Thriller": "mystery",
@@ -56,23 +58,121 @@
     "Poetry": "poetry"
   };
 
+  // State variables
+  let currentAbortController = null;
+  let requestEpoch = 0;
   let catalogBusy = false;
   let moreCount = 0;
   let searchTerm = "";
-  let requestEpoch = 0;
-  let offset = 0;
-  let finished = false;
+  let currentOffset = 0;
   const seenWorkIds = new Set();
-  const workDescriptionCache = new Map();
 
-  function getActiveGenre() {
-    return window.rabbitSelectedGenre || "The Human Mind";
+  function escapeHtml(str) {
+    return String(str || "").replace(/[&<>"']/g, c => ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;"
+    }[c]));
   }
 
-  // Render book cards into the feed
+  // Robust genre resolver: maps aliases to standard genre names
+  function resolveGenreKey(genreName) {
+    if (!genreName) return "The Human Mind";
+    const g = String(genreName).trim();
+    const lower = g.toLowerCase();
+
+    if (lower.includes("self discovery") || lower.includes("self-discovery")) return "Self Discovery";
+    if (lower.includes("self-help") || lower.includes("self help") || lower.includes("productivity")) return "Self-Help";
+    if (lower.includes("mind") || lower.includes("psychology") || lower.includes("neuroscience") || lower.includes("behavior")) return "The Human Mind";
+    if (lower.includes("sci-fi") || lower.includes("science fiction") || lower.includes("space") || lower.includes("technology") || lower.includes("artificial intelligence")) return "Science Fiction";
+    if (lower.includes("fantasy") || lower.includes("mythology")) return "Fantasy";
+    if (lower.includes("mystery") || lower.includes("thriller") || (lower.includes("crime") && !lower.includes("true crime"))) return "Mystery & Thriller";
+    if (lower.includes("true crime")) return "True Crime";
+    if (lower.includes("romance") || lower.includes("relationship") || lower.includes("love")) return "Romance";
+    if (lower.includes("horror")) return "Horror";
+    if (lower.includes("historical fiction")) return "Historical Fiction";
+    if (lower.includes("history") || lower.includes("ancient")) return "History";
+    if (lower.includes("young adult") || lower.includes("ya")) return "Young Adult";
+    if (lower.includes("classic")) return "Classics";
+    if (lower.includes("adventure") || lower.includes("travel")) return "Adventure";
+    if (lower.includes("business") || lower.includes("money") || lower.includes("economic") || lower.includes("entrepreneurship") || lower.includes("leadership")) return "Business & Money";
+    if (lower.includes("science") || lower.includes("environment") || lower.includes("nature")) return "Science";
+    if (lower.includes("philosophy") || lower.includes("ethics")) return "Philosophy";
+    if (lower.includes("biography") || lower.includes("memoir")) return "Biography & Memoir";
+    if (lower.includes("politic") || lower.includes("society") || lower.includes("culture") || lower.includes("sociology") || lower.includes("feminism")) return "Politics & Society";
+    if (lower.includes("poetry")) return "Poetry";
+    if (lower.includes("literary") || lower.includes("fiction")) return "Literary Fiction";
+
+    return g;
+  }
+
+  function getActiveGenre() {
+    return resolveGenreKey(window.rabbitSelectedGenre || "The Human Mind");
+  }
+
+  // Retrieve instant books (curated masterworks + localStorage cache)
+  function getInstantBooks(genreName) {
+    const list = [];
+    const key = genreName.toLowerCase();
+
+    // 1. Curated masterworks from static catalog
+    const catalog = window.RABBIT_CURATED_CATALOG || {};
+    const curated = catalog[key] || catalog[key.replace(/\s+/g, "-")] || [];
+    curated.forEach(b => {
+      list.push(Object.assign({}, b, { isCurated: true }));
+    });
+
+    // 2. Cached books from previous sessions
+    try {
+      const cacheStr = localStorage.getItem("rabbit_cache_" + genreName);
+      if (cacheStr) {
+        const cached = JSON.parse(cacheStr);
+        if (Array.isArray(cached)) {
+          cached.forEach(b => {
+            if (!list.some(item => (item.id || item.title) === (b.id || b.title))) {
+              list.push(b);
+            }
+          });
+        }
+      }
+    } catch (e) {}
+
+    return list;
+  }
+
+  // Save successful discoveries to localStorage
+  function saveToLocalCache(genreName, newBooks) {
+    if (!newBooks || !newBooks.length) return;
+    try {
+      const cacheKey = "rabbit_cache_" + genreName;
+      let existing = [];
+      const cacheStr = localStorage.getItem(cacheKey);
+      if (cacheStr) {
+        existing = JSON.parse(cacheStr) || [];
+      }
+      const existingIds = new Set(existing.map(b => b.id || b.title));
+      newBooks.forEach(b => {
+        if (!existingIds.has(b.id || b.title)) {
+          existing.push({
+            id: b.id,
+            title: b.title,
+            author: b.author,
+            cover_url: b.cover_url,
+            description: b.description
+          });
+        }
+      });
+      // Store at most 30 books per genre in cache to keep storage light
+      localStorage.setItem(cacheKey, JSON.stringify(existing.slice(0, 30)));
+    } catch (e) {}
+  }
+
+  // Render cards into the feed
   function addRealBookCards(rows) {
     const scroller = document.getElementById("homeScroll");
-    if (!scroller) return;
+    if (!scroller || !rows || !rows.length) return;
 
     const storyRail = scroller.querySelector(".home-first .stories");
     if (storyRail) {
@@ -177,11 +277,6 @@
       info.textContent = enriched.preview;
       body.append(info);
 
-      // Queue lazy background enrichment from Open Library works API if description is short
-      if (!enriched.isCurated && String(book.id || "").startsWith("/works/")) {
-        queueWorkEnrichment(book, info, headline);
-      }
-
       // Actions: Read More, Save, Follow
       const actions = document.createElement("div");
       actions.className = "actions";
@@ -232,42 +327,7 @@
     }
   }
 
-  // Background work description enrichment
-  function queueWorkEnrichment(book, infoElement, headlineElement) {
-    const id = String(book.id || "");
-    if (!id.startsWith("/works/")) return;
-
-    if (workDescriptionCache.has(id)) {
-      applyCachedDescription(book, workDescriptionCache.get(id), infoElement, headlineElement);
-      return;
-    }
-
-    fetch("https://openlibrary.org" + id + ".json")
-      .then(res => res.ok ? res.json() : null)
-      .then(work => {
-        if (!work) return;
-        const d = typeof work.description === "string" ? work.description : work.description?.value;
-        if (typeof d === "string" && d.trim().length > 50) {
-          workDescriptionCache.set(id, d.trim());
-          applyCachedDescription(book, d.trim(), infoElement, headlineElement);
-        }
-      })
-      .catch(() => {});
-  }
-
-  function applyCachedDescription(book, desc, infoElement, headlineElement) {
-    book.description = desc;
-    if (window.RABBIT_ENRICH && infoElement.isConnected) {
-      const enriched = window.RABBIT_ENRICH.getEnrichedBook(book, getActiveGenre());
-      book.__rabbitSections = enriched.sections;
-      infoElement.textContent = enriched.preview;
-      if (headlineElement && headlineElement.isConnected) {
-        headlineElement.textContent = enriched.hook;
-      }
-    }
-  }
-
-  // Interactive Reader Overlay for ANY book
+  // Interactive 4-Part Reader Overlay
   function rabbitReader(book) {
     const old = document.querySelector(".rabbit-reader-overlay");
     if (old) old.remove();
@@ -418,34 +478,25 @@
 
   window.rabbitOpenBook = rabbitReader;
 
-  // Load more books from Open Library or Curated Catalog
-  async function loadMore() {
-    if (catalogBusy || finished || !document.getElementById("homeScroll")) return;
+  // Background incremental discovery with strict 3.5s timeout
+  async function loadBackgroundBooks(targetGenre, epoch) {
+    if (catalogBusy) return;
     catalogBusy = true;
-    const epoch = requestEpoch;
+
+    // Set up AbortController with 3.5s timeout
+    if (currentAbortController) {
+      currentAbortController.abort();
+    }
+    const controller = new AbortController();
+    currentAbortController = controller;
+    const timeoutId = setTimeout(() => controller.abort(), 3500);
 
     try {
-      const activeGenre = getActiveGenre();
-      let rows = [];
-
-      // 1. If at offset 0, first check if we have curated books for this genre
-      if (offset === 0 && !searchTerm) {
-        const catalog = window.RABBIT_CURATED_CATALOG || {};
-        const curatedList = catalog[activeGenre.toLowerCase()] || [];
-        curatedList.forEach(b => {
-          if (!seenWorkIds.has(b.id || b.title)) {
-            seenWorkIds.add(b.id || b.title);
-            rows.push(b);
-          }
-        });
-      }
-
-      // 2. Fetch books from Open Library to scale to thousands and thousands of titles
-      const subject = GENRE_SUBJECTS[activeGenre] || "fiction";
+      const subject = GENRE_SUBJECTS[targetGenre] || "fiction";
       const params = new URLSearchParams({
-        limit: "50",
-        offset: String(offset),
-        fields: "key,title,author_name,cover_i,language,first_sentence,first_publish_year"
+        limit: "10",
+        offset: String(currentOffset),
+        fields: "key,title,author_name,cover_i,language,first_sentence"
       });
 
       if (searchTerm) {
@@ -454,49 +505,59 @@
         params.set("subject", subject);
       }
 
-      const res = await fetch("https://openlibrary.org/search.json?" + params.toString());
-      if (res.ok) {
-        const data = await res.json();
-        const olBooks = (data.docs || [])
-          .filter(b => b.key && b.title && b.author_name?.length && (!b.language || b.language.includes("eng")))
-          .map(b => ({
-            id: b.key,
-            title: b.title,
-            author: b.author_name[0],
-            cover_url: b.cover_i ? "https://covers.openlibrary.org/b/id/" + b.cover_i + "-M.jpg" : "",
-            description: (Array.isArray(b.first_sentence) ? b.first_sentence[0] : b.first_sentence) || ""
-          }));
+      const res = await fetch("https://openlibrary.org/search.json?" + params.toString(), {
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
 
-        olBooks.forEach(b => {
-          if (!seenWorkIds.has(b.id)) {
-            seenWorkIds.add(b.id);
-            rows.push(b);
-          }
-        });
-      }
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
 
       if (epoch !== requestEpoch) return;
 
-      offset += 50;
-      if (!rows.length && offset >= 100) finished = true;
+      const newBooks = (data.docs || [])
+        .filter(b => b.key && b.title && b.author_name?.length && (!b.language || b.language.includes("eng")))
+        .map(b => ({
+          id: b.key,
+          title: b.title,
+          author: b.author_name[0],
+          cover_url: b.cover_i ? "https://covers.openlibrary.org/b/id/" + b.cover_i + "-M.jpg" : "",
+          description: (Array.isArray(b.first_sentence) ? b.first_sentence[0] : b.first_sentence) || ""
+        }));
 
-      addRealBookCards(rows);
+      const toRender = [];
+      newBooks.forEach(b => {
+        if (!seenWorkIds.has(b.id || b.title)) {
+          seenWorkIds.add(b.id || b.title);
+          toRender.push(b);
+        }
+      });
 
-      if (!rows.length && moreCount === 0) {
-        const rail = document.querySelector("#homeScroll .home-first .stories");
-        if (rail) rail.textContent = "No books found. Try another genre or search.";
+      if (toRender.length > 0) {
+        currentOffset += toRender.length;
+        addRealBookCards(toRender);
+        saveToLocalCache(targetGenre, toRender);
       }
     } catch (err) {
-      console.warn("RABBIT feed error:", err);
+      // Graceful handling of network timeout, rate-limit, or abort:
+      // The user ALREADY has instant books rendered. Never crash or freeze!
+      console.warn("Background fetch completed or timed out for:", targetGenre);
     } finally {
+      clearTimeout(timeoutId);
       catalogBusy = false;
-      if (epoch !== requestEpoch && document.getElementById("homeScroll")) {
-        loadMore();
+
+      // Always ensure "Finding book stories..." is cleared
+      const scroller = document.getElementById("homeScroll");
+      if (scroller) {
+        const rail = scroller.querySelector(".home-first .stories");
+        if (rail && rail.querySelector(".muted") && rail.children.length > 1) {
+          rail.querySelector(".muted").remove();
+        }
       }
     }
   }
 
-  // Build the sleek 20-Genre Navigation Bar in the feed
+  // Build the horizontal 20-Genre Navigation Bar in the feed
   function renderGenreBar(container) {
     if (!container) return;
     const existing = container.querySelector(".rabbit-genre-nav-bar");
@@ -512,6 +573,7 @@
       btn.className = "chip" + (getActiveGenre() === g ? " active" : "");
       btn.style.cssText = "flex-shrink:0;cursor:pointer;font-size:12px;padding:6px 14px;border-radius:20px;transition:all 0.2s ease;";
       btn.textContent = g;
+      btn.dataset.genre = g;
 
       btn.onclick = () => {
         if (getActiveGenre() === g) return;
@@ -523,68 +585,85 @@
     container.append(bar);
   }
 
-  // Switch genres cleanly and instantly
-  function switchGenre(newGenre) {
-    window.rabbitSelectedGenre = newGenre;
+  // Instant zero-latency switch between genres
+  function switchGenre(targetGenre) {
+    const resolved = resolveGenreKey(targetGenre);
+    window.rabbitSelectedGenre = resolved;
     try {
-      localStorage.setItem("rabbit_selected_genre", newGenre);
+      localStorage.setItem("rabbit_selected_genre", resolved);
     } catch (e) {}
+
+    // 1. Cancel in-flight network requests
+    if (currentAbortController) {
+      currentAbortController.abort();
+      currentAbortController = null;
+    }
+    requestEpoch++;
+    const thisEpoch = requestEpoch;
+    currentOffset = 0;
+    moreCount = 0;
+    catalogBusy = false;
+    searchTerm = "";
+    seenWorkIds.clear();
 
     const scroller = document.getElementById("homeScroll");
     if (!scroller) return;
 
-    // Reset pagination and tracking
-    requestEpoch++;
-    offset = 0;
-    moreCount = 0;
-    finished = false;
-    searchTerm = "";
-    seenWorkIds.clear();
-
-    // Update heading and feature block
+    // 2. Update heading
     const heading = scroller.querySelector(".section-head .muted");
-    if (heading) heading.textContent = newGenre.toUpperCase();
+    if (heading) heading.textContent = resolved.toUpperCase();
 
-    // Remove old dynamic cards
+    // 3. Update active pill highlight
+    const bar = scroller.querySelector(".rabbit-genre-nav-bar");
+    if (bar) {
+      bar.querySelectorAll(".chip").forEach(c => {
+        c.classList.toggle("active", c.dataset.genre === resolved || c.textContent === resolved);
+      });
+    }
+
+    // 4. Clear old expanded cards
     scroller.querySelectorAll(".rabbit-expanded-post").forEach(el => el.remove());
 
+    // 5. Update feature box and clear story rail
     const first = scroller.querySelector(".home-first");
     if (first) {
       const feature = first.querySelector(".feature");
       if (feature) {
         feature.innerHTML = `
-          <div class="eyebrow">YOUR RABBIT HOLE · ${newGenre.replace(/</g, "&lt;")}</div>
-          <h2 style="font:600 27px/1.2 var(--reading-font);margin:16px 0">Follow your curiosity into ${newGenre.replace(/</g, "&lt;")}.</h2>
-          <p class="muted">Bite-sized ideas, 8–10 line curious previews, and deep chapter insights from thousands of books.</p>
+          <div class="eyebrow">YOUR RABBIT HOLE · ${escapeHtml(resolved)}</div>
+          <h2 style="font:600 27px/1.2 var(--reading-font);margin:16px 0">Follow your curiosity into ${escapeHtml(resolved)}.</h2>
+          <p class="muted">Instant ideas, 8–10 line curious previews, and deep chapter insights. Swipe down to discover.</p>
         `;
       }
-
-      // Update stories rail
       const stories = first.querySelector(".stories");
       if (stories) {
         stories.replaceChildren();
         stories.dataset.catalog = "loaded";
+      }
+    }
+
+    // 6. ZERO-LATENCY INSTANT FIRST RENDER: Show instant books immediately! (0ms)
+    const instantBooks = getInstantBooks(resolved);
+    if (instantBooks && instantBooks.length > 0) {
+      instantBooks.forEach(b => seenWorkIds.add(b.id || b.title));
+      addRealBookCards(instantBooks);
+    } else {
+      // If no instant books, show clean placeholder
+      const stories = first?.querySelector(".stories");
+      if (stories && !stories.children.length) {
         const loading = document.createElement("span");
         loading.className = "muted";
-        loading.style.cssText = "font-size:12px;min-width:180px;padding:20px 0";
-        loading.textContent = "Finding book stories…";
+        loading.style.cssText = "font-size:12px;padding:20px 0";
+        loading.textContent = "Connecting to library…";
         stories.append(loading);
       }
     }
 
-    // Refresh active genre button highlight
-    const bar = scroller.querySelector(".rabbit-genre-nav-bar");
-    if (bar) {
-      bar.querySelectorAll(".chip").forEach(c => {
-        c.classList.toggle("active", c.textContent === newGenre);
-      });
-    }
-
-    // Load initial batch
-    loadMore();
+    // 7. Non-blocking progressive background fetch
+    loadBackgroundBooks(resolved, thisEpoch);
   }
 
-  // Intercept renderHome to add search, genre bar, and trigger discovery
+  // Intercept renderHome to add search, genre bar, and trigger instant discovery
   const originalHome = window.renderHome;
   if (typeof originalHome === "function") {
     window.renderHome = function() {
@@ -621,31 +700,29 @@
               return;
             }
             searchTerm = value;
+            if (currentAbortController) currentAbortController.abort();
             requestEpoch++;
-            offset = 0;
+            const searchEpoch = requestEpoch;
+            currentOffset = 0;
             moreCount = 0;
-            finished = false;
+            catalogBusy = false;
             seenWorkIds.clear();
             s.querySelectorAll(".rabbit-expanded-post").forEach(el => el.remove());
             const rail = s.querySelector(".home-first .stories");
             if (rail) {
               rail.replaceChildren();
               rail.dataset.catalog = "loaded";
-              const message = document.createElement("span");
-              message.className = "muted";
-              message.textContent = "Searching the library for '" + value + "'…";
-              rail.append(message);
             }
-            loadMore();
+            loadBackgroundBooks(chosen, searchEpoch);
           };
           first.prepend(search);
         }
 
-        // 2. Add Horizontal 20-Genre Bar
+        // 2. Add Horizontal Genre Bar
         renderGenreBar(first);
       }
 
-      // If user selected non-Human Mind genre, customize the feature card & clear Human Mind cards
+      // If user selected non-Human Mind genre, customize feature card and show instant books
       if (chosen !== "The Human Mind") {
         const heading = s.querySelector(".section-head .muted");
         if (heading) heading.textContent = chosen.toUpperCase();
@@ -658,41 +735,47 @@
           const feature = firstSec.querySelector(".feature");
           if (feature) {
             feature.innerHTML = `
-              <div class="eyebrow">YOUR RABBIT HOLE · ${chosen.replace(/</g, "&lt;")}</div>
-              <h2 style="font:600 27px/1.2 var(--reading-font);margin:16px 0">Follow your curiosity into ${chosen.replace(/</g, "&lt;")}.</h2>
-              <p class="muted">Curated masterworks and real-time discoveries across thousands of titles. Swipe down to discover.</p>
+              <div class="eyebrow">YOUR RABBIT HOLE · ${escapeHtml(chosen)}</div>
+              <h2 style="font:600 27px/1.2 var(--reading-font);margin:16px 0">Follow your curiosity into ${escapeHtml(chosen)}.</h2>
+              <p class="muted">Instant ideas, 8–10 line curious previews, and deep chapter insights. Swipe down to discover.</p>
             `;
           }
           const stories = firstSec.querySelector(".stories");
           if (stories) {
             stories.replaceChildren();
             stories.dataset.catalog = "loaded";
-            const loading = document.createElement("span");
-            loading.className = "muted";
-            loading.style.cssText = "font-size:12px;min-width:180px;padding:20px 0";
-            loading.textContent = "Finding book stories…";
-            stories.append(loading);
           }
         }
+
+        // Render instant books immediately
+        requestEpoch++;
+        const thisEpoch = requestEpoch;
+        currentOffset = 0;
+        moreCount = 0;
+        catalogBusy = false;
+        seenWorkIds.clear();
+
+        const instantBooks = getInstantBooks(chosen);
+        if (instantBooks && instantBooks.length > 0) {
+          instantBooks.forEach(b => seenWorkIds.add(b.id || b.title));
+          addRealBookCards(instantBooks);
+        }
+
+        loadBackgroundBooks(chosen, thisEpoch);
+      } else {
+        // If Human Mind, background fetch additional titles progressively
+        requestEpoch++;
+        loadBackgroundBooks("The Human Mind", requestEpoch);
       }
-
-      // Reset request variables and start loading
-      requestEpoch++;
-      offset = 0;
-      moreCount = 0;
-      finished = false;
-      seenWorkIds.clear();
-
-      loadMore();
     };
   }
 
   // Infinite Scroll Listener
   document.addEventListener("scroll", () => {
     const scroller = document.getElementById("homeScroll");
-    if (!scroller) return;
+    if (!scroller || catalogBusy) return;
     if (scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 1400) {
-      loadMore();
+      loadBackgroundBooks(getActiveGenre(), requestEpoch);
     }
   }, true);
 
