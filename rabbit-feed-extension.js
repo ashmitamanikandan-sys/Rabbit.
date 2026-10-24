@@ -595,6 +595,22 @@
       };
       actions.append(follow);
 
+      const share = document.createElement("button");
+      share.className = "rabbit-share-btn";
+      share.setAttribute("aria-label", "Share book");
+      share.style.cssText = "display:inline-flex;align-items:center;gap:4px;background:none;border:none;color:#ddd;cursor:pointer;padding:4px 6px;font-size:12px;margin-left:auto;";
+      share.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span>Share</span>';
+      share.onclick = () => {
+        if (typeof window.rabbitShareBook === "function") {
+          window.rabbitShareBook(book);
+        } else if (navigator.share) {
+          navigator.share({ title: book.title, text: book.title + " — " + (book.author || "RABBIT"), url: location.href }).catch(() => {});
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(location.href).then(() => { if (typeof toast === 'function') toast('Link copied to clipboard! ↗'); });
+        }
+      };
+      actions.append(share);
+
       body.append(actions);
 
       const note = document.createElement("p");
@@ -651,6 +667,18 @@
       }
     };
     panel.append(readerSaveBtn);
+
+    const readerShareBtn = document.createElement("button");
+    readerShareBtn.type = "button";
+    readerShareBtn.className = "rabbit-reader-share-btn";
+    readerShareBtn.style.cssText = "float:right;margin-right:8px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;background:rgba(255,255,255,0.08);color:#eee;border:1px solid #444;transition:all 0.2s ease;display:inline-flex;align-items:center;gap:5px;";
+    readerShareBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span>Share</span>';
+    readerShareBtn.onclick = () => {
+      if (typeof window.rabbitShareBook === "function") window.rabbitShareBook(book);
+      else if (navigator.share) navigator.share({title:book.title, url:location.href}).catch(() => {});
+      else if (navigator.clipboard) navigator.clipboard.writeText(location.href).then(() => { if (typeof toast === 'function') toast('Link copied! ↗'); });
+    };
+    panel.append(readerShareBtn);
 
     const eyebrow = document.createElement("div");
     eyebrow.className = "eyebrow";
@@ -1159,6 +1187,7 @@
         <div class="actions" style="display:flex;align-items:center;gap:10px;margin-top:16px">
           <button class="rabbit-card-btn ${isLiked ? 'active' : ''}" id="rabbit-featured-like-btn" aria-label="Like book" style="background:rgba(255,255,255,0.06);border:1px solid #333;color:#ddd;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:5px">${isLiked ? '♥ Liked' : '♡ Like'}</button>
           <button class="rabbit-card-btn ${isSaved ? 'active' : ''}" id="rabbit-featured-save-btn" aria-label="Save book" style="background:rgba(255,255,255,0.06);border:1px solid #333;color:#ddd;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:5px">${isSaved ? '◆ Saved' : '◇ Save'}</button>
+          <button class="rabbit-card-btn" id="rabbit-featured-share-btn" aria-label="Share book" style="background:rgba(255,255,255,0.06);border:1px solid #333;color:#ddd;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:13px;display:inline-flex;align-items:center;gap:5px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg><span>Share</span></button>
           <button class="readmore" id="rabbit-featured-read-btn" style="margin-left:auto;background:transparent;border:1px solid #bca6ff;color:#bca6ff;padding:8px 16px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:500">Read more ↗</button>
         </div>
         <div class="subtle" style="margin-top:14px;font-size:11px;color:#888;text-align:center">↓ Scroll to fall deeper into the rabbit hole</div>
@@ -1167,6 +1196,8 @@
 
     const readBtn = slot.querySelector("#rabbit-featured-read-btn");
     if (readBtn) readBtn.onclick = () => rabbitReader(book);
+    const featuredShareBtn = slot.querySelector("#rabbit-featured-share-btn");
+    if (featuredShareBtn) featuredShareBtn.onclick = () => window.rabbitShareBook ? window.rabbitShareBook(book) : (navigator.share ? navigator.share({title:book.title, url:location.href}) : null);
 
     const likeBtn = slot.querySelector("#rabbit-featured-like-btn");
     if (likeBtn) {
