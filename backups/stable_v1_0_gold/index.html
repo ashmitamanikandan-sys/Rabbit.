@@ -546,10 +546,20 @@ function enterBurrowFromWelcome() {
   const genre = window.rabbitSelectedGenre || localStorage.getItem('rabbit_selected_genre') || 'Self Discovery';
   window.rabbitSelectedGenre = genre;
   window.rabbitSelectedGenres = new Set([genre]);
-  if (typeof window.switchSingleGenre === 'function') {
-    window.switchSingleGenre(genre, true);
+
+  if (window.RabbitLoader && typeof window.RabbitLoader.show === 'function') {
+    window.RabbitLoader.show("Entering the burrow…");
+    if (typeof window.switchSingleGenre === 'function') {
+      window.switchSingleGenre(genre, true);
+    }
+    renderHome();
+    window.RabbitLoader.ready();
+  } else {
+    if (typeof window.switchSingleGenre === 'function') {
+      window.switchSingleGenre(genre, true);
+    }
+    renderHome();
   }
-  renderHome();
 }
 
 function renderWelcome(){
@@ -600,6 +610,22 @@ function toggleFollow(id){if(!followed.includes(id))rabbitTrack(id,'follow');fol
 </style><script src="./rabbit-config.js"></script><script src="./rabbit-catalog.js"></script><script src="./rabbit-genres-catalog.js"></script>
 <script src="./rabbit-enrichment-engine.js"></script>
 <script src="./rabbit-feed-extension.js"></script>
+<script src="./rabbit-loader.js"></script>
+<script>
+// 2-Second Mandatory Branded Hopping Rabbit Loading Experience
+window.addEventListener('DOMContentLoaded', () => {
+  if (window.RabbitLoader && typeof window.RabbitLoader.show === 'function') {
+    window.RabbitLoader.show();
+    window.RabbitLoader.ready();
+  }
+});
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+  if (window.RabbitLoader && typeof window.RabbitLoader.show === 'function' && !window.RabbitLoader.isActive()) {
+    window.RabbitLoader.show();
+    window.RabbitLoader.ready();
+  }
+}
+</script>
 <a href="./warren.html?v=529129a3"<a href="./warren.html?v=529129a3" id="rabbit-warren-direct" hidden aria-label="Open The Warren community" style="position:fixed;right:12px;bottom:calc(152px + env(safe-area-inset-bottom));z-index:100;display:flex;align-items:center;justify-content:center;min-height:48px;padding:12px 17px;border:1px solid #bca6ff;border-radius:99px;background:#342147;color:#fff;font:700 13px -apple-system,BlinkMacSystemFont,Arial,sans-serif;text-decoration:none;box-shadow:0 8px 24px #0009">✦ The Warren</a><script src="rabbit-v10.js?v=28f8ac70b6e2f7d6" defer></script><script>(function(){function sync(){var active=['curiosity','feed','reader'].includes(document.body.dataset.rabbitStage);document.body.classList.toggle('rabbit-in-curiosity-feed',active);var trigger=document.getElementById('rabbit-menu-trigger');if(trigger){trigger.hidden=!active;if(!active){trigger.setAttribute('aria-expanded','false');var nav=document.getElementById('rabbit-v10-nav');if(nav){nav.hidden=true;nav.classList.remove('rabbit-menu-open')}}}var old=document.getElementById('rabbit-warren-direct');if(old)old.remove()}var observer=new MutationObserver(sync);observer.observe(document.body,{attributes:true,attributeFilter:['data-rabbit-stage']});document.addEventListener('DOMContentLoaded',sync);sync()})();</script><style>body:not([data-rabbit-stage="curiosity"]):not([data-rabbit-stage="feed"]):not([data-rabbit-stage="reader"]) #rabbit-v10-nav,body:not([data-rabbit-stage="curiosity"]):not([data-rabbit-stage="feed"]):not([data-rabbit-stage="reader"]) #rabbit-fy-trigger,#rabbit-warren-direct{display:none!important}#rabbit-v10-nav[hidden],#rabbit-fy-trigger[hidden]{display:none!important}</style><style>body[data-rabbit-stage="curiosity"] .home-first .stories{scroll-snap-type:x proximity;gap:14px}body[data-rabbit-stage="curiosity"] .home-first .story{scroll-snap-align:start;transition:transform .2s ease,filter .2s ease}body[data-rabbit-stage="curiosity"] .home-first .story:hover{transform:translateY(-4px);filter:brightness(1.12)}body[data-rabbit-stage="curiosity"] .feature,body[data-rabbit-stage="feed"] .feedpost{border-color:#333039!important;background:linear-gradient(160deg,#131417,#09090b)!important}body[data-rabbit-stage="feed"] .feedpost{scroll-snap-align:start}body[data-rabbit-stage="reader"] .reader{max-width:780px;margin:auto;line-height:1.85}@media(prefers-reduced-motion:reduce){.story{transition:none!important}}</style><style>@media(max-width:720px){.v10-nav{max-width:calc(100vw - 14px)!important;overflow-x:auto!important;justify-content:flex-start!important;scrollbar-width:none}.v10-nav::-webkit-scrollbar{display:none}.v10-nav button{flex:0 0 auto!important}}body:not([data-rabbit-stage="curiosity"]):not([data-rabbit-stage="feed"]):not([data-rabbit-stage="reader"]) #rabbit-v10-nav,body:not([data-rabbit-stage="curiosity"]):not([data-rabbit-stage="feed"]):not([data-rabbit-stage="reader"]) #rabbit-fy-trigger{display:none!important}</style><style>body:not([data-rabbit-stage="curiosity"]):not([data-rabbit-stage="feed"]):not([data-rabbit-stage="reader"]) #rabbit-menu-trigger{display:none!important}#rabbit-v10-nav[hidden]{display:none!important}#rabbit-fy-trigger,#rabbit-for-you{display:none!important}</style><style>#rabbit-menu-trigger[hidden],#rabbit-v10-nav[hidden]{display:none!important}#rabbit-menu-trigger{visibility:visible}body:not([data-rabbit-stage="curiosity"]):not([data-rabbit-stage="feed"]):not([data-rabbit-stage="reader"]) #rabbit-menu-trigger{display:none!important}</style><style>.footnav{display:none!important}#rabbit-menu-trigger{bottom:calc(22px + env(safe-area-inset-bottom))!important}</style><style>
 #rabbit-menu-trigger,#rabbit-v10-nav{display:none!important}
 #rabbit-primary-toggle{position:fixed;z-index:2147483000;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:58px;height:58px;border:1px solid #9a7bb7;border-radius:50%;background:#18121f;color:#fff;font-size:29px;box-shadow:0 8px 30px #000b;cursor:pointer}
