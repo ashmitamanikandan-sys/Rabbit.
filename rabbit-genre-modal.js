@@ -532,12 +532,24 @@
 
     // Delay render to guarantee minimum 2-second animation
     setTimeout(() => {
-      if (typeof window.applyGenreSelectionAndRefreshFeed === "function") {
-        window.applyGenreSelectionAndRefreshFeed();
+      // 1. Ensure Home view is mounted in #app (creates #homeScroll & sets curiosity stage)
+      if (window.RabbitUnifiedViews) {
+        window.RabbitUnifiedViews.showHome();
       } else if (typeof renderHome === "function") {
         renderHome();
       }
 
+      // 2. Ensure feed is populated for the current genre selection
+      if (typeof window.applyGenreSelectionAndRefreshFeed === "function") {
+        window.applyGenreSelectionAndRefreshFeed();
+      }
+
+      // 3. Update bottom navigation tab state to 'home'
+      if (window.RabbitNavigation) {
+        window.RabbitNavigation.setActiveTab("home");
+      }
+
+      // 4. Signal loader readiness (loader enforces full 2000ms minimum)
       if (window.RabbitLoader) {
         window.RabbitLoader.ready();
       }
