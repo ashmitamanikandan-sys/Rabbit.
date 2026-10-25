@@ -187,3 +187,20 @@ p {
 .rabbit-action-btn.share-btn {
   margin-left: 8px;
 }
+
+
+/* RABBIT Welcome Page Official Logo */
+.rabbit-welcome-logo {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 28px 0 18px;
+}
+.rabbit-welcome-logo .rabbit-original-logo {
+  width: 175px !important;
+  max-width: 60vw !important;
+  height: auto !important;
+  object-fit: contain !important;
+  display: block !important;
+  filter: drop-shadow(0 4px 20px rgba(167, 139, 250, 0.18));
+}
