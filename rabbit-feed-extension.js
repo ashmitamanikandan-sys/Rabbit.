@@ -939,6 +939,17 @@
       bar.append(mixTrigger);
     }
 
+    // Quick access button to full-screen genre modal
+    const manageBtn = document.createElement("button");
+    manageBtn.type = "button";
+    manageBtn.className = "chip";
+    manageBtn.style.cssText = "flex-shrink:0;cursor:pointer;font-size:12px;padding:6px 14px;border-radius:20px;background:rgba(167,139,250,0.18);border:1px solid #A78BFA;color:#E9D5FF;font-weight:700;";
+    manageBtn.textContent = "✦ Edit Genres";
+    manageBtn.onclick = () => {
+      if (window.RabbitGenreModal) window.RabbitGenreModal.open({ fromNav: true });
+    };
+    bar.append(manageBtn);
+
     AUTHORITATIVE_GENRES.forEach(g => {
       const isSelected = window.rabbitSelectedGenres && window.rabbitSelectedGenres.has(g);
       const btn = document.createElement("button");
@@ -1237,6 +1248,7 @@
   window.toggleGenre = toggleGenre;
   window.resetToSingleGenre = resetToSingleGenre;
   window.renderFeedForCurrentSelection = renderFeedForCurrentSelection;
+  window.applyGenreSelectionAndRefreshFeed = renderFeedForCurrentSelection;
 
   window.renderUserLibrary = function() {
     const scroller = document.getElementById("homeScroll");
@@ -1464,14 +1476,17 @@
     searchTerm = "";
     seenWorkIds.clear();
 
-    const selectedArr = Array.from(window.rabbitSelectedGenres || [getActiveGenre()]);
-    const isMixed = selectedArr.length > 1;
+    const isWildBurrow = localStorage.getItem("rabbit_wild_burrow_active") === "true";
+    const selectedArr = isWildBurrow
+      ? AUTHORITATIVE_GENRES.slice()
+      : Array.from(window.rabbitSelectedGenres || [getActiveGenre()]);
+    const isMixed = isWildBurrow || selectedArr.length > 1;
 
     // 2. Update heading
     const heading = scroller.querySelector(".section-head .muted");
-    const headingText = isMixed
-      ? selectedArr.join(" + ").toUpperCase() + " (MIXED FEED)"
-      : selectedArr[0].toUpperCase();
+    const headingText = isWildBurrow
+      ? "THE WILD BURROW · ALL 21 GENRES"
+      : (isMixed ? selectedArr.join(" + ").toUpperCase() + " (MIXED FEED)" : selectedArr[0].toUpperCase());
     if (heading) heading.textContent = headingText;
 
     // 3. Re-render genre bar
