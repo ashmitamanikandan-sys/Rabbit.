@@ -31,27 +31,27 @@
   ];
 
   const GENRE_EMOJIS = {
-    "The Human Mind": "🧠",
-    "Self Discovery": "🌱",
-    "Science Fiction": "🚀",
-    "Fantasy": "✨",
-    "Mystery & Thriller": "🗝️",
-    "Romance": "☁️",
-    "Horror": "🕯️",
-    "Historical Fiction": "🏛️",
-    "Young Adult": "🔮",
-    "Classics": "📜",
-    "Adventure": "🧭",
-    "Literary Fiction": "📖",
-    "Philosophy": "🌌",
-    "Self-Help": "⚡",
-    "Business & Money": "📈",
-    "Science": "🔬",
-    "History": "⏳",
-    "Biography & Memoir": "🖋️",
-    "Politics & Society": "🌐",
-    "True Crime": "🔍",
-    "Poetry": "🪶"
+    "The Human Mind": "\u{1F9E0}",
+    "Self Discovery": "\u{2728}",
+    "Science Fiction": "\u{1F680}",
+    "Fantasy": "\u{2694}\u{FE0F}",
+    "Mystery & Thriller": "\u{1F50D}",
+    "Romance": "\u{2764}\u{FE0F}",
+    "Horror": "\u{1F56F}\u{FE0F}",
+    "Historical Fiction": "\u{1F3DB}\u{FE0F}",
+    "Young Adult": "\u{26A1}",
+    "Classics": "\u{1F4DC}",
+    "Adventure": "\u{1F5FA}\u{FE0F}",
+    "Literary Fiction": "\u{1F4D6}",
+    "Philosophy": "\u{1F30C}",
+    "Self-Help": "\u{1F331}",
+    "Business & Money": "\u{1F4C8}",
+    "Science": "\u{1F52C}",
+    "History": "\u{23F3}",
+    "Biography & Memoir": "\u{1FAB6}",
+    "Politics & Society": "\u{1F310}",
+    "True Crime": "\u{1F5DD}\u{FE0F}",
+    "Poetry": "\u{1FAB7}"
   };
 
   let modalEl = null;
@@ -449,7 +449,7 @@
     if (isWildBurrowSelected) {
       if (countLabel) countLabel.textContent = "The Wild Burrow active · All 21 genres in one feed";
       if (enterBtn) {
-        enterBtn.textContent = "Enter The Wild Burrow →";
+        enterBtn.textContent = "Enter the Rabbit Hole \u2192";
         enterBtn.disabled = false;
       }
     } else {
@@ -460,7 +460,7 @@
         else countLabel.textContent = `${count} genres selected (Mixed feed)`;
       }
       if (enterBtn) {
-        enterBtn.textContent = count === 0 ? "Select a Genre" : "Enter the Rabbit Hole →";
+        enterBtn.textContent = count === 0 ? "Select a Genre" : "Enter the Rabbit Hole \u2192";
         enterBtn.disabled = (count === 0);
       }
     }

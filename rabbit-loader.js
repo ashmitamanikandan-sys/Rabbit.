@@ -222,7 +222,7 @@
         </div>
 
         <div class="rabbit-loader-brand">RABBIT<span class="accent">.</span></div>
-        <p class="rabbit-loader-quote">“${quote}”</p>
+        <p class="rabbit-loader-quote">&ldquo;${quote}&rdquo;</p>
         <span class="rabbit-loader-subtle">Entering the Burrow</span>
       </div>
     `;
@@ -248,7 +248,7 @@
 
       if (customLine) {
         const qEl = el.querySelector(".rabbit-loader-quote");
-        if (qEl) qEl.textContent = `“${customLine}”`;
+        if (qEl) qEl.innerHTML = `&ldquo;${customLine}&rdquo;`;
       }
     },
 
