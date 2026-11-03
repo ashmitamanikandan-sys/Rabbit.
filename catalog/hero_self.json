@@ -1,0 +1,2798 @@
+[
+  {
+    "id": "the-subtle-art-of-not-giving-a-fuck",
+    "title": "The Subtle Art of Not Giving a F*ck",
+    "author": "Mark Manson",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/8231996-M.jpg",
+    "public_domain": false,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "Don't Try",
+        "hook": "True confidence comes from being comfortable with your flaws, not pretending to be flawless.",
+        "spark": "Modern consumer culture bombards us with relentless messages commanding us to care about everything.\nCare about having a better car, a flatter stomach, whiter teeth, and more exotic vacations.\nThe Feedback Loop from Hell occurs when you feel anxious about being anxious, or guilty about feeling angry.\nCharles Bukowski's tombstone famously reads: 'Don't Try.'\nBukowski became an iconic writer not because he tried to project success, but because he was comfortable being a flawed mess.\nYou have a limited number of cares to give in this finite life.\nIf you give cares to every trivial traffic jam, rude comment, or social post, you will squander your peace.\nMaturity is the art of reserving your cares exclusively for what is genuinely sacred and important.",
+        "key_ideas": [
+          {
+            "idea": "Care budget is strictly finite",
+            "why": "Giving cares to trivial annoyances drains the emotional bandwidth needed for true values."
+          },
+          {
+            "idea": "The Feedback Loop from Hell",
+            "why": "Judging your negative emotions creates a vicious cycle of neurotic anxiety."
+          },
+          {
+            "idea": "Accepting flaws brings peace",
+            "why": "True confidence is not being fearless; it is being comfortable with fear."
+          }
+        ],
+        "line": {
+          "text": "The desire for a more positive experience is itself a negative experience. Accepting negative experience is a positive experience.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "When stuck in slow traffic, remind yourself that this is not worthy of spending your finite cares.",
+          "Stop beating yourself up for feeling nervous before a presentation; accept the nerves as natural.",
+          "Unfollow influencers who make you feel inadequate about your normal, grounded daily life."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-courage-to-be-disliked",
+            "chapter": 1,
+            "reason": "Accepting yourself without needing constant external validation is the foundation of freedom."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "Happiness Is a Problem",
+        "hook": "Happiness is not a destination where problems disappear; it is the process of solving good problems.",
+        "spark": "Many people labor under the myth that one day they will solve their difficulties and live in perpetual bliss.\nIn reality, problems never stop; they merely get upgraded or exchanged for better problems.\nGoing to the gym solves health problems but creates the problem of sore muscles and scheduled time.\nEarning more money solves debt problems but creates the problem of tax planning and investment decisions.\nHappiness comes from solving problems you genuinely enjoy having.\nDo not ask what rewards you want out of life; everyone wants financial freedom and loving romance.\nThe far more revealing question is: what pain are you willing to endure?\nWhat is the struggle you are willing to navigate day after day? That struggle determines your success.",
+        "key_ideas": [
+          {
+            "idea": "Problems are permanent fixtures",
+            "why": "Life is a continuous series of challenges; true joy is finding problems you enjoy solving."
+          },
+          {
+            "idea": "Choose your flavor of struggle",
+            "why": "Achievements are defined by the hardships you are willing to tolerate, not the trophies you crave."
+          },
+          {
+            "idea": "Emotions are biological directional flags",
+            "why": "Pain signals that something needs attention, not that you are defective."
+          }
+        ],
+        "line": {
+          "text": "Don't ask what you want to achieve. Ask what pain you are willing to sustain.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "If you want to be a great musician, fall in love with the repetitive pain of practicing boring scales.",
+          "If you want an entrepreneurial career, accept the pain of unpredictable revenue and constant uncertainty.",
+          "View relationship disagreements as cooperative problems to solve together rather than personal attacks."
+        ],
+        "connects_to": [
+          {
+            "book_id": "mans-search-for-meaning",
+            "chapter": 3,
+            "reason": "Meaning arises when we transform unavoidable suffering into deliberate heroic responsibility."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "You Are Not Special",
+        "hook": "The tyranny of exceptionalism convinces ordinary people that being average is a failure.",
+        "spark": "The self-esteem movement of the late twentieth century taught children that everyone is uniquely extraordinary.\nThis bred a generation of entitlement: people who feel they deserve special treatment without producing effort.\nThe vast majority of human life in almost every domain is thoroughly, beautifully average.\nInternet media highlights only the top 0.001% of physical beauty, athletic triumph, and billionaire fortunes.\nThis creates an extreme information diet that makes normal, quiet lives feel like catastrophic failures.\nAccepting that you are not special is not defeat; it is profound liberation.\nOnce you drop the exhausting pressure to be a generational prodigy, you are free to do what you love.\nYou can enjoy cooking, writing, or gardening simply for the intrinsic joy of doing it.",
+        "key_ideas": [
+          {
+            "idea": "Entitlement breeds toxic fragility",
+            "why": "Expecting rewards without putting in the unglamorous grind creates bitter resentment."
+          },
+          {
+            "idea": "Media magnifies extreme outliers",
+            "why": "Comparing your everyday life to highlight reels of prodigies distorts normal reality."
+          },
+          {
+            "idea": "The freedom of being average",
+            "why": "Releasing the demand to be extraordinary frees energy for humble, meaningful craftsmanship."
+          }
+        ],
+        "line": {
+          "text": "Accepting your ordinary humanity liberates you to accomplish what you truly love without paralyzing pressure.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Enjoy playing tennis or soccer on weekends without needing to win local tournaments to validate your hobby.",
+          "Recognize that ordinary kindness and loyalty to family are far more noble than chasing viral fame.",
+          "Celebrate steady, quiet progress in your coursework rather than expecting effortless perfection."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-courage-to-be-disliked",
+            "chapter": 6,
+            "reason": "Having the courage to be normal frees you from neurotic demands for public distinction."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "The Value of Suffering",
+        "hook": "Pain is an evolutionary teacher that reveals the flaws in your values and expectations.",
+        "spark": "Lieutenant Hiroo Onoda hid in the Philippine jungle for thirty years after World War II ended, refusing to surrender.\nHe endured immense starvation, rain, and illness because his value was unconditional loyalty to the Emperor.\nWhen he finally returned to Japan, modern consumer culture felt hollow and meaningless to him.\nSuffering is inevitable, but the meaning of your suffering depends on the values you choose to measure it by.\nShitty values include: pleasure, material success, always being right, and staying relentlessly positive.\nGood values are reality-based, socially constructive, and immediately controllable, like honesty and curiosity.\nWhen you measure life by good values, painful setbacks become lessons that refine your character.\nChoose worthy values, and your suffering transforms into the crucible of genuine wisdom.",
+        "key_ideas": [
+          {
+            "idea": "Suffering is an inevitable signal",
+            "why": "Pain alerts us to gaps between our beliefs and reality; ignoring it worsens the wound."
+          },
+          {
+            "idea": "Audit your internal metrics",
+            "why": "Superficial values like popularity and wealth generate chronic insecurity and fragile pride."
+          },
+          {
+            "idea": "Controllable values build resilience",
+            "why": "Choosing values like honesty and humility keeps your peace independent of external luck."
+          }
+        ],
+        "line": {
+          "text": "The question is not whether you will suffer, but what you will suffer for.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Replace the goal of 'being liked by everyone' with the controllable value of 'speaking honestly with kindness.'",
+          "When rejected by a company, treat the disappointment as data on which skills need sharpening.",
+          "Measure friendships by mutual trust and loyalty rather than shared social prestige."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 3,
+            "reason": "Stoic philosophy teaches that events do not hurt us; our opinions about events cause our suffering."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "You Are Always Choosing",
+        "hook": "You cannot control every circumstance, but you always choose how you respond to events.",
+        "spark": "Many people confuse responsibility with fault.\nIf someone drops an abandoned baby on your doorstep, it is not your fault that the baby is there.\nHowever, you are one hundred percent responsible for what you choose to do about the baby on your doorstep.\nYou cannot control the genes you inherited, the parents who raised you, or sudden accidents.\nYet you are completely responsible for how you interpret those events and what actions you take next.\nVictimhood mentality occurs when you surrender responsibility for your life to external forces.\nWhile it brings short-term emotional comfort, blaming others traps you in permanent helplessness.\nTaking radical responsibility for your responses returns the steering wheel of your life to your hands.",
+        "key_ideas": [
+          {
+            "idea": "Fault is past; responsibility is present",
+            "why": "Others may have caused the injury, but healing the wound is entirely your responsibility."
+          },
+          {
+            "idea": "Victimhood surrenders personal power",
+            "why": "Blaming external circumstances keeps you paralyzed in permanent childhood dependence."
+          },
+          {
+            "idea": "Agency begins with radical ownership",
+            "why": "Claiming responsibility for your mindset restores your ability to shape your future."
+          }
+        ],
+        "line": {
+          "text": "You are always, at every single second, choosing what to care about and how to respond.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Stop blaming your high school teacher for your current math gaps; take ownership and study online tutorials.",
+          "When someone treats you unfairly, choose to respond with firm boundaries rather than passive-aggressive sulking.",
+          "Accept that your physical health is your personal responsibility regardless of your family's dietary history."
+        ],
+        "connects_to": [
+          {
+            "book_id": "mans-search-for-meaning",
+            "chapter": 1,
+            "reason": "The last of human freedoms is the ability to choose one's attitude in any given circumstance."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "You're Wrong About Everything",
+        "hook": "Growth is an iterative process of becoming slightly less wrong over the course of a lifetime.",
+        "spark": "Certainty is the enemy of intellectual and personal growth.\nInstead of trying to find the final, perfect truth, strive to become slightly less wrong every single day.\nOur brains are flawed instruments that misremember the past, misjudge the present, and miscalculate the future.\nWhen you cling to the belief that you are completely right, you defend your ego at the cost of reality.\nManson's Law of Avoidance states that the more something threatens your identity, the more you will avoid it.\nIf you see yourself as an unappreciated genius, you will avoid producing work that could be criticized.\nKeep your identity small and fluid: see yourself as an imperfect student constantly learning.\nDoubt your own certainties, stay curious, and let experience teach you with humility.",
+        "key_ideas": [
+          {
+            "idea": "Certainty halts personal growth",
+            "why": "Believing you have arrived at absolute truth blinds you to necessary feedback and updates."
+          },
+          {
+            "idea": "The Law of Avoidance protects ego",
+            "why": "We avoid opportunities that challenge the comfortable stories we tell about ourselves."
+          },
+          {
+            "idea": "Embrace the beginner's mind",
+            "why": "Remaining a perpetual learner keeps you adaptable and open to unexpected breakthroughs."
+          }
+        ],
+        "line": {
+          "text": "We don't go from wrong to right. We go from wrong to slightly less wrong.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Admit when a colleague's idea is superior to yours and thank them publicly for the insight.",
+          "Notice when defensiveness flares in discussions; ask yourself what fragile identity story you are protecting.",
+          "Be willing to change your opinion on important topics when presented with sound empirical evidence."
+        ],
+        "connects_to": [
+          {
+            "book_id": "thinking-fast-and-slow",
+            "chapter": 5,
+            "reason": "Overconfidence and narrative fallacies trick us into false certainty about complex realities."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "mans-search-for-meaning",
+    "title": "Man's Search for Meaning",
+    "author": "Viktor E. Frankl",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543682-M.jpg",
+    "public_domain": false,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "Experiences in a Concentration Camp",
+        "hook": "When everything physical is stripped away, human dignity rests in the freedom of one's attitude.",
+        "spark": "Viktor Frankl survived Auschwitz and Dachau, enduring the absolute lowest depths of human brutality.\nIn the camps, prisoners were stripped of their clothes, names, professions, and possessions, reduced to bare numbers.\nUnder conditions of extreme starvation, typhus, and frostbite, most prisoners succumbed to spiritual apathy.\nYet Frankl observed that even in the camps, a few men walked through the huts comforting others and giving away their last crust of bread.\nThey proved that everything can be taken from a human being but one thing.\nThe last of the human freedoms: to choose one's attitude in any given set of circumstances, to choose one's own way.\nEven when your physical surroundings are a living nightmare, your inner sovereignty remains inviolate.\nNo external power on Earth can force you to become bitter or hateful unless you surrender your soul.",
+        "key_ideas": [
+          {
+            "idea": "Inner freedom cannot be stolen",
+            "why": "External circumstances may chain the body, but your choice of character remains free."
+          },
+          {
+            "idea": "Spiritual life deepens under hardship",
+            "why": "A rich inner intellectual and loving life provides an untouchable sanctuary in dark times."
+          },
+          {
+            "idea": "Apathy is an internal surrender",
+            "why": "Surrendering your sense of future purpose leads directly to physical and psychological collapse."
+          }
+        ],
+        "line": {
+          "text": "Everything can be taken from a man but one thing: the last of the human freedoms.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "When dealing with an unfair teacher or boss, remember that your internal dignity is entirely yours to maintain.",
+          "Refuse to let physical fatigue or pain dictate whether you speak with kindness to your family.",
+          "Recognize that freedom is not just having endless consumer choices; it is mastering your response to difficulty."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 2,
+            "reason": "Marcus Aurelius reminds us that external events touch only the body; the mind governs itself."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "The Meaning of Love",
+        "hook": "Love is the ultimate and highest goal to which a human being can aspire.",
+        "spark": "During an agonizing pre-dawn march through icy mud, guarded by rifle-wielding soldiers, Frankl found salvation.\nA fellow prisoner whispered: 'If our wives could see us now! I hope they are better off.'\nIn that moment, Frankl thought of his young wife, and his mind was illuminated by an overwhelming truth.\nHe understood that love is the highest and final horizon of human existence.\nThe salvation of man is through love and in love.\nHe did not know if his wife was alive or dead, and in a profound sense, it did not matter.\nHer loving presence lived with radiant reality in his soul, transcending the physical brutality of the camp.\nLove goes far beyond the physical person of the beloved; it finds its deepest meaning in their spiritual being.",
+        "key_ideas": [
+          {
+            "idea": "Love transcends physical presence",
+            "why": "Loving another human being anchors the soul even across physical separation and death."
+          },
+          {
+            "idea": "Contemplation of the beloved restores courage",
+            "why": "Memories of love provide an oasis of grace during times of acute suffering."
+          },
+          {
+            "idea": "Love is an active spiritual orientation",
+            "why": "Caring deeply about another person pulls consciousness out of self-centered despair."
+          }
+        ],
+        "line": {
+          "text": "The salvation of man is through love and in love.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Hold the thought of those you love in your mind when walking into intimidating or stressful exams.",
+          "Express deep gratitude to parents, partners, and dear friends while they are here beside you.",
+          "Dedicate your daily studies and labor as quiet offerings to support and protect the people you love."
+        ],
+        "connects_to": [
+          {
+            "book_id": "gitanjali",
+            "chapter": 2,
+            "reason": "Tagore writes that love is the divine song that weaves human souls into the cosmic tapestry."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "The Meaning of Suffering",
+        "hook": "Suffering ceases to be suffering the moment it finds the meaning of a sacrifice.",
+        "spark": "If there is a meaning in life at all, then there must be a meaning in suffering.\nSuffering is an ineradicable part of human life, even as fate and death.\nWithout suffering and death, human life cannot be complete.\nThe way in which a person accepts their fate and all its suffering gives them ample opportunity to add deeper meaning to life.\nAn elderly general physician fell into severe depression after his wife died of cancer.\nFrankl asked him: 'What would have happened if you had died first, and your wife had survived you?'\nThe doctor gasped: 'It would have been terrible for her; she would have suffered immensely!'\nFrankl replied: 'You have spared her this suffering, at the price of surviving and mourning her now.'\nThe doctor shook Frankl's hand and walked out in peace: his suffering had found meaning as an act of loving sacrifice.",
+        "key_ideas": [
+          {
+            "idea": "Suffering can be given purpose",
+            "why": "When pain serves a noble duty, sacrifice, or lesson, it ceases to feel like senseless torture."
+          },
+          {
+            "idea": "Courage under unavoidable trial",
+            "why": "How you carry an unfair burden reveals the ultimate depth of your moral character."
+          },
+          {
+            "idea": "Do not search for suffering, but honor it",
+            "why": "Unnecessary pain is masochism; unavoidable pain is an opportunity to prove your humanity."
+          }
+        ],
+        "line": {
+          "text": "In some ways suffering ceases to be suffering at the moment it finds a meaning, such as the meaning of a sacrifice.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Reframe long hours of hard study as a loving sacrifice to build a secure future for your family.",
+          "When caring for a sick relative, view the sleepless nights as an honor of service rather than an imposition.",
+          "Stand tall during seasons of grief, knowing that your tears honor the beauty of what you were blessed to love."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-subtle-art-of-not-giving-a-fuck",
+            "chapter": 4,
+            "reason": "Choosing worthy values transforms unavoidable suffering into meaningful growth."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "Logotherapy in a Nutshell",
+        "hook": "Man's primary motivational force is not pleasure or power, but the striving to find meaning.",
+        "spark": "Freud believed humans are driven primarily by the 'will to pleasure.'\nAdler argued that humans are driven by the 'will to power' and status.\nFrankl's logotherapy demonstrates that human beings are driven primarily by the 'will to meaning.'\nWe can discover meaning in life in three distinct ways: through creating a work, experiencing something, or our attitude toward suffering.\nFirst, by creating a work or doing a deed: writing a book, building a home, serving a patient.\nSecond, by experiencing something or encountering someone: absorbing nature's beauty or loving a person.\nThird, by the attitude we take toward unavoidable suffering.\nLife asks something of each human being, and we answer not through words, but through responsible action.",
+        "key_ideas": [
+          {
+            "idea": "The Will to Meaning is primal",
+            "why": "Humans can endure almost any hardship if they believe their existence serves a purpose."
+          },
+          {
+            "idea": "Three paths to authentic meaning",
+            "why": "Creating works, experiencing love and beauty, and bearing trials with courage."
+          },
+          {
+            "idea": "Life questions us, not vice versa",
+            "why": "We do not ask what life owes us; life demands our responsible answer each morning."
+          }
+        ],
+        "line": {
+          "text": "Man does not simply exist but always decides what his existence will be, what he will become in the next moment.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Write down three specific responsibilities—to a creative project, a friend, or a duty—that only you can fulfill.",
+          "When feeling lost or unmotivated, ask what this specific day is demanding of your character.",
+          "Find meaning in small everyday deeds: cooking a nourishing meal, solving a work problem, or smiling at a stranger."
+        ],
+        "connects_to": [
+          {
+            "book_id": "flow",
+            "chapter": 1,
+            "reason": "Directing consciousness toward clear, meaningful creative responsibilities produces optimal experience."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "The Existential Vacuum",
+        "hook": "Boredom and purposelessness are the modern plagues that wealth and leisure cannot cure.",
+        "spark": "In the twentieth century, human instincts were weakened by civilization, and traditional dogmas lost their grip.\nAs a result, humanity was plunged into an existential vacuum: a state of profound, hollow meaninglessness.\nThe existential vacuum manifests primarily in the condition of boredom.\nSunday neurosis describes the depression that settles in when people have no work deadlines to distract them.\nTo escape this void, people turn to vicarious thrills: consumerism, alcohol, compulsive pleasure, and tribal rage.\nNo amount of wealth, entertainment, or material luxury can fill the emptiness of an unexamined life.\nThe cure is not more entertainment, but discovering a personal responsibility that demands your dedicated effort.\nDo not wait for meaning to strike like lightning; build it through daily service to something greater than yourself.",
+        "key_ideas": [
+          {
+            "idea": "Boredom reveals the existential void",
+            "why": "Empty leisure without purpose exposes the lack of an authentic guiding compass."
+          },
+          {
+            "idea": "Escapism fails to heal the soul",
+            "why": "Compulsive entertainment and consumer shopping merely mask spiritual emptiness temporarily."
+          },
+          {
+            "idea": "Responsibility cures nihilism",
+            "why": "Committing to a calling and serving others fills the vacuum with durable fulfillment."
+          }
+        ],
+        "line": {
+          "text": "When a person can't find a deep sense of meaning, they distract themselves with pleasure.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Notice when weekend boredom triggers endless scrolling; replace it with volunteering or creative projects.",
+          "Do not seek a life of zero responsibility; humans thrive under the healthy tension of noble obligations.",
+          "Find an initiative in your local school or town that needs dedicated hands and commit your time."
+        ],
+        "connects_to": [
+          {
+            "book_id": "deep-work",
+            "chapter": 3,
+            "reason": "Devoting attention to deep craftsmanship anchors the mind and banishes existential drift."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "Tragic Optimism",
+        "hook": "Saying yes to life in spite of everything: turning pain into human achievement and guilt into change.",
+        "spark": "Tragic optimism means that one is, and remains, optimistic in spite of the 'tragic triad.'\nThe tragic triad consists of pain, guilt, and death: the unavoidable realities of mortal existence.\nPain offers the opportunity to turn suffering into human achievement and heroic endurance.\nGuilt offers the opportunity to change oneself for the better and repair moral errors.\nDeath and the transitoriness of life offer an incentive to take responsible, decisive action today.\nIf life were immortal and infinite, every decision could be postponed forever without consequence.\nBecause your days are numbered and irreversible, every single hour is a precious, unrepeatable decision.\nLive as if you were living already for the second time and as if you had acted the first time as wrongly as you are about to act now.",
+        "key_ideas": [
+          {
+            "idea": "Optimism in the face of tragedy",
+            "why": "Affirming life despite pain, guilt, and mortality is the supreme triumph of human character."
+          },
+          {
+            "idea": "Transitoriness makes life precious",
+            "why": "The finality of death gives urgent, beautiful weight to every choice you make today."
+          },
+          {
+            "idea": "The categorical imperative of logotherapy",
+            "why": "Live each moment as if it were a second chance to correct past mistakes."
+          }
+        ],
+        "line": {
+          "text": "Live as if you were living already for the second time and as if you had acted the first time as wrongly as you are about to act now.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Treat today as your second chance: if you squandered yesterday, wake up and act with wisdom now.",
+          "Acknowledge past mistakes without shame, using healthy guilt to fuel immediate positive restitution.",
+          "Remind yourself that life's finite length makes every conversation with loved ones infinitely sacred."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 6,
+            "reason": "Remember that you could depart from life right now; let that determine what you do and think."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "meditations",
+    "title": "Meditations",
+    "author": "Marcus Aurelius",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543684-M.jpg",
+    "public_domain": true,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "Debts and Lessons from My Ancestors",
+        "hook": "Gratitude is the cornerstone of wisdom: acknowledging what we learned from those who came before.",
+        "spark": "Marcus Aurelius, the Emperor of the Roman Empire, began his private journal not with triumphs, but with debts.\nHe systematically recorded every virtue he learned from grandfathers, parents, teachers, and friends.\nFrom his grandfather Verus, he learned good morals and the government of his temper.\nFrom his mother, he learned piety, generosity, and simplicity in his way of living.\nFrom his tutor Rusticus, he learned not to be led astray into sophistry or display of rhetoric.\nBefore examining your own greatness, pause and catalog the constellation of souls that built your foundation.\nTrue nobility recognizes that everything good inside you was gifted, nurtured, or taught by others.\nStarting each day with deep gratitude keeps the human ego grounded and pure.",
+        "key_ideas": [
+          {
+            "idea": "Gratitude grounds the soul",
+            "why": "Remembering that our virtues were inherited from mentors keeps arrogance at bay."
+          },
+          {
+            "idea": "Study human exemplars",
+            "why": "Observe the specific strengths of family and teachers to integrate their best qualities."
+          },
+          {
+            "idea": "Humility in the highest office",
+            "why": "Even the ruler of the Western world viewed himself merely as a humble servant of duty."
+          }
+        ],
+        "line": {
+          "text": "From my grandfather Verus I learned good morals and the government of my temper. — Marcus Aurelius",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Write a list of three specific life skills you learned from parents or teachers and thank them in person.",
+          "When praised for a major project success, publicly acknowledge the peers who helped assemble the foundation.",
+          "Review the vices of historical figures to recognize what moral traps you must actively avoid."
+        ],
+        "connects_to": [
+          {
+            "book_id": "atomic-habits",
+            "chapter": 6,
+            "reason": "Daily reflection and acknowledging debts of character prevents comfortable complacency."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "On the River of Change",
+        "hook": "Time is a violent river: every living thing flows swiftly into dissolution and renewal.",
+        "spark": "Time is like a river made up of the events which happen, and a violent stream.\nFor as soon as a thing has been seen, it is carried away, and another comes in its place, and this will be carried away too.\nMarcus reminded himself that Alexander the Great and his mule driver both died and came to the same dust.\nThe emperors, the armies, the cities, and the grand monuments are all swallowed by the vast gulf of eternity.\nWhy then do you fret over petty slights, fleeting insults, or minor embarrassments?\nAll things are ephemeral: both the one who remembers and the one who is remembered.\nAccept the natural flow of change without clinging or despair.\nView your life through the cosmic lens of cosmic time, and peace settles over your heart.",
+        "key_ideas": [
+          {
+            "idea": "Everything is in perpetual flux",
+            "why": "Resisting change is foolish; all of nature is continuous transformation and rebirth."
+          },
+          {
+            "idea": "Equalizing power of mortality",
+            "why": "Emperors and paupers share the same ultimate fate; worldly status is temporary mist."
+          },
+          {
+            "idea": "The view from above",
+            "why": "Zooming out to cosmic timescales shrinks immediate anxieties down to their true microscopic size."
+          }
+        ],
+        "line": {
+          "text": "Time is a river, a violent current of events, glimpsed once and already carried past us. — Marcus Aurelius",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "When feeling humiliated by a small mistake, ask yourself if anyone will remember it in ten years.",
+          "Do not cling to material possessions; view clothes and gadgets as temporary travelers through your hands.",
+          "Embrace aging and seasons of life with dignity rather than fighting the natural river of time."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-psychology-of-money",
+            "chapter": 1,
+            "reason": "Financial fortunes shift across generations; humility before time protects wealth."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "What Disturbs You Is Your Opinion",
+        "hook": "Things cannot touch your mind; your suffering originates solely from internal judgment.",
+        "spark": "If you are distressed by anything external, the pain is not due to the thing itself.\nThe pain is due to your estimate of the thing; and this you have the power to revoke at any moment.\nExternal events—criticism, sickness, economic downturns—are completely indifferent to your existence.\nThey remain outside your mind, standing quietly at the gates.\nIt is your own internal opinion that rushes out, labels the event 'terrible,' and generates agonizing distress.\nWipe out the impression, and the suffering vanishes with it.\nSay to yourself: 'It is in my power now to keep this soul free from wickedness, lust, and disturbance.'\nMaster your interpretations, and you will walk through the world with an untouchable inner sanctuary.",
+        "key_ideas": [
+          {
+            "idea": "Events lack moral quality",
+            "why": "External occurrences are neutral facts; your judgment alone brands them as good or bad."
+          },
+          {
+            "idea": "Revoke flawed judgments",
+            "why": "You possess the supreme cognitive authority to cancel opinions that disturb your inner peace."
+          },
+          {
+            "idea": "The fortress of the mind",
+            "why": "Nothing can penetrate the citadel of consciousness without your permission."
+          }
+        ],
+        "line": {
+          "text": "Choose not to be harmed—and you won't feel harmed. Don't feel harmed—and you haven't been. — Marcus Aurelius",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "When someone insults you, tell yourself: 'That is their opinion; it cannot penetrate my character.'",
+          "Treat bad weather on vacation as neutral nature rather than an intentional attack on your joy.",
+          "Catch yourself catastrophizing over minor problems and consciously revoke the dramatic judgment."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-subtle-art-of-not-giving-a-fuck",
+            "chapter": 5,
+            "reason": "You are always in control of your interpretation and response to external events."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "Duty to the Human Community",
+        "hook": "We are made for cooperation, like feet, like hands, like the rows of the upper and lower teeth.",
+        "spark": "When you wake up in the morning, tell yourself: I shall meet with the busybody, the ungrateful, arrogant, deceitful, and envious.\nThey are like this because they cannot distinguish good from evil.\nYet I cannot be injured by any of them, for no one can fix on me what is ugly.\nNor can I be angry with my kinsman, nor hate him.\nFor we are made for cooperation, like feet, like hands, like the rows of the upper and lower teeth.\nTo act against one another then is contrary to nature; and it is acting against one another to be vexed and turn away.\nDo not retreat into bitter misanthropy because people are selfish or foolish.\nView difficult people as fellow limbs of the cosmic human body that need patient instruction, not rage.",
+        "key_ideas": [
+          {
+            "idea": "Anticipate human flaws each morning",
+            "why": "Expecting flawed behavior prevents morning shock and keeps temper serene."
+          },
+          {
+            "idea": "Human beings are built for mutual support",
+            "why": "Working against fellow humans is unnatural, like a hand attacking the foot."
+          },
+          {
+            "idea": "Patience over punishment",
+            "why": "Misguided people act out of ignorance of virtue; teach them with grace or endure them with calm."
+          }
+        ],
+        "line": {
+          "text": "We are made for cooperation, like feet, like hands, like the rows of the upper and lower teeth. — Marcus Aurelius",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Before entering a tough family gathering, remind yourself that difficult personalities act from their own wounds.",
+          "Help a struggling classmate with notes even if they were curt or unfriendly to you yesterday.",
+          "View teamwork friction as natural resistance that refines your patience and cooperative leadership."
+        ],
+        "connects_to": [
+          {
+            "book_id": "surrounded-by-idiots",
+            "chapter": 1,
+            "reason": "Understanding differing human temperaments removes toxic anger and restores cooperation."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "Standing Upright, Not Being Held Upright",
+        "hook": "A noble character relies on internal virtue, not on the fickle props of external praise.",
+        "spark": "Do not act as if you were going to live ten thousand years; death hangs over you.\nWhile you live, while it is in your power, be good.\nDoes an emerald lose its beauty if someone fails to praise it?\nDoes gold, ivory, a little purple flower, or a lyre become less splendid if nobody applauds?\nNeither does a truly good person need the applause of the crowd to validate their integrity.\nBe like the promontory against which the waves continually break, but it stands firm and tames the fury of the water.\nDo not lean on external accolades or public titles like a crutch.\nStand upright through your own self-respect, not because others are propping you up.",
+        "key_ideas": [
+          {
+            "idea": "Virtue is self-contained splendor",
+            "why": "True beauty and character require no outside praise to confirm their reality."
+          },
+          {
+            "idea": "The promontory against the sea",
+            "why": "Remain grounded and immovable while external chaos and criticism crash at your feet."
+          },
+          {
+            "idea": "Authentic self-reliance",
+            "why": "Cultivate internal standards of honor so external rejection cannot sway your conduct."
+          }
+        ],
+        "line": {
+          "text": "To stand upright, not to be held upright. — Marcus Aurelius",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Do good deeds in total secrecy; do not post your charitable acts online for cheap applause.",
+          "Maintain your study discipline during weekends even when no teachers or parents are watching.",
+          "Let your conscience be your judge rather than counting likes or superficial compliments."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-48-laws-of-power",
+            "chapter": 4,
+            "reason": "A legendary reputation is anchored in genuine, rock-solid internal discipline."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "Amor Fati: Embracing Nature's Course",
+        "hook": "Accept whatever fate weaves for your life, for nothing is better suited to your needs.",
+        "spark": "Love the art, poor as it may be, which you have learned, and be content with it.\nPass through the rest of your life in the conviction that you have committed your all to the gods.\nAccept whatever happens to you, even if it seems disagreeable, because it leads to the health of the universe.\nThe mind adapts and converts to its own purposes the obstacle to our acting.\nThe impediment to action advances action. What stands in the way becomes the way.\nDo not wish that reality were different; love reality as it is.\nEvery obstacle, injury, or detour is raw material to be converted into the fire of virtue.\nA blazing fire makes flame and brightness out of everything that is thrown into it.",
+        "key_ideas": [
+          {
+            "idea": "Love your allotted fate",
+            "why": "Accepting life's unfolds without resentment brings total psychological serenity."
+          },
+          {
+            "idea": "The obstacle becomes the way",
+            "why": "Hardship is not a roadblock; it is the exact training ground where virtue is practiced."
+          },
+          {
+            "idea": "The mind is a blazing fire",
+            "why": "Turn every setback, delay, or insult into fuel that strengthens your wisdom."
+          }
+        ],
+        "line": {
+          "text": "The impediment to action advances action. What stands in the way becomes the way. — Marcus Aurelius",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "When a flight is canceled or plans ruined, immediately ask what virtue—patience, humor, or adaptability—you can practice.",
+          "Embrace difficult academic challenges as the fire that tempers your intellect for future leadership.",
+          "Stop wishing for an easy life; wish for the inner strength to turn any adversity into moral gold."
+        ],
+        "connects_to": [
+          {
+            "book_id": "mans-search-for-meaning",
+            "chapter": 3,
+            "reason": "Finding sacrificial purpose in hardship transforms trials into enduring human triumphs."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "thirukkural",
+    "title": "Thirukkural",
+    "author": "Thiruvalluvar",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543686-M.jpg",
+    "public_domain": true,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "The Primacy of Virtue (Aram)",
+        "hook": "Virtue is not a passive duty; it is the active foundation that yields supreme renown and joy.",
+        "spark": "Composed two thousand years ago in Tamil Nadu, the Thirukkural begins with an uncompromising celebration of moral virtue.\nThiruvalluvar teaches that virtue yields both worldly honor and eternal spiritual liberation.\nWhat greater gain can there be in mortal life than to cultivate that which secures both peace and dignity?\nVirtue is not practiced in secluded caves away from society, but in the heat of daily domestic life.\nTo be free from four mental poisons is the totality of virtue: envy, greed, anger, and harsh words.\nWhen a person purifies their mind of these four vices, their very presence radiates auspicious light.\nDo not delay virtue until old age; practice it this hour, for death waits for no man's convenience.\nVirtue practiced today will accompany you as an unfailing friend into the vast unknown.",
+        "key_ideas": [
+          {
+            "idea": "Four poisons destroy virtue",
+            "why": "Envy, uncontrolled greed, sudden wrath, and bitter speech poison the human heart."
+          },
+          {
+            "idea": "Virtue thrives in ordinary life",
+            "why": "Living ethically within family and community is superior to cowardly ascetic retreat."
+          },
+          {
+            "idea": "Do not postpone righteousness",
+            "why": "Death strikes without warning; practice virtue now so your legacy is secure."
+          }
+        ],
+        "line": {
+          "text": "Virtue yields honor and wealth; what greater gain can life bestow? — Thiruvalluvar",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Notice when envy rises at a classmate's good fortune; immediately replace it with sincere congratulations.",
+          "Refrain from using sharp, cutting sarcasm during family arguments even when you feel provoked.",
+          "Make regular small contributions to community charity without announcing your deeds to onlookers."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 5,
+            "reason": "Standing upright in virtue without needing the crutches of public applause."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "The Power of Rain (Vaan Sirappu)",
+        "hook": "Without the gift of rain, oceans wither, charity dies, and human civilization starves.",
+        "spark": "Thiruvalluvar dedicates his second chapter to the sacred ecological gift of falling rain.\nBy the bountiful fall of rain the world is preserved; it is the nectar of all living organisms.\nIf the clouds fail to dispense their liquid drops, even the mighty green grass cannot shoot forth its blade.\nIf the sky runs dry, ocean treasures diminish and pearls no longer form in the depths of the sea.\nNeither worship of the divine nor daily acts of charity can endure in a world parched by drought.\nWater is the prime minister of nature; without water, no mortal duty can be performed on Earth.\nTreat the natural world with reverence, for civilization is a fragile guest on a living planet.\nTrue ethics begins with environmental stewardship and awe before the life-giving rains.",
+        "key_ideas": [
+          {
+            "idea": "Water is the prerequisite for all ethics",
+            "why": "Without ecological abundance, neither charity, worship, nor moral living can survive."
+          },
+          {
+            "idea": "The fragility of nature's web",
+            "why": "When rain fails, both land agriculture and marine life suffer catastrophic decline."
+          },
+          {
+            "idea": "Reverence for natural cycles",
+            "why": "Recognizing our total dependence on weather fosters profound ecological humility."
+          }
+        ],
+        "line": {
+          "text": "If the heavens dry up, neither charity nor worship will endure on earth. — Thiruvalluvar",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Turn off running taps and protect clean water in your household with mindful discipline.",
+          "Support sustainable agriculture and plant native trees in your neighborhood community spaces.",
+          "Remember that material wealth is worthless without the natural ecological foundations that sustain life."
+        ],
+        "connects_to": [
+          {
+            "book_id": "dune",
+            "chapter": 3,
+            "reason": "Water as sacred currency on desert worlds echoes Thiruvalluvar's ecological reverence."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "Sweet Words (Iniyavai Koorala)",
+        "hook": "Speaking kindly with an open heart is superior to giving lavish gifts with a cold face.",
+        "spark": "Humility and sweet speech are the only authentic ornaments of a civilized human being; all else is vanity.\nWhen you possess the ability to speak words that comfort, heal, and encourage, why use words that wound?\nTo utter harsh words when pleasant ones are available is like eating unripe bitter fruit when sweet ripe fruit hangs near.\nA pleasant face and warm words of greeting create instant goodwill that gold cannot purchase.\nKind words cost nothing to produce, yet they enrich both the speaker and the listener beyond measure.\nHarsh speech leaves invisible burns on the soul that fester for decades after the argument ends.\nTrain your tongue to speak with gracious warmth, and you will walk through the world surrounded by friends.\nLet every word that crosses your lips be a blessing of sweetness and truth.",
+        "key_ideas": [
+          {
+            "idea": "Kind words are true jewelry",
+            "why": "Gentle speech and humble posture outshine the most extravagant physical adornments."
+          },
+          {
+            "idea": "The unripe fruit metaphor",
+            "why": "Choosing bitter insults when kind words exist is an act of foolish self-deprivation."
+          },
+          {
+            "idea": "Healing power of speech",
+            "why": "A gracious greeting dissolves interpersonal hostility and knits fractured bonds."
+          }
+        ],
+        "line": {
+          "text": "To utter harsh words when sweet ones are available is like eating unripe fruit when ripe is at hand. — Thiruvalluvar",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Greet shopkeepers, bus drivers, and servers with a warm smile and sincere words of appreciation.",
+          "When delivering critical feedback to team members, wrap the truth in encouraging, constructive praise.",
+          "Catch yourself before speaking in anger; pause until you can communicate with calm sweetness."
+        ],
+        "connects_to": [
+          {
+            "book_id": "surrounded-by-idiots",
+            "chapter": 4,
+            "reason": "Gentle, non-confrontational speech builds lasting trust with supportive colleagues."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "Gratitude (Seinri Arithal)",
+        "hook": "A favor done in the hour of need, however small, is larger than the measure of the earth.",
+        "spark": "A kindness done in a season of desperate emergency, though small as a grain of millet, looms as vast as a palm tree.\nNever forget the benefit conferred upon you by those who stood beside you in the hour of sorrow.\nDo not abandon the friendship of those who sheltered you when the storms of life raged around your head.\nThe wise remember with tears of joy the favor that lifted them out of darkness.\nHe who has killed every other virtue may yet find redemption, but there is no salvation for the ungrateful.\nIngratitude is the spiritual poison that corrodes the soul and burns the bridges of human fellowship.\nRepay favors with double measure whenever fortune grants you the strength to give.\nHold the memory of kindness sacred, carved into granite that time cannot erase.",
+        "key_ideas": [
+          {
+            "idea": "Timely help carries infinite weight",
+            "why": "Assistance rendered during acute crises has a spiritual value beyond any price."
+          },
+          {
+            "idea": "Ingratitude is the unpardonable sin",
+            "why": "Betraying those who helped you in your vulnerable hour ruins character completely."
+          },
+          {
+            "idea": "Remember kindness forever",
+            "why": "Let injuries be written on water, but let favors be carved in stone."
+          }
+        ],
+        "line": {
+          "text": "A favor conferred in the hour of need, though small, is larger than the world itself. — Thiruvalluvar",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Call a mentor or friend who supported you during tough times and thank them for their loyalty.",
+          "When you achieve career success, look back and hire or assist those who helped you get your start.",
+          "Never speak ill of someone who opened their home or wallet to you when you were broke."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 1,
+            "reason": "Cataloging lessons and debts to ancestors echoes the sacred duty of gratitude."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "Truthfulness (Vaimai)",
+        "hook": "Truthfulness is speech that produces not the slightest harm to any living creature.",
+        "spark": "What is truthfulness? It is speaking words that are utterly free from harm and malice.\nEven a falsehood may take the rank of truth if it produces unblemished, life-saving good for the innocent.\nIf a person speaks truth with purity of heart, their name will be honored above those who perform austerities and gifts.\nExternal water cleanses the physical body, but truthfulness alone purifies the internal soul.\nLet not a person consciously utter a falsehood; for their own conscience will burn them with relentless fire.\nHe who lives in truth dwells in the hearts of all noble people across all generations.\nTruth needs no elaborate armor; its quiet simplicity stands unconquered against all deceits.\nSpeak the truth with love, and your character will become an unshakeable beacon.",
+        "key_ideas": [
+          {
+            "idea": "Truth must be benevolent",
+            "why": "Speech that is factual but malicious fails the highest test of righteous truthfulness."
+          },
+          {
+            "idea": "Conscience is an inescapable judge",
+            "why": "Lying burns the inner spirit with guilt long after the lie has been spoken."
+          },
+          {
+            "idea": "Inward purity through truth",
+            "why": "Physical bathing cleanses skin; speaking truth purifies consciousness itself."
+          }
+        ],
+        "line": {
+          "text": "Purity of body is achieved by water; purity of heart is illuminated by truthfulness. — Thiruvalluvar",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Refuse to tell flattering lies to curry favor with superiors; speak the respectful, constructive truth.",
+          "When you make an error on a team project, confess it immediately rather than hiding behind excuses.",
+          "Let your word be your bond so partners never feel the need for legal threats to ensure compliance."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-48-laws-of-power",
+            "chapter": 5,
+            "reason": "Winning through actions rather than deceitful arguments establishes unshakeable integrity."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "Friendship (Natpu)",
+        "hook": "True friendship is a steady hand that rushes to catch you when you stumble.",
+        "spark": "Friendship is not merely walking together and laughing over pleasant entertainment.\nTrue friendship is an inner bond that rushes forward to avert ruin in the hour of calamity.\nLike the hand that instantly catches the garment slipping from the waist, true friendship acts without delay.\nA friend does not hesitate, deliberate, or calculate when danger threatens the companion.\nThey step into the breach, pull you back from wrong paths, and share your burden with fierce loyalty.\nAssociate with those who possess noble character, for their virtue will elevate your own standards.\nFlee from the fair-weather companion who smiles in prosperity but vanishes when hardship arrives.\nOne faithful, principled friend is a treasure greater than all the gold in royal vaults.",
+        "key_ideas": [
+          {
+            "idea": "Immediate instinct to protect",
+            "why": "True friendship reacts like the hand catching a falling robe: instantaneous and instinctive."
+          },
+          {
+            "idea": "Moral correction as love",
+            "why": "A genuine friend rebukes your bad habits to save you from self-destruction."
+          },
+          {
+            "idea": "Shun transactional allies",
+            "why": "Fair-weather friends who celebrate your wins but flee your trials must be cast aside."
+          }
+        ],
+        "line": {
+          "text": "Like the hand that moves to catch a slipping garment, true friendship leaps to avert ruin. — Thiruvalluvar",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Show up for friends during hospital stays, family deaths, and financial crises without waiting to be invited.",
+          "Have the courage to tell a close friend when their alcohol or spending habits are spiraling out of control.",
+          "Choose friends whose ambition, honesty, and kindness inspire you to become a better human being."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-courage-to-be-disliked",
+            "chapter": 2,
+            "reason": "Building deep interpersonal bonds requires treating companions as equals, not competitors."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "siddhartha",
+    "title": "Siddhartha",
+    "author": "Hermann Hesse",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543688-M.jpg",
+    "public_domain": true,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "The Brahmin's Son",
+        "hook": "The thirst for truth cannot be quenched by rituals, scriptures, or the teachings of others.",
+        "spark": "Siddhartha grew up in the golden sunlight of the riverbank, loved by his father and revered by the Brahmins.\nHe mastered the holy ablutions, recited the sacred verses, and performed every ritual with flawless devotion.\nYet his heart was not at peace; his soul was an empty vessel thirsting for authentic illumination.\nHe realized that the wise Brahmins could impart knowledge, but they could not impart enlightenment.\nThe sacred river of truth must be discovered within one's own consciousness, not borrowed from texts.\nSiddhartha resolved to leave behind his family, his wealth, and his status to become a wandering Samana.\nNo dogma, however ancient, can substitute for the raw, direct encounter with one's own soul.\nThe journey toward self-discovery requires the courage to leave comfortable shores behind.",
+        "key_ideas": [
+          {
+            "idea": "Knowledge is not wisdom",
+            "why": "Memorizing scriptures and rituals does not dissolve the spiritual thirst of the seeker."
+          },
+          {
+            "idea": "Direct experience over second-hand dogma",
+            "why": "Authentic truth must be lived firsthand, not accepted on blind authority."
+          },
+          {
+            "idea": "The courage of renunciation",
+            "why": "Leaving behind comfortable privileges is often the necessary first step of awakening."
+          }
+        ],
+        "line": {
+          "text": "Wisdom cannot be imparted. Wisdom that a wise man attempts to impart always sounds like foolishness. — Hermann Hesse",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Do not accept career or life paths purely because parents or tradition demand it; examine your own calling.",
+          "Read philosophical texts critically, testing their claims against the laboratory of your own lived experience.",
+          "Step away from comfortable group echo chambers to discover what you truly believe in solitude."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-power-of-now",
+            "chapter": 1,
+            "reason": "Direct conscious presence transcends theoretical concepts and intellectual doctrines."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "With the Samanas",
+        "hook": "Fasting, waiting, and thinking: the three timeless arts that conquer the restless appetites.",
+        "spark": "Siddhartha joined the ascetics in the forest, learning to renounce the body and silence the senses.\nHe gave away his clothes, fasted for weeks, and exposed his flesh to scorching sun and icy rain.\nHe learned the three foundational arts that would serve him throughout his entire earthly journey.\nI can think, I can wait, I can fast.\nThinking allows the mind to solve complex problems without panic or emotional distraction.\nWaiting allows the spirit to endure long delays with patience, knowing that fruits ripen in their season.\nFasting frees the individual from desperate dependency on immediate food, luxury, or comfort.\nWhen you possess these three arts, you can walk into any marketplace or palace without fear.",
+        "key_ideas": [
+          {
+            "idea": "I can think",
+            "why": "The disciplined intellect cuts through confusion and refuses to accept hasty conclusions."
+          },
+          {
+            "idea": "I can wait",
+            "why": "Patience allows the seeker to endure long winters without forcing premature action."
+          },
+          {
+            "idea": "I can fast",
+            "why": "Freedom from physical cravings makes you immune to bribery, greed, and panic."
+          }
+        ],
+        "line": {
+          "text": "I can think. I can wait. I can fast. — Hermann Hesse",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Practice intermittent fasting to prove to yourself that appetite is a servant, not your master.",
+          "Wait twenty-four hours before responding to stressful life events; cultivate the art of waiting.",
+          "Sit quietly with difficult academic problems for an hour before searching for shortcut solutions."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-psychology-of-money",
+            "chapter": 5,
+            "reason": "Living below your means and tolerating delays is the financial equivalent of fasting and waiting."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "Gotama the Buddha",
+        "hook": "Enlightenment is a path walked in solitary footsteps; no master can hand you your awakening.",
+        "spark": "In the grove of Jetavana, Siddhartha encountered Gotama, the Illustrious Buddha, whose presence radiated pure peace.\nSiddhartha observed Gotama's downcast gaze, his gentle step, his quiet robe: every finger spoke of wholeness.\nGovinda, Siddhartha's companion, took refuge in the Buddha and joined the monastic order of the yellow robes.\nSiddhartha bowed in profound reverence before the Buddha, but declined to join the disciples.\nHe told Gotama: 'Your doctrine contains no flaw, yet it cannot teach me what occurred to you in the hour of awakening.'\nThe secret of what the Buddha experienced under the Bodhi tree was incommunicable through words.\nTo achieve genuine salvation, Siddhartha had to leave all teachers behind and walk into the world alone.\nReverence for the master must not become an excuse to avoid walking your own solitary path.",
+        "key_ideas": [
+          {
+            "idea": "Teaching has boundaries",
+            "why": "Words can convey information, but they cannot transmit the living essence of enlightenment."
+          },
+          {
+            "idea": "The master cannot walk your path",
+            "why": "Borrowing another person's awakening leaves your own spirit unawakened."
+          },
+          {
+            "idea": "Solitary responsibility",
+            "why": "Every human being must discover their own liberation through their own steps."
+          }
+        ],
+        "line": {
+          "text": "No doctrine can save you; you must find your own salvation through your own footsteps. — Hermann Hesse",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Respect teachers and authors, but test their wisdom in your own daily conduct rather than idolizing them.",
+          "Do not become a passive follower of online gurus; build your own coherent life philosophy.",
+          "Have the courage to walk away from systems that no longer nourish your genuine spiritual growth."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-courage-to-be-disliked",
+            "chapter": 3,
+            "reason": "Separating tasks means taking total ownership of your own path rather than living someone else's."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "Kamala and the City",
+        "hook": "Immersing in the worldly dance of desire, commerce, and pleasure without losing your center.",
+        "spark": "Siddhartha entered the bustling commercial city, encountering the beautiful courtesan Kamala and the merchant Kamaswami.\nTo win Kamala's affection and learn the art of love, Siddhartha became a wealthy merchant.\nBecause he could think, wait, and fast, business felt like an effortless children's game to him.\nHe did not panic when ships were delayed or transactions failed; he viewed commerce with amused detachment.\nKamaswami was astonished: while other merchants lost their hair over losses, Siddhartha remained serene.\nHowever, slowly and insidiously, the poison of worldly luxury began to seep into Siddhartha's bloodstream.\nHe began to play dice for money, feel the pangs of greed, and drink wine late into the night.\nThe game of the world had caught him in its velvet trap, drowning the quiet voice within.",
+        "key_ideas": [
+          {
+            "idea": "Detachment creates business mastery",
+            "why": "Not caring about petty outcomes gives you immense leverage in commercial affairs."
+          },
+          {
+            "idea": "The subtle trap of luxury",
+            "why": "Material comforts slowly numb the spiritual ear until the quiet voice of truth falls silent."
+          },
+          {
+            "idea": "Experience teaches what theory cannot",
+            "why": "Siddhartha had to taste worldly indulgence to understand its ultimate emptiness."
+          }
+        ],
+        "line": {
+          "text": "Most people are like falling leaves that drift and turn in the air; a few are like stars that follow a fixed course. — Hermann Hesse",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Engage in business and career goals with excellence, but do not tie your inner worth to quarterly profits.",
+          "Watch out for lifestyle creep: luxury slowly turns from an amusing game into an addictive necessity.",
+          "Maintain daily habits of quiet meditation so worldly commercial noise does not drown your center."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-psychology-of-money",
+            "chapter": 3,
+            "reason": "Knowing what is enough prevents the worldly trap of endless pursuit from destroying your peace."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "By the River with Vasudeva",
+        "hook": "The river is everywhere at once: time is an illusion, and all voices merge into the holy Om.",
+        "spark": "Fleeing the city in disgust and despair, Siddhartha collapsed by the banks of the mighty river.\nContemplating ending his life in the waters, the holy sound 'Om' resonated from the depths of his being.\nHe awoke refreshed, as if reborn, and met Vasudeva, the humble ferryman whose eyes radiated divine calm.\nVasudeva was not a scholar; he was a listener who learned everything from the voice of the flowing water.\nSiddhartha became the ferryman's assistant, learning to listen to the river with an open, non-judgmental soul.\nHe learned from the river that there is no such thing as time: the river is at the source and the ocean simultaneously.\nThe past, present, and future are merely shadows; reality exists in the eternal, indivisible Now.\nListening without ego reveals that all joy, all suffering, and all beings are one harmonious melody.",
+        "key_ideas": [
+          {
+            "idea": "The river knows all secrets",
+            "why": "Nature speaks profound truths to those who listen with patience and humility."
+          },
+          {
+            "idea": "Time is a human illusion",
+            "why": "The river is present everywhere at once; the eternal Now is the only true reality."
+          },
+          {
+            "idea": "The art of non-judgmental listening",
+            "why": "Quieting your own internal commentary allows you to hear the universal harmony of existence."
+          }
+        ],
+        "line": {
+          "text": "The river is everywhere at the same time, at the source and at the mouth, at the waterfall, at the ferry, at the current, in the ocean and in the mountains. — Hermann Hesse",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Spend time walking beside a flowing river or in a forest, listening without headphones or distractions.",
+          "Release anxiety about the future by reminding yourself that only this present moment actually exists.",
+          "Listen to friends with complete, unhurried presence rather than mentally formulating your reply."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-power-of-now",
+            "chapter": 3,
+            "reason": "Moving deeply into the present moment reveals the timeless river of consciousness."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "The Eternal Smile: Om",
+        "hook": "When all voices of sorrow, joy, longing, and laughter merge, the single word Om resounds.",
+        "spark": "In his final trial, Siddhartha suffered the agony of loving his rebellious son, who fled back to the city.\nSiddhartha realized that he could not protect his son from life's pain, just as his own father could not protect him.\nHe sat beside Vasudeva and listened to the river with total surrender, hearing thousands of voices at once.\nHe heard the voice of the lustful, the voice of the grieving, the voice of the warrior, and the voice of the dying.\nNone of the voices could be separated from the others; all were interwoven into a singular cosmic web.\nWhen all voices merged together, the river sang the great syllable: Om, the perfection of being.\nIn that moment, Siddhartha ceased to fight against destiny; his wound healed, and his face shone with an eternal smile.\nLike the Buddha, like Vasudeva, his countenance beamed with the quiet, loving radiance of enlightenment.",
+        "key_ideas": [
+          {
+            "idea": "Accepting the limits of control",
+            "why": "You cannot spare loved ones their life lessons; every soul must walk its own fire."
+          },
+          {
+            "idea": "The unity of all existence",
+            "why": "Pain and joy, evil and good, are complementary notes in the universal symphony."
+          },
+          {
+            "idea": "The smile of enlightenment",
+            "why": "Surrendering resistance to reality produces profound peace that blesses the entire world."
+          }
+        ],
+        "line": {
+          "text": "When Siddhartha listened attentively to the thousand-fold song of the river, when he did not bind his soul to any one voice, but heard all, he heard the single word: Om. — Hermann Hesse",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Accept that loved ones must make their own mistakes to grow; love them without suffocating control.",
+          "View the chaotic news of the world as a vast unfolding symphony rather than an occasion for despair.",
+          "Smile at the ordinary challenges of today, knowing that every moment is woven into your awakening."
+        ],
+        "connects_to": [
+          {
+            "book_id": "flow",
+            "chapter": 6,
+            "reason": "The autotelic self perceives the unity of all experience and moves with cosmic harmony."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "gitanjali",
+    "title": "Gitanjali",
+    "author": "Rabindranath Tagore",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543690-M.jpg",
+    "public_domain": true,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "Thou Hast Made Me Endless",
+        "hook": "The fragile human vessel is emptied again and again to be filled with fresh immortal life.",
+        "spark": "Rabindranath Tagore opens Gitanjali with an ecstatic realization of the human soul's eternal renewal.\nThou hast made me endless, such is thy pleasure. This frail vessel thou emptiest again and again, and fillest it ever with fresh life.\nThe body is a little flute of reed carried over hills and dales, breathing through it melodies eternally new.\nAt the immortal touch of the infinite, the heart loses its limits in joy and gives birth to utterance ineffable.\nTagore reminds us that our small ego-boundaries are illusions; we are open vessels of cosmic vitality.\nWhen you surrender the rigid demand to control every outcome, the universe breathes fresh life through your spirit.\nYour creative gifts are not private possessions to hoard, but divine melodies passing through your reed.\nOpen your heart to each sunrise as an unearned gift of renewed consciousness.",
+        "key_ideas": [
+          {
+            "idea": "The soul as an open vessel",
+            "why": "Emptying oneself of rigid pride allows universal vitality and inspiration to enter."
+          },
+          {
+            "idea": "The flute of the infinite",
+            "why": "Human talent is an instrument through which universal melodies and beauty are expressed."
+          },
+          {
+            "idea": "Transcendence of the finite ego",
+            "why": "Releasing petty self-centeredness dissolves mortal limits into profound joy."
+          }
+        ],
+        "line": {
+          "text": "Thou hast made me endless, such is thy pleasure. This frail vessel thou emptiest again and again, and fillest it ever with fresh life. — Rabindranath Tagore",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Begin each morning by sitting in stillness, visualizing emptying your mind of yesterday's lingering grievances.",
+          "View your creative writing or artistic projects as gifts flowing through you rather than stressful tests of ego.",
+          "Walk outdoors at dawn and feel the fresh air as a physical reminder of renewed life."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-untethered-soul",
+            "chapter": 4,
+            "reason": "Infinite energy flows through the spiritual heart when internal blockages are surrendered."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "Where the Mind Is Without Fear",
+        "hook": "The supreme prayer for human freedom: where knowledge is free and the mind led into widening thought.",
+        "spark": "Tagore's immortal Poem 35 is a universal anthem for the liberation of the human intellect and spirit.\nWhere the mind is without fear and the head is held high; where knowledge is free;\nWhere the world has not been broken up into fragments by narrow domestic walls;\nWhere words come out from the depth of truth; where tireless striving stretches its arms towards perfection;\nWhere the clear stream of reason has not lost its way into the dreary desert sand of dead habit;\nWhere the mind is led forward by thee into ever-widening thought and action;\nInto that heaven of freedom, my Father, let my country awake.\nTagore challenges every generation to shatter the petty barriers of caste, tribe, and dogmatic tradition.",
+        "key_ideas": [
+          {
+            "idea": "Fearless intellectual integrity",
+            "why": "A truly educated mind holds its head high in truth, untamed by authoritarian intimidation."
+          },
+          {
+            "idea": "Shatter narrow domestic walls",
+            "why": "Rejecting tribal sectarianism unites humanity into a single borderless family of knowledge."
+          },
+          {
+            "idea": "The clear stream of reason",
+            "why": "Living truth must never be suffocated by the dry desert sands of unthinking dead habit."
+          }
+        ],
+        "line": {
+          "text": "Where the clear stream of reason has not lost its way into the dreary desert sand of dead habit. — Rabindranath Tagore",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Refuse to let partisan tribalism divide your friendships; seek truth beyond political slogans.",
+          "Challenge dead traditions and superstitions with the clear stream of respectful, curious reasoning.",
+          "Speak from the depth of your authentic conviction rather than parroting opinions to please the crowd."
+        ],
+        "connects_to": [
+          {
+            "book_id": "1984-george-orwell",
+            "chapter": 1,
+            "reason": "Freedom is the ability to say that two plus two equals four without fear of persecution."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "Leave This Chanting and Singing",
+        "hook": "Open your eyes: divine truth lives out where the honest laborer tills the soil.",
+        "spark": "Tagore delivers a stunning rebuke to hypocritical, cloistered religious asceticism in Poem 11.\nLeave this chanting and singing and telling of beads! Whom dost thou worship in this lonely dark corner of a temple with doors all shut?\nOpen thine eyes and see thy God is not before thee!\nHe is there where the tiller is tilling the hard ground and where the pathmaker is breaking stones.\nHe is with them in sun and in shower, and his garment is covered with the dust of honest labor.\nPut off thy holy mantle and even like him come down on the dusty soil!\nTrue holiness is found not in incense and chants, but in compassionate solidarity with hardworking common people.\nMeet the divine in honest work, in sweat, and in serving those who labor under the hot sun.",
+        "key_ideas": [
+          {
+            "idea": "Divinity resides with working hands",
+            "why": "God is present in the honest sweat of the laborer, not trapped inside cold temple walls."
+          },
+          {
+            "idea": "Spiritual hypocrisy of seclusion",
+            "why": "Shutting oneself away in ritual isolation avoids the sacred duty of loving human service."
+          },
+          {
+            "idea": "Put off the holy mantle",
+            "why": "True enlightenment gets its hands dirty in the dusty soil of daily community care."
+          }
+        ],
+        "line": {
+          "text": "He is there where the tiller is tilling the hard ground and where the pathmaker is breaking stones. — Rabindranath Tagore",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Honor manual laborers, janitors, and street workers with deep personal respect and generous tips.",
+          "Do not separate your spiritual ideals from your daily work; treat studying and cooking as sacred acts.",
+          "Step outside academic libraries and volunteer at local shelters where genuine human needs exist."
+        ],
+        "connects_to": [
+          {
+            "book_id": "thirukkural",
+            "chapter": 1,
+            "reason": "Virtue practiced within domestic and communal labor is superior to ascetic retreat."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "Deliverance Is Not for Me in Renunciation",
+        "hook": "Freedom is not found in fleeing the world, but in embracing life with a thousand bonds of delight.",
+        "spark": "Many ascetic traditions demand that seekers renounce the senses, despise the body, and flee worldly delight.\nTagore boldly rejects world-denying asceticism in Poem 73.\nDeliverance is not for me in renunciation. I feel the embrace of freedom in a thousand bonds of delight.\nThou ever pourest for me the fresh draught of thy wine of various colors and fragrance, filling this earthen vessel to the brim.\nThe world is not an evil illusion to be shunned; it is a radiant banquet of divine beauty to be celebrated with joy.\nMy world will keep its hundred different lamps lit with thy flame and place them before the altar of thy temple.\nNo, I will never shut the doors of my senses. The delights of sight and hearing and touch will bear thy delight.\nTaste the splendor of art, friendship, nature, and song with holy gratitude and an open heart.",
+        "key_ideas": [
+          {
+            "idea": "Embrace the sacred banquet of life",
+            "why": "Sensory beauty is a divine gift to be enjoyed with reverence, not an evil trap to avoid."
+          },
+          {
+            "idea": "Freedom within connection",
+            "why": "True liberation is experienced through a thousand loving bonds of delightful relationship."
+          },
+          {
+            "idea": "Do not extinguish the senses",
+            "why": "Let sight, hearing, and touch become windows of wonder and gratitude for existence."
+          }
+        ],
+        "line": {
+          "text": "Deliverance is not for me in renunciation. I feel the embrace of freedom in a thousand bonds of delight. — Rabindranath Tagore",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Enjoy the colors of a sunset, the aroma of fresh bread, and the beauty of music without monastic guilt.",
+          "Reject toxic self-denial; celebrate healthy physical vitality and wholesome creative pleasures.",
+          "Cultivate deep friendships and creative passions as joyful threads in your spiritual tapestry."
+        ],
+        "connects_to": [
+          {
+            "book_id": "siddhartha",
+            "chapter": 4,
+            "reason": "Siddhartha learns that true enlightenment embraces the full sensory dance of earthly reality."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "The Journey Home",
+        "hook": "The wanderer knocks on every distant door before discovering the quiet sanctuary within.",
+        "spark": "The time that my journey takes is long and the way of it long.\nI came out on the chariot of the first gleam of light, and my path through the wildernesses of worlds left its impression upon many a star.\nIt is the most distant course that comes nearest to thyself, and that training is the most intricate which leads to the utter simplicity of a tune.\nThe traveler has to knock at every alien door to come to his own, and one has to wander through all the outer worlds to reach the innermost shrine at the end.\nMy eyes strayed far and wide before I shut them and said: 'Here art thou!'\nWe search across oceans and foreign lands for the peace that was waiting quietly in our own chest.\nThe longest journey of any human soul is the journey that leads back home to its authentic self.\nRest from outer wandering, close your restless eyes, and discover the radiant presence within.",
+        "key_ideas": [
+          {
+            "idea": "The longest journey leads home",
+            "why": "Wandering through alien philosophies and distant lands ultimately returns us to our own heart."
+          },
+          {
+            "idea": "The complexity of simplicity",
+            "why": "Achieving profound inner simplicity requires extensive spiritual discipline and wandering."
+          },
+          {
+            "idea": "The shrine within",
+            "why": "The divine truth sought across external mountains was dwelling quietly within all along."
+          }
+        ],
+        "line": {
+          "text": "The traveler has to knock at every alien door to come to his own. — Rabindranath Tagore",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Do not regret past detours, false starts, and mistakes; they were necessary steps on the road back to your center.",
+          "Stop looking to external approval or exotic places to fix your life; find peace right where you stand today.",
+          "Take fifteen minutes of silence tonight, closing your eyes to rest in the sanctuary of your own being."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-alchemist",
+            "chapter": 6,
+            "reason": "The treasure sought at the Egyptian pyramids was buried beneath the roots of the home tree all along."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "In One Salutation to Thee",
+        "hook": "At life's close, let every song and action gather into one quiet salutation.",
+        "spark": "Tagore concludes Gitanjali with Poem 103: a magnificent symphony of complete surrender and peace.\nIn one salutation to thee, my God, let all my senses spread out and touch this world at thy feet.\nLike a rain-cloud of July hung low with its burden of unshed showers let all my mind bend down at thy door in one salutation to thee.\nLet all my songs gather together their diverse strains into a single current and flow to a sea of silence in one salutation to thee.\nLike a flock of homesick cranes flying night and day back to their mountain nests, let all my life take its voyage to its eternal home in one salutation to thee.\nAt the close of our brief mortal dance, let our striving dissolve into profound gratitude.\nEvery song, every tear, and every trial gathers into a single river flowing home to the sea of quiet eternity.\nLive with such grace that when the final call arrives, your soul departs like homeward cranes flying to their nest.",
+        "key_ideas": [
+          {
+            "idea": "The ultimate gathering of the self",
+            "why": "All diverse life experiences, joys, and sorrows merge into a singular river of gratitude."
+          },
+          {
+            "idea": "The rain-cloud of humility",
+            "why": "Bending down like a heavy cloud ready to bless the parched earth with gentle rain."
+          },
+          {
+            "idea": "The voyage of the homeward cranes",
+            "why": "Death is not a violent terror, but a peaceful return of the soul to its eternal home."
+          }
+        ],
+        "line": {
+          "text": "Like a flock of homesick cranes flying night and day back to their mountain nests, let all my life take its voyage to its eternal home. — Rabindranath Tagore",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "End every day by mentally gathering all your accomplishments and frustrations into one quiet prayer of gratitude.",
+          "Let go of petty rivalries before sleep, remembering that life is a brief homeward flight.",
+          "Live each hour so that when your journey concludes, you can look back with peaceful, unblemished honor."
+        ],
+        "connects_to": [
+          {
+            "book_id": "mans-search-for-meaning",
+            "chapter": 6,
+            "reason": "Tragic optimism enables human beings to affirm life with gratitude even in the presence of mortality."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "the-alchemist",
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543692-M.jpg",
+    "public_domain": false,
+    "fiction": true,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "The Boy and the Shepherd's Dream",
+        "hook": "When you want something, all the universe conspires in helping you to achieve it.",
+        "spark": "Santiago was an Andalusian shepherd boy who loved his sheep and the open pastures of Spain.\nYet beneath his quiet life, a recurring dream of treasure at the Egyptian pyramids troubled his heart.\nHe met Melchizedek, the mysterious King of Salem, who introduced him to the concept of the Personal Legend.\nA Personal Legend is what you have always wanted to accomplish since childhood.\nWhen you are young, everything is clear and possible; you are not afraid to dream of grand adventures.\nAs time passes, a mysterious force convinces you that your dream is impossible.\nMelchizedek told him: when you want something, all the universe conspires in helping you to achieve it.\nSantiago chose to sell his flock and set sail across the strait to Africa in pursuit of his destiny.",
+        "key_ideas": [
+          {
+            "idea": "The Personal Legend calls each soul",
+            "why": "Everyone has a unique purpose, but fear of failure convinces adults to settle."
+          },
+          {
+            "idea": "The universe conspires to assist",
+            "why": "When you commit with single-minded devotion, unexpected synchronicities emerge."
+          },
+          {
+            "idea": "Give up the good for the great",
+            "why": "Santiago had to surrender the comfortable safety of his flock to cross the sea."
+          }
+        ],
+        "line": {
+          "text": "When you want something, all the universe conspires in helping you to achieve it.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Identify the childhood passion you abandoned because adults labeled it impractical.",
+          "Take one concrete risk toward your real dream rather than staying safe in comfortable routines.",
+          "Notice the small signs and encouragements that appear when you finally take action."
+        ],
+        "connects_to": [
+          {
+            "book_id": "siddhartha",
+            "chapter": 1,
+            "reason": "Leaving behind comfortable pastoral life to pursue inner calling echoes Siddhartha's departure."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "The Crystal Merchant in Tangier",
+        "hook": "Beware of the dream that becomes a comfortable excuse to avoid living fully.",
+        "spark": "Upon arriving in Tangier, Santiago was robbed of all his gold by an untrustworthy guide.\nPenniless and stranded in a foreign land, he took a job cleaning glassware in a crystal shop atop a hill.\nHe worked diligently for a year, learning Arabic, expanding sales, and serving mint tea in crystal glasses.\nThe crystal merchant was an elderly Muslim man who had dreamed of making the pilgrimage to Mecca for thirty years.\nYet when Santiago asked why he did not go now that business was booming, the merchant hesitated.\nThe merchant confessed: 'I am afraid that if my dream is realized, I will have no reason to go on living.'\nHe preferred the fantasy of Mecca to the reality of making the journey.\nDo not let your dream become a museum piece; dreams are meant to be walked, tested, and lived.",
+        "key_ideas": [
+          {
+            "idea": "The fear of realizing dreams",
+            "why": "Some people cling to fantasies because reality threatens the comforting illusion."
+          },
+          {
+            "idea": "Turn setbacks into stepping stones",
+            "why": "Being robbed forced Santiago to learn commerce and foreign languages in Tangier."
+          },
+          {
+            "idea": "Action cures despair",
+            "why": "Hard work in the crystal shop transformed an initial catastrophe into rich savings."
+          }
+        ],
+        "line": {
+          "text": "It is the fear of failure that makes a dream impossible to achieve.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Notice if you procrastinate on your biggest ambition because failing would destroy your ego.",
+          "Take practical part-time jobs when money runs short without losing sight of your ultimate north star.",
+          "Test your creative ideas in public rather than keeping them safely unjudged in private notebooks."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-subtle-art-of-not-giving-a-fuck",
+            "chapter": 1,
+            "reason": "Accepting real negative experiences is the prerequisite for authentic achievement."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "The Desert Caravan",
+        "hook": "The desert is a vast teacher: listen to the language of omens and the soul of the world.",
+        "spark": "Having earned back his fortune, Santiago joined a massive desert caravan traveling toward the pyramids.\nIn the caravan, he met an Englishman who read heavy leather-bound books on alchemy all day.\nWhile the Englishman sought the secret of alchemy through books, Santiago observed the desert.\nHe learned from the camel driver that the desert has a soul, and that everything is connected.\nThe Soul of the World is nourished by the happiness of people, or by their unhappiness and envy.\nTo realize one's destiny is a person's only real obligation.\nThe Englishman learned that books without observation are dry, and Santiago learned that books hold history.\nBoth realized that all things speak a single universal language of passion and courage.",
+        "key_ideas": [
+          {
+            "idea": "The Soul of the World connects all beings",
+            "why": "Nature, people, and events are linked by an invisible web of meaning."
+          },
+          {
+            "idea": "Complementary paths of learning",
+            "why": "Scholarly study and direct physical observation must inform and balance each other."
+          },
+          {
+            "idea": "The language of omens",
+            "why": "Observing subtle patterns in surroundings reveals guidance when facing crossroads."
+          }
+        ],
+        "line": {
+          "text": "To realize one's destiny is a person's only real obligation.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Pay attention to coincidences, gut feelings, and repeating opportunities as you navigate choices.",
+          "Balance reading textbooks with real-world practice in the field or studio.",
+          "Respect the wisdom of experienced mentors who have navigated the desert of your industry."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-power-of-now",
+            "chapter": 5,
+            "reason": "Attuned presence in nature connects consciousness to the underlying reality of existence."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "The Oasis and Love",
+        "hook": "True love never stands between a human being and the pursuit of their Personal Legend.",
+        "spark": "The caravan halted at the oasis of Al-Fayoum, a neutral sanctuary of palm trees and wells amid tribal wars.\nAt a well, Santiago met Fatima, a desert maiden filling her goatskin vessel with fresh water.\nWhen their eyes met, time stopped, and Santiago understood the pure Language of the World: Love.\nHe wanted to abandon his journey to the pyramids and remain forever at the oasis with Fatima.\nFatima, however, possessed the wisdom of desert women who know that men must follow their horizons.\nShe told him: 'If I am part of your dream, you will come back to me one day. You must go.'\nTrue love never holds someone back from their authentic calling; if it does, it is not true love.\nWith a courageous heart, Santiago prepared to ride deeper into the war-torn dunes.",
+        "key_ideas": [
+          {
+            "idea": "Love is an empowering force, not a cage",
+            "why": "Genuine love encourages the beloved to fulfill their highest personal calling."
+          },
+          {
+            "idea": "The language of the heart",
+            "why": "Intuitive connection transcends rational calculation and binds souls across deserts."
+          },
+          {
+            "idea": "Trust in destiny's return",
+            "why": "What is truly meant for your life will never be lost by pursuing your righteous purpose."
+          }
+        ],
+        "line": {
+          "text": "One is loved because one is loved. No reason is needed for loving.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Support your partner or friends in pursuing distant fellowships or demanding career leaps.",
+          "Never demand that someone surrender their personal calling to provide you with comfortable company.",
+          "Trust that deep, authentic bonds survive physical distance and challenging seasons of growth."
+        ],
+        "connects_to": [
+          {
+            "book_id": "mans-search-for-meaning",
+            "chapter": 2,
+            "reason": "Love is the spiritual sanctuary that gives strength to endure harsh trials."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "The Alchemist's Crucible",
+        "hook": "Alchemy is not turning lead into gold; it is the spiritual transformation of the self.",
+        "spark": "Guided by the mysterious Alchemist on horseback, Santiago rode into the most dangerous sector of the desert.\nThe Alchemist taught him that lead has its own purpose, and that gold is merely the highest evolution of matter.\nWise alchemists understood that by purifying metal in the fire, they were purifying their own souls.\nThose who sought only gold were greedy charlatans who destroyed the secret.\nWhen captured by hostile desert warriors, the Alchemist promised the warlords that Santiago could turn himself into wind.\nTerrified and alone on a cliff, Santiago had to commune with the desert, the wind, and the sun.\nHe realized that love is what transforms and improves the soul of the world.\nBy reaching the universal hand that wrote it all, Santiago vanished and reappeared on the other side of the camp.",
+        "key_ideas": [
+          {
+            "idea": "Alchemy is internal purification",
+            "why": "Refining character in the furnace of discipline is the true transmutation of lead into gold."
+          },
+          {
+            "idea": "The trap of material greed",
+            "why": "Seeking wealth for its own sake blinds the practitioner to the spiritual laws of nature."
+          },
+          {
+            "idea": "Unifying with the elements",
+            "why": "Recognizing that your spirit is interwoven with the cosmos unlocks immense human potential."
+          }
+        ],
+        "line": {
+          "text": "The simple things are also the most extraordinary things, and only the wise can see them.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Treat exams and career pressures as the crucible that burns away arrogance and sharpens skill.",
+          "Do not pursue money as the ultimate prize; pursue becoming an extraordinary person of value.",
+          "Notice how nature reflects your own inner weather: calm mind produces calm perception."
+        ],
+        "connects_to": [
+          {
+            "book_id": "gitanjali",
+            "chapter": 1,
+            "reason": "The fragile vessel of the self is purified and filled with immortal cosmic vitality."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "The Treasure at the Roots",
+        "hook": "The treasure you seek across oceans and deserts is buried right where you started.",
+        "spark": "Santiago reached the majestic Pyramids of Egypt at last, weeping with joy and gratitude.\nHe began digging into the sand where his tears fell, searching for his promised gold.\nA band of desert refugees attacked him, beat him, and stole his remaining gold coins.\nAs their leader left, he sneered: 'You are a fool. Two years ago, I had a recurring dream of a ruined church in Spain.'\nThe leader continued: 'The dream said gold was buried under a sycamore tree where shepherds sleep! But I am not stupid enough to travel.'\nSantiago smiled through his bloody lips, filled with overwhelming peace.\nThe treasure had been buried in the ruined church in Spain, right where he had slept with his sheep all along.\nYet he had to cross an entire continent, learn languages, and find true love to become the man worthy of finding it.",
+        "key_ideas": [
+          {
+            "idea": "The journey creates the finder",
+            "why": "The outer journey was necessary to forge the wisdom capable of appreciating the home treasure."
+          },
+          {
+            "idea": "Treasure was at home all along",
+            "why": "The deepest peace and riches are waiting quietly under the foundation of your own life."
+          },
+          {
+            "idea": "Gratitude for the detour",
+            "why": "Every trial, robbery, and sandstorm was essential to the awakening of the soul."
+          }
+        ],
+        "line": {
+          "text": "No heart has ever suffered when it goes in pursuit of its dreams.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Appreciate that your current struggles are forging the character you will need when success arrives.",
+          "Look around your current home and community for opportunities you overlooked while dreaming of distant lands.",
+          "Smile at the detours in your education, knowing that every unexpected step serves your awakening."
+        ],
+        "connects_to": [
+          {
+            "book_id": "gitanjali",
+            "chapter": 5,
+            "reason": "The traveler has to knock at every alien door before discovering the shrine in his own home."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "can-t-hurt-me",
+    "title": "Can't Hurt Me",
+    "author": "David Goggins",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543694-M.jpg",
+    "public_domain": false,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "The Accountability Mirror",
+        "hook": "Look yourself in the eyes and tell the brutal, unvarnished truth about who you are.",
+        "spark": "David Goggins grew up in poverty, suffering severe childhood abuse, racism, and learning disabilities.\nBy age twenty-four, he weighed nearly three hundred pounds, sprayed bugs for a living, and had zero prospects.\nOne night after work, watching Navy SEALs on television, a spark ignited in his soul.\nHe shaved his face, stood before the mirror, and confronted his reflection with savage honesty.\nHe taped Post-it notes on the mirror stating his exact weaknesses: lazy, uneducated, overweight.\nHe called it the Accountability Mirror: no excuses, no soothing lies, no blaming others.\nEvery night, he had to look at those notes and answer whether he had taken action to fix them.\nTransformation begins only when you stop sugarcoating your reality and demand accountability from yourself.",
+        "key_ideas": [
+          {
+            "idea": "The Accountability Mirror demands truth",
+            "why": "Self-delusion preserves fragile comfort; brutal honesty sparks genuine change."
+          },
+          {
+            "idea": "External blame is a dead end",
+            "why": "Complaining about past trauma will never do the work needed to build your future."
+          },
+          {
+            "idea": "Post your weaknesses publicly to yourself",
+            "why": "Keeping reminders of your targets front and center destroys procrastination."
+          }
+        ],
+        "line": {
+          "text": "You have to be willing to suffer to grow. The mirror does not lie.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Tape your two biggest academic or fitness goals directly on your bathroom mirror where you see them daily.",
+          "Stop making excuses for missed deadlines; tell yourself honestly that you mismanaged your time.",
+          "Treat your reflection as a sparring partner that demands your best effort every single morning."
+        ],
+        "connects_to": [
+          {
+            "book_id": "atomic-habits",
+            "chapter": 2,
+            "reason": "Identity change requires daily tangible evidence posted and validated before your own eyes."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "The 40% Rule",
+        "hook": "When your mind tells you that you are completely exhausted, you are only at forty percent of capacity.",
+        "spark": "During Navy SEAL Hell Week, candidates run hundreds of miles carrying heavy boats with zero sleep.\nAt minute ninety of a brutal workout, the brain screams: 'Quit! We are going to die!'\nGoggins discovered the 40% Rule: when your mind insists you are tapped out, you have only reached 40% of your limit.\nThe human brain is an evolutionary safety governor designed to protect you from pain and injury.\nIt triggers fatigue, fear, and doubt long before your physical body actually reaches its true breaking point.\nTo access the remaining sixty percent of your potential, you must learn to override that mental governor.\nPush through the initial wall of panic and fatigue, and you discover vast hidden reservoirs of strength.\nGreatness lives in the territory beyond where comfortable people decide to quit.",
+        "key_ideas": [
+          {
+            "idea": "The brain is a cautious safety governor",
+            "why": "Mental panic triggers long before physical collapse to preserve comfortable safety."
+          },
+          {
+            "idea": "Tapping the remaining sixty percent",
+            "why": "Pushing past the first wall of exhaustion reveals unexpected endurance."
+          },
+          {
+            "idea": "Habituate to discomfort",
+            "why": "Consistently leaning into mild pain expands your baseline threshold for stress."
+          }
+        ],
+        "line": {
+          "text": "When you think you're done, you're only at forty percent of your body's capability.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "When you want to stop studying after thirty minutes, push yourself to complete just ten more minutes.",
+          "During hard cardio or workouts, take five deep breaths and do two more repetitions past the urge to stop.",
+          "Recognize that your brain's urge to quit is merely a suggestion, not a biological command."
+        ],
+        "connects_to": [
+          {
+            "book_id": "flow",
+            "chapter": 1,
+            "reason": "Optimal performance emerges when human capacity is pushed to its absolute limits."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "Taking Souls",
+        "hook": "Excellence under brutal conditions demoralizes your opposition and commands undeniable respect.",
+        "spark": "During his third attempt at Hell Week, Goggins faced cruel weather, hypothermia, and sadistic instructors.\nInstead of showing pain and shivering, Goggins decided to 'take their souls.'\nTaking souls means performing with such fierce joy and unmatched intensity that it breaks the tormentor's spirit.\nWhen instructors made his boat crew paddle into freezing surf, Goggins smiled and roared with laughter.\nThe instructors were stunned: how do you break a man who finds ecstasy in your harshest punishment?\nWhen facing rivals, critics, or difficult bosses, do not whine or file complaints.\nOutwork them so thoroughly, with such dignified energy, that they are forced to respect your power.\nTrue dominance is quiet, relentless excellence in the very conditions designed to crush you.",
+        "key_ideas": [
+          {
+            "idea": "Smile in the storm",
+            "why": "Reacting to hardship with joy confuses critics and neutralizes their psychological leverage."
+          },
+          {
+            "idea": "Outwork every critic",
+            "why": "Flawless execution under fire is the ultimate refutation of every doubt."
+          },
+          {
+            "idea": "Command respect through endurance",
+            "why": "People admire the competitor who refuses to complain even when the rules are unfair."
+          }
+        ],
+        "line": {
+          "text": "Do not just survive the trial; conquer it with such intensity that you take the soul of the obstacle.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "When given an unfairly difficult academic assignment, submit an impeccably researched paper early.",
+          "Arrive ten minutes early and work with high energy on rainy Monday mornings when everyone else grumbles.",
+          "Smile at critics who doubt your goals, then let your consistent daily progress shatter their predictions."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-48-laws-of-power",
+            "chapter": 5,
+            "reason": "Winning through actions and relentless execution outclasses verbal complaints every time."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "The Cookie Jar",
+        "hook": "Store your past victories in a mental vault and feast on them when facing dark challenges.",
+        "spark": "During the San Diego One Day race, Goggins attempted to run one hundred miles in twenty-four hours with zero training.\nAt mile seventy, his kidneys failed, bones broke in his feet, and he collapsed in a lawn chair, unable to stand.\nHis mind told him it was impossible to take another step.\nHe reached into what he calls the Cookie Jar: a mental repository of all the past hardships he had conquered.\nHe remembered surviving childhood beatings, escaping poverty, losing one hundred pounds in three months, and surviving Hell Week.\nEach memory was a sweet cookie of proof that he was capable of enduring hell.\nFeasting on that proof reminded him of who he truly was, generating the adrenaline needed to stand up.\nHe completed the final thirty miles on broken bones, entering the ultramarathon elite.",
+        "key_ideas": [
+          {
+            "idea": "The Cookie Jar stores hard evidence",
+            "why": "Documenting past trials conquered gives you tangible proof of your resilience."
+          },
+          {
+            "idea": "Fuel for dark moments",
+            "why": "When facing panic, recalling previous obstacles survived restores psychological grit."
+          },
+          {
+            "idea": "Celebrate small victories",
+            "why": "Every time you overcome laziness, deposit another cookie into your mental jar."
+          }
+        ],
+        "line": {
+          "text": "The Cookie Jar is a reminder of who you are and what you have already conquered.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Write a list of the five hardest things you have survived or accomplished in your life and review it before big exams.",
+          "When self-doubt whispers that you cannot pass an interview, open your Cookie Jar and recall past victories.",
+          "Treat every tough workout or disciplined study night as depositing another cookie for future storms."
+        ],
+        "connects_to": [
+          {
+            "book_id": "atomic-habits",
+            "chapter": 6,
+            "reason": "Visual evidence and stored proof of capability reinforce an unshakeable identity."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "Callusing the Mind",
+        "hook": "The mind calluses like hands on a barbell: continuous friction turns soft skin into iron.",
+        "spark": "If you lift weights with soft hands, your palms develop painful blisters and tears.\nIf you continue gripping the iron week after week, the skin thickens, producing protective calluses.\nThe human mind behaves in the exact same manner when exposed to intentional, voluntary friction.\nIf you avoid all discomfort, your mind remains fragile, offended by minor slights and paralyzed by basic stress.\nTo callus your mind, do something that sucks every single day.\nMake your bed, take cold showers, run in the rain, study when tired, and clean the bathroom.\nVoluntary discomfort thickens your mental armor, making you resilient when real-life catastrophes arrive.\nA callused mind walks through chaos with calm, unshakeable composure.",
+        "key_ideas": [
+          {
+            "idea": "Mental calluses through voluntary stress",
+            "why": "Subjecting yourself to small daily hardships builds psychological armor."
+          },
+          {
+            "idea": "Fragility comes from comfort",
+            "why": "Coddling yourself with constant air conditioning and convenience softens the spirit."
+          },
+          {
+            "idea": "Do something that sucks daily",
+            "why": "Small daily disciplines train the brain to override complaints and take action."
+          }
+        ],
+        "line": {
+          "text": "A callused mind is the only shield that protects you from the brutality of this world.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Take a cold shower for the final two minutes of your morning routine to train instant discipline.",
+          "Run or walk outside even when the weather is rainy and cold; don't wait for sunny days.",
+          "Study your most difficult subject first thing in the morning when your mind wants to procrastinate."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 6,
+            "reason": "The blazing fire converts every obstacle into fuel; callusing the mind makes it invincible."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "The Most Powerful Weapon: Total Self-Mastery",
+        "hook": "Uncommon among the uncommon: continuing to push when everyone else thinks you have arrived.",
+        "spark": "Most people who achieve success make a fatal mistake: they relax, celebrate, and lose their edge.\nThey become complacent, writing books about past glory while their daily discipline rots away.\nGoggins advocates being 'uncommon among uncommon people.'\nWhen you graduate from the elite school, win the championship, or earn the promotion, do not unpack your bags.\nThe finish line is just the beginning of the next, higher mountain.\nKeep setting higher standards for yourself that nobody else expects or demands.\nSelf-mastery is not a destination you arrive at and retire from; it is an endless, daily martial art.\nStay hungry, stay humble, and keep after it until your final breath on Earth.",
+        "key_ideas": [
+          {
+            "idea": "Complacency destroys champions",
+            "why": "Relaxing after victory softens the edge that earned the triumph in the first place."
+          },
+          {
+            "idea": "Raise the standard after winning",
+            "why": "Use each milestone as a launching pad for deeper self-mastery."
+          },
+          {
+            "idea": "The pursuit is lifelong",
+            "why": "Authentic discipline has no retirement date; it is a daily way of living with honor."
+          }
+        ],
+        "line": {
+          "text": "You are in danger of living a life so comfortable that you will die without ever knowing your true potential.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "After finishing a great semester with top marks, review your weaknesses and set next term's goals immediately.",
+          "Do not let praise inflate your ego; keep doing your boring daily fundamentals with humility.",
+          "Ask yourself: 'Am I living up to my true potential today, or am I resting on yesterday's reputation?'"
+        ],
+        "connects_to": [
+          {
+            "book_id": "deep-work",
+            "chapter": 2,
+            "reason": "Elite achievement demands perpetual dedication to high standards that others consider extreme."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "the-courage-to-be-disliked",
+    "title": "The Courage to Be Disliked",
+    "author": "Ichiro Kishimi & Fumitake Koga",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543696-M.jpg",
+    "public_domain": false,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "The Unknown Third Giant: Alfred Adler",
+        "hook": "Your past does not determine your future; you are driven by goals, not haunted by causes.",
+        "spark": "While Sigmund Freud taught that past traumas cause our present unhappiness, Alfred Adler proposed a liberating alternative: teleology.\nTeleology looks at the purpose of our present behavior rather than past causes.\nAdler argues that people do not suffer from the shock of past experiences; instead, they make out of them whatever suits their current purposes.\nA person who claims they cannot socialize because of past childhood bullying is often using trauma as an excuse to avoid the risk of future rejection.\nWe determine our own lives according to the meaning we choose to give to our past experiences.\nYou are not a helpless puppet of your childhood environment or ancestral genetics.\nAt any given moment, you hold the creative power to choose a completely new lifestyle and destination.\nFreedom begins the instant you stop blaming yesterday for how you behave today.",
+        "key_ideas": [
+          {
+            "idea": "Teleology over etiology",
+            "why": "Behavior is driven by current goals and convenience, not fixed by historical trauma."
+          },
+          {
+            "idea": "Trauma as an excuse",
+            "why": "People cling to past wounds to justify avoiding the frightening uncertainty of present growth."
+          },
+          {
+            "idea": "The power of present reinterpretation",
+            "why": "You can assign empowering new meaning to past events this very afternoon."
+          }
+        ],
+        "line": {
+          "text": "No experience is in itself a cause of our success or failure. We do not suffer from the shock of our experiences—the so-called trauma—but instead make out of them whatever suits our purposes.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Catch yourself saying 'I am bad at math because my fifth-grade teacher was mean' and replace it with intentional practice.",
+          "Stop using past introversion as an alibi to decline invitations to join study groups and clubs.",
+          "Acknowledge that staying in a rut can feel safer than trying and risking public failure."
+        ],
+        "connects_to": [
+          {
+            "book_id": "atomic-habits",
+            "chapter": 2,
+            "reason": "Identity is shaped by current habits rather than permanent historical labels."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "All Problems Are Interpersonal Relationship Problems",
+        "hook": "Loneliness is not being alone; loneliness is the painful sensation of being alienated from others.",
+        "spark": "Adler stated emphatically: 'All problems are interpersonal relationship problems.'\nIf an individual lived completely alone in the boundless universe, all financial worries, self-consciousness, and jealousy would vanish instantly.\nWe suffer because we constantly compare ourselves against friends, colleagues, and social media personas.\nWhen we view the human world through the lens of competition, everyone around us looks like an adversary or a judge.\nYou worry about what shoes you wear, how your voice sounds, and how much money you earn because you fear their judgment.\nTrue growth is not competing against other human beings, but comparing yourself against your own potential.\nThe moment you step off the competitive battlefield, other people transform from threatening rivals into trusted companions.\nPeace arrives when you celebrate other people's victories as if they were your own.",
+        "key_ideas": [
+          {
+            "idea": "The root of human suffering",
+            "why": "Virtually all anxiety arises from navigating status, approval, and judgment among peers."
+          },
+          {
+            "idea": "The curse of vertical competition",
+            "why": "Viewing society as a ladder makes every peer a threat to your self-worth."
+          },
+          {
+            "idea": "Shift to horizontal fellowship",
+            "why": "Treating humans as equals on a wide plain dissolves jealousy and unlocks genuine empathy."
+          }
+        ],
+        "line": {
+          "text": "To get rid of one's problems, all one can do is live in the universe all alone. But that is impossible. So we must learn to be companions, not rivals.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Unfollow social media accounts that trigger chronic feelings of material or social inadequacy.",
+          "Send a message of sincere admiration to a peer who just won an award you secretly hoped to receive.",
+          "Measure your daily study progress against what you knew yesterday, never against your classmate's test score."
+        ],
+        "connects_to": [
+          {
+            "book_id": "surrounded-by-idiots",
+            "chapter": 2,
+            "reason": "Recognizing complementary human behavioral styles eliminates toxic workplace rivalry."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "The Separation of Tasks",
+        "hook": "Do not intrude on other people's life tasks, and never let them intrude upon yours.",
+        "spark": "How can we free ourselves from the suffocating pressure of trying to meet everyone else's expectations?\nAdler introduces his signature diagnostic tool: the separation of tasks.\nIn any situation, ask yourself: 'Whose task is this ultimately? Who will receive the final results brought about by this choice?'\nStudying for an exam is the child's task; worrying about or forcing it is a parental intrusion that breeds resentment.\nWhat other people think of your career choice, your clothing, or your beliefs is entirely their task, not yours.\nYou have full responsibility over your actions, your honesty, and your kindness; you have zero control over how others react to you.\nTrying to control other people's opinions is like trying to command the clouds to rain.\nDiscard the burden of other people's expectations, and you will breathe the clean air of true autonomy.",
+        "key_ideas": [
+          {
+            "idea": "Diagnose the task",
+            "why": "Identify who bears the ultimate consequences of a decision before getting entangled."
+          },
+          {
+            "idea": "Stop intruding on others",
+            "why": "Trying to force family members to change their habits only creates unnecessary warfare."
+          },
+          {
+            "idea": "Release control of opinions",
+            "why": "How someone judges your choices belongs strictly on their side of the boundary line."
+          }
+        ],
+        "line": {
+          "text": "You are not living to satisfy other people's expectations, and other people are not living to satisfy yours.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "State your honest boundary to parents regarding your university major without apologizing or shouting.",
+          "Stop losing sleep over an awkward comment you made at lunch; how they interpret it is their task.",
+          "Allow your younger sibling to suffer the natural consequence of forgetting their homework instead of rescuing them."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-48-laws-of-power",
+            "chapter": 6,
+            "reason": "Cultivating quiet autonomy prevents emotional manipulators from dictating your schedule."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "The Center of the Universe Fallacy",
+        "hook": "You are not the center of the world; you are an active part of the human community.",
+        "spark": "People who are obsessed with what others think of them believe they are deeply humble, but Adler reveals they are profoundly self-centered.\nThey view everyone else merely as mirrors to reflect their own importance, anxiety, or perfection.\nThey constantly ask: 'What will they think of me? Will they like me? Do they admire me?'\nTo overcome this toxic self-preoccupation, shift your awareness from self-regard to community feeling.\nYou are not the conductor of the cosmic orchestra; you are simply one grateful musician holding an instrument.\nCommunity feeling means seeing others as companions and feeling that you have a meaningful place of belonging among them.\nBelonging is not something you passively receive like a trophy; it is something you actively build through contributing.\nWhen you focus on how you can be of use to those around you, self-conscious paralysis evaporates.",
+        "key_ideas": [
+          {
+            "idea": "Vanity disguises as insecurity",
+            "why": "Chronic self-consciousness is an inverted form of egotism where you imagine everyone is watching you."
+          },
+          {
+            "idea": "The shift to community feeling",
+            "why": "True psychological health replaces 'what do they think of me' with 'how can I contribute'."
+          },
+          {
+            "idea": "Belonging is earned through service",
+            "why": "Active contribution creates an indestructible sense of psychological home."
+          }
+        ],
+        "line": {
+          "text": "Do not ask what others can give you; ask what you can contribute to the community right now.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "When feeling awkward at a party, go into the kitchen and help the host wash dishes or serve drinks.",
+          "Focus your attention on asking thoughtful questions to quiet colleagues rather than worrying about your own charisma.",
+          "Join a volunteer initiative to experience the grounding joy of selfless communal labor."
+        ],
+        "connects_to": [
+          {
+            "book_id": "thirukkural",
+            "chapter": 6,
+            "reason": "True friendship acts instinctively to uplift the companion without selfish calculation."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "Praise Is a Vertical Trap",
+        "hook": "Never praise or rebuke someone; treat human beings with horizontal equality and genuine gratitude.",
+        "spark": "Many parents and managers believe that lavish praise is the most effective way to motivate children and employees.\nAdler warns that praise is a vertical tool used by the superior to manipulate the inferior.\nWhen you say 'Good job! You are so smart!', you are passing judgment from an elevated throne of authority.\nPraise creates approval addicts who will only work hard when an authority figure is watching to hand out rewards.\nInstead of praise, Adler advocates horizontal encouragement rooted in genuine gratitude: 'Thank you for your help. That made a big difference.'\nGratitude does not judge; it simply acknowledges the person's positive contribution to the group.\nWhen people feel that they are beneficial to the community, they discover their own authentic courage from within.\nEncourage others as equal companions on the path of life, and watch their inner dignity blossom.",
+        "key_ideas": [
+          {
+            "idea": "Praise implies hierarchy",
+            "why": "Congratulatory judgment reinforces vertical power dynamics and breeds approval dependency."
+          },
+          {
+            "idea": "Encouragement through gratitude",
+            "why": "Saying 'thank you' honors the recipient's dignity without placing yourself above them."
+          },
+          {
+            "idea": "Awakening internal courage",
+            "why": "People gain real courage when they realize their existence is useful to those around them."
+          }
+        ],
+        "line": {
+          "text": "Do not praise, and do not scold. Simply offer gratitude. That is how equal companions encourage one another.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Thank your project partner for their hard work on the slides instead of rating them like a school teacher.",
+          "Acknowledge your parents' cooked dinner with heartfelt thanks rather than a patronizing 'good job.'",
+          "Notice when you are performing only to fish for praise, and redirect your focus to the quality of the work."
+        ],
+        "connects_to": [
+          {
+            "book_id": "influence-psychology-of-persuasion",
+            "chapter": 3,
+            "reason": "Genuine peer reciprocity creates mutual respect far deeper than hollow flattery."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "The Courage to Be Disliked",
+        "hook": "Freedom is being disliked by other people; live now in the dance of the present moment.",
+        "spark": "The courage to be happy inherently requires the courage to be disliked.\nIf nobody dislikes you, it means you are constantly currying favor, altering your opinions, and living a compromised, cowardly existence.\nBeing disliked by someone is proof that you are living freely according to your own principles.\nAdler uses the metaphor of dancing: life is not a straight highway leading toward a distant peak where success awaits.\nLife is a dance made up of a series of present moments, complete in and of themselves.\nIf you dance with full energy and passion across the floor, it does not matter where you end up when the music stops.\nDo not shine a weak spotlight into a foggy future, worrying about retirement or distant status.\nShine a brilliant, blazing spotlight on the present moment, live with honor, and let others think whatever they wish.",
+        "key_ideas": [
+          {
+            "idea": "Dislike as the cost of freedom",
+            "why": "Having critics confirms that you are standing up for authentic values rather than pandering."
+          },
+          {
+            "idea": "Life as a kinetic dance",
+            "why": "Every moment of living, studying, and loving is an end in itself, not just a stepping stone."
+          },
+          {
+            "idea": "The intense spotlight on Now",
+            "why": "Focusing on immediate ethical action eliminates chronic anxiety about the unknown future."
+          }
+        ],
+        "line": {
+          "text": "The courage to be happy also includes the courage to be disliked. When you have gained that courage, all your interpersonal relationships will suddenly turn light.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Speak your candid, ethical perspective during a meeting even if the popular crowd disagrees.",
+          "Stop putting off happiness until graduation or promotion; enjoy the study session you are conducting tonight.",
+          "Smile when you encounter someone who disapproves of your creative projects; take it as proof of your independence."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 5,
+            "reason": "Standing upright through internal virtue rather than leaning on the props of external applause."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "the-mountain-is-you",
+    "title": "The Mountain Is You",
+    "author": "Brianna Wiest",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543698-M.jpg",
+    "public_domain": false,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "Self-Sabotage Is an Unconscious Need",
+        "hook": "Your bad habits are not flaws; they are maladaptive coping mechanisms protecting your comfort zone.",
+        "spark": "We often view our procrastination, overeating, or sudden relationship drama as inexplicable self-sabotage.\nBrianna Wiest reframes this completely: self-sabotage is never random destruction.\nIt is a brilliant, misguided psychological attempt to meet an unconscious, unmet emotional need.\nWhen you procrastinate on an important application, your brain is actively protecting you from the fear of catastrophic failure.\nWhen you pick fights with someone who loves you, your subconscious is seeking safety from the vulnerability of true intimacy.\nYou cannot eliminate a self-sabotaging behavior simply through sheer willpower and angry self-criticism.\nYou must identify the hidden need the habit was desperately trying to satisfy and provide a healthier solution.\nThe mountain before you is not a roadblock; the mountain is the parts of yourself waiting to be understood.",
+        "key_ideas": [
+          {
+            "idea": "The purpose of self-sabotage",
+            "why": "Harmful habits are protective shields designed to keep us inside familiar emotional territory."
+          },
+          {
+            "idea": "Willpower is insufficient",
+            "why": "Yelling at yourself does not heal the subconscious fear driving the destructive cycle."
+          },
+          {
+            "idea": "Revealing the hidden payoff",
+            "why": "Ask what emotional comfort or safety your bad habit is secretly providing."
+          }
+        ],
+        "line": {
+          "text": "Self-sabotage is what happens when you have two conflicting desires: one conscious, and one unconscious.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "When delaying study for an exam, ask: 'What terrifying outcome is my procrastination trying to protect me from?'",
+          "Recognize that leaving assignments to the last minute gives you a convenient excuse if you receive a low grade.",
+          "Offer yourself compassionate reassurance before starting intimidating tasks to calm subconscious fear."
+        ],
+        "connects_to": [
+          {
+            "book_id": "atomic-habits",
+            "chapter": 3,
+            "reason": "Understanding the cue and craving behind habits unlocks true behavioral transformation."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "The Upper Limit Problem and Familiar Misery",
+        "hook": "The brain prefers familiar suffering over the terrifying uncertainty of unfamiliar happiness.",
+        "spark": "Human beings possess an internal emotional thermostat known as their upper limit.\nWe have a baseline level of joy, success, and love that we feel safe tolerating.\nWhen life suddenly goes wonderfully well—a promotion, a great romance, a creative breakthrough—our alarms sound.\nThe subconscious mind panics: 'This is unfamiliar territory! Danger! We don't know how to survive here!'\nTo bring the thermostat back down to baseline, we unconsciously manufacture a crisis or drama.\nWe pick an argument, overspend money, or spiral into irrational worry to return to familiar misery.\nFamiliar misery feels safe because we already know how to survive it; unfamiliar joy demands immense vulnerability.\nTo ascend your mountain, you must expand your capacity to hold peace, joy, and abundance without panicking.",
+        "key_ideas": [
+          {
+            "idea": "The upper limit thermostat",
+            "why": "When good fortune exceeds our comfort baseline, we unconsciously sabotage our joy."
+          },
+          {
+            "idea": "Familiar suffering feels safe",
+            "why": "The brain equates the known with survival, even when the known is painful depression."
+          },
+          {
+            "idea": "Expanding tolerance for peace",
+            "why": "Learn to sit inside quiet contentment without frantically looking for the next emergency."
+          }
+        ],
+        "line": {
+          "text": "Your comfort zone is not comfortable; it is simply familiar.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Notice when you start inventing catastrophic worries immediately after receiving wonderful news.",
+          "Take three deep breaths when experiencing pure happiness, allowing your nervous system to register safety.",
+          "Resist the urge to check your work email during relaxing weekends to avoid manufactured stress."
+        ],
+        "connects_to": [
+          {
+            "book_id": "thinking-fast-and-slow",
+            "chapter": 5,
+            "reason": "The subconscious brain is biased toward loss aversion and hyper-vigilant threat detection."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "Emotional Triggers as Internal Maps",
+        "hook": "Whatever irritates you in other people is a direct reflection of an unhealed fracture within yourself.",
+        "spark": "When someone's arrogance, laziness, or success makes your blood boil, pause before you attack them.\nYour emotional triggers are not proof of their evil; they are brightly lit roadmaps to your own internal wounds.\nYou cannot be triggered by something that does not resonate with a suppressed part of your own psyche.\nIf a peer's boastful self-confidence fills you with rage, it often points to your own repressed ambition and fear of being seen.\nIf someone's disorganization disgusts you, it may reflect your own exhausting, perfectionist fear of losing control.\nStop wasting valuable life energy policing other people's flaws and social media posts.\nTurn the investigative mirror around and ask: 'What unintegrated piece of my history does this trigger reveal?'\nHealing begins when you thank your triggers for highlighting the exact places where you are not yet free.",
+        "key_ideas": [
+          {
+            "idea": "Triggers as diagnostic tools",
+            "why": "Extreme emotional reactions to others reveal suppressed desires and unhealed insecurities."
+          },
+          {
+            "idea": "Projection of the shadow",
+            "why": "We despise in others the very behaviors we forbid ourselves from expressing."
+          },
+          {
+            "idea": "The mirror of self-awareness",
+            "why": "Shift the focus from judging their conduct to healing your own vulnerability."
+          }
+        ],
+        "line": {
+          "text": "What you see in others is a reflection of what you need to heal in yourself.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "When infuriated by a loud classmate, examine whether you harbor unexpressed resentment about your own quietness.",
+          "Write down three traits that trigger intense annoyance in others and reflect on your own relationship to them.",
+          "Use moments of interpersonal irritation as opportunities for quiet self-inquiry rather than gossip."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-laws-of-human-nature",
+            "chapter": 2,
+            "reason": "Shadow projection leads us to condemn our own dark traits in neighboring rivals."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "Releasing Emotional Residue and Trauma",
+        "hook": "Feelings do not vanish because you ignore them; they sit in your physical tissues waiting to be felt.",
+        "spark": "Modern culture encourages us to numb our sorrow, distract our grief, and scroll past our anxiety.\nHowever, an emotion is a physiological wave that lasts roughly ninety seconds if allowed to flow uninterrupted.\nWhen we resist our feelings—labeling them as weak or inconvenient—we trap their emotional residue in our bodies.\nThis accumulated emotional backlog manifests as chronic fatigue, sudden panic attacks, and inexplicable irritability.\nTo heal, you must cultivate the courage to sit quietly and feel your feelings all the way through to the end.\nLie on the floor, close your eyes, and locate the physical sensation of the ache in your chest or stomach.\nDo not analyze the story, blame culprits, or search for solutions; simply breathe into the physical sensation.\nWhen you stop fleeing from your sadness, it dissolves naturally, leaving clean clarity and deep peace in its wake.",
+        "key_ideas": [
+          {
+            "idea": "Emotions are temporary waves",
+            "why": "A physiological emotional response completes its cycle in ninety seconds when not resisted."
+          },
+          {
+            "idea": "The danger of emotional numbing",
+            "why": "Suppressed feelings solidify into chronic physical tension, exhaustion, and anxiety."
+          },
+          {
+            "idea": "Somatic release through presence",
+            "why": "Locating feelings in the physical body allows emotional residue to metabolize and release."
+          }
+        ],
+        "line": {
+          "text": "You do not heal by thinking your way out of feelings; you heal by allowing yourself to feel them completely.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Put your phone away and sit in silence for ten minutes when hit by unexpected sadness or grief.",
+          "Notice where stress sits in your shoulders or stomach and take slow, deep breaths directly into that area.",
+          "Stop judging yourself for feeling vulnerable; honor your sadness as a natural, cleansing human tide."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-power-of-now",
+            "chapter": 2,
+            "reason": "Observing the pain-body with conscious awareness dissolves its toxic grip on the psyche."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "Building Radical Self-Trust",
+        "hook": "Confidence is not knowing you will succeed; confidence is knowing you will survive failure.",
+        "spark": "Many people wait for confidence to magically arrive before they apply for the job, speak up, or start the business.\nWiest reveals that confidence is not a feeling you summon; it is the after-effect of repeated, honest action.\nSelf-doubt is not a mystery; it is the natural consequence of breaking hundreds of small promises to yourself.\nEvery time you set an alarm and hit snooze five times, you teach your subconscious that your word is worthless.\nEvery time you promise to eat clean or study at seven and break it, your self-trust deteriorates.\nTo rebuild self-trust, start with microscopic, unbreakable commitments.\nDrink a glass of water upon waking, walk for ten minutes, or read two pages without fail.\nWhen your subconscious realizes that your decisions are non-negotiable laws, fear dissolves and genuine courage rises.",
+        "key_ideas": [
+          {
+            "idea": "Confidence follows action",
+            "why": "Waiting for courage before taking steps guarantees paralysis; action generates confidence."
+          },
+          {
+            "idea": "The currency of self-trust",
+            "why": "Keeping small daily promises builds an unshakeable psychological foundation."
+          },
+          {
+            "idea": "Surviving failure",
+            "why": "Real self-reliance is not avoiding defeat, but trusting your capacity to endure and rebuild."
+          }
+        ],
+        "line": {
+          "text": "Self-trust is built in the tiny moments when nobody is watching and you keep your promise anyway.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Set only one micro-promise tomorrow—like washing your dish immediately after eating—and keep it without exception.",
+          "Stop making grandiose New Year resolutions that set you up for predictable cycles of failure and self-disgust.",
+          "Remind yourself during tough moments: 'I have survived one hundred percent of my worst days so far.'"
+        ],
+        "connects_to": [
+          {
+            "book_id": "atomic-habits",
+            "chapter": 1,
+            "reason": "Tiny two-minute habits reinforce the subconscious belief that you are an effective, reliable person."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "The Mountain Was You",
+        "hook": "The obstacle in your path was never the circumstances; it was your own readiness to awaken.",
+        "spark": "At the start of your journey, the mountain appeared as an external monster designed to ruin your plans.\nYou cursed the economic climate, the toxic family dynamics, the breakup, or the lack of luck.\nYet as you climb the steep, rocky terrain, you are forced to shed everything that cannot survive at high altitudes.\nYou shed people-pleasing, victim mentality, toxic numbing, and superficial pride.\nWhen you finally reach the windy summit and gaze down upon the valley below, a profound revelation strikes your heart.\nThe mountain was never placed there to defeat you, humiliate you, or hold you back.\nThe mountain was an intentional crucible designed by destiny to forge the strength required for your true purpose.\nYou did not conquer the mountain; the mountain was you, and you finally stepped into your power.",
+        "key_ideas": [
+          {
+            "idea": "The crucible of adversity",
+            "why": "High mountains exist to strip away fragile pretenses and cultivate authentic resilience."
+          },
+          {
+            "idea": "Shedding baggage at altitude",
+            "why": "You cannot carry old victim narratives into the higher elevations of your personal destiny."
+          },
+          {
+            "idea": "The realization of wholeness",
+            "why": "Looking back reveals that every painful trial was an essential brick in your spiritual backbone."
+          }
+        ],
+        "line": {
+          "text": "You are not moving the mountain; you are becoming the person who can stand upon its summit.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Write a letter thanking a past painful experience for the resilience and discernment it forced you to build.",
+          "Identify one comfortable excuse you are finally ready to leave behind in the valley as you climb upward.",
+          "Stand tall today, recognizing that you already possess the inner strength to handle whatever summit lies ahead."
+        ],
+        "connects_to": [
+          {
+            "book_id": "mans-search-for-meaning",
+            "chapter": 4,
+            "reason": "Finding transcendent purpose transforms suffering into an enduring human victory."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "the-power-of-now",
+    "title": "The Power of Now",
+    "author": "Eckhart Tolle",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543700-M.jpg",
+    "public_domain": false,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "You Are Not Your Mind",
+        "hook": "Thinking is a tool; when you cannot stop thinking, the tool has become your tyrannical master.",
+        "spark": "Most human beings live in a state of involuntary, incessant mental chatter.\nA continuous stream of commentary, judgment, regret about the past, and anxiety about the future plays in our heads.\nEckhart Tolle points out the single most liberating realization of human existence: you are not your mind.\nYou are the silent, spacious awareness behind the thoughts, the witness who observes the chatter.\nWhen you identify completely with your thoughts, you mistake the voice in your head for your authentic identity.\nThis false, manufactured identity is the ego: fragile, defensive, and perpetually terrified of not being enough.\nThe ego constantly drags your consciousness into past resentments or future fears to ensure its own survival.\nThe moment you watch a thought without judging it, a gap of pure presence opens in your soul.",
+        "key_ideas": [
+          {
+            "idea": "Incessant thinking is a disease",
+            "why": "When mental chatter operates without pause, consciousness is trapped in chronic illusion."
+          },
+          {
+            "idea": "The witness behind thoughts",
+            "why": "You are the spacious observer of the mind, not the neurotic thoughts passing through it."
+          },
+          {
+            "idea": "The birth of the ego",
+            "why": "Identifying with mental concepts creates a fragile, anxious persona that craves constant defense."
+          }
+        ],
+        "line": {
+          "text": "The beginning of freedom is the realization that you are not 'the thinker.' The moment you start watching the thinker, a higher level of consciousness becomes activated.",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Pause right now, take a breath, and ask yourself: 'What will my next thought be?' Notice the silent gap that follows.",
+          "While brushing your teeth, focus entirely on the sound of the water and the feel of the bristles rather than replaying arguments.",
+          "Notice when your mind starts an anxious monologue and say silently: 'There is anxiety in the mind, but I am the observer.'"
+        ],
+        "connects_to": [
+          {
+            "book_id": "flow",
+            "chapter": 1,
+            "reason": "Total immersion in the immediate activity silences the psychic entropy of anxious ego-chatter."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "Consciousness: The Way Out of Pain",
+        "hook": "Past and future have no reality of their own; all suffering exists as psychological time.",
+        "spark": "Have you ever experienced anything outside of the present moment? Can you ever do so?\nThe answer is an absolute, undeniable no: nothing has ever happened in the past; it happened in the Now.\nNothing will ever happen in the future; it will happen in the Now.\nYet the human ego spends ninety-nine percent of its energy living in psychological time.\nIt hoards memories of past injuries, generating guilt, regret, and resentment.\nOr it projects hypothetical catastrophes into the future, creating worry, panic, and dread.\nTolle explains that all anxiety is caused by too much future, and all guilt is caused by too much past.\nWhen you step fully into the immediate present, psychological suffering instantly dissolves, for in the Now, there are no problems.",
+        "key_ideas": [
+          {
+            "idea": "The illusion of psychological time",
+            "why": "Past and future exist only as memory traces and mental projections in the present brain."
+          },
+          {
+            "idea": "The anatomy of anxiety and guilt",
+            "why": "Worry requires a future to fear; depression requires a past to grieve; Now holds neither."
+          },
+          {
+            "idea": "Problems require time to exist",
+            "why": "In the immediate five seconds of this exact room, you have challenges to handle, not abstract problems."
+          }
+        ],
+        "line": {
+          "text": "Unease, anxiety, tension, stress, worry—all forms of fear—are caused by too much future, and not enough presence. Guilt, regret, resentment, grievances, sadness, bitterness, and all forms of nonforgiveness are caused by too much past, and not enough presence.",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Whenever you catch yourself spiraling about next week's exam, return your attention to the desk beneath your elbows.",
+          "Ask yourself: 'What is lacking in this exact physical second right now?' You will find that the present is whole.",
+          "Stop treating the present moment merely as an inconvenient obstacle to reach a future goal."
+        ],
+        "connects_to": [
+          {
+            "book_id": "siddhartha",
+            "chapter": 5,
+            "reason": "The river flows everywhere simultaneously; time is a human illusion that blinds us to eternity."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "The Pain-Body: Dissolving the Ghost",
+        "hook": "Negative emotional energy accumulates into a psychic parasite that feeds on drama and conflict.",
+        "spark": "Most people carry an invisible accumulation of old, unhealed emotional pain called the pain-body.\nThe pain-body consists of every heartache, betrayal, and sorrow from childhood to adulthood that was never fully faced.\nIt lies dormant inside your nervous system until a trigger—a critical word, a tired evening—wakes it up.\nOnce awake, the pain-body takes over your mind, making you crave drama, arguments, and gloomy victimhood.\nIt feeds on negative emotional energy; it wants to fight with your partner or plunge you into dark despair.\nThe pain-body survives only as long as you remain unconscious and identify with its misery.\nThe moment you bring sustained, conscious awareness to the pain-body, you break the cycle of feeding.\nDo not fight it; simply observe the dark cloud in your chest with alert, non-judgmental presence, and it dissolves.",
+        "key_ideas": [
+          {
+            "idea": "The nature of the pain-body",
+            "why": "An accumulated mass of old emotional trauma that periodically wakes to feed on drama."
+          },
+          {
+            "idea": "The craving for misery",
+            "why": "When hijacked by the pain-body, the ego actively seeks conflicts to sustain its negative charge."
+          },
+          {
+            "idea": "Transmutation through awareness",
+            "why": "Shining the light of alert consciousness on the pain-body transmutes suffering into peace."
+          }
+        ],
+        "line": {
+          "text": "The pain-body cannot survive in the light of your presence. It can only survive if you identify with it and feed it with your thinking.",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "When a sudden wave of gloom hits, recognize it instantly: 'The pain-body has awakened; I will not feed it with thoughts.'",
+          "Refrain from sending angry text messages late at night when the pain-body is running your fingertips.",
+          "Breathe quietly into physical chest tension until the physiological storm subsides without adding narrative drama."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-mountain-is-you",
+            "chapter": 4,
+            "reason": "Somatic presence allows old emotional residue to release without getting entangled in mental stories."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "The Inner Body as an Anchor",
+        "hook": "Connecting with the invisible life energy inside your physical form roots you in timeless reality.",
+        "spark": "How can you remain centered in the present moment when the world around you is loud, chaotic, and stressful?\nTolle provides an infallible, portable spiritual practice: inhabiting the inner body.\nClose your eyes and ask yourself: 'How do I know that my hands still exist without looking at them?'\nYou will immediately feel a subtle tingling, a quiet warmth, an invisible current of alive energy in your fingers.\nThat subtle vibration is the life of the universe pulsing through your physical cells.\nDirect your awareness into your feet, your legs, your chest, and your arms until your entire body hums with life.\nBy anchoring fifty percent of your attention in the inner body, you prevent the mind from wandering into neurotic chatter.\nThe inner body is your personal gateway from the noisy realm of time into the quiet ocean of Being.",
+        "key_ideas": [
+          {
+            "idea": "The felt sense of aliveness",
+            "why": "Inhabiting the internal cellular energy of the physical body tethers consciousness to the Now."
+          },
+          {
+            "idea": "Preventing mental wandering",
+            "why": "Keeping a portion of awareness inside the physical form prevents egoic spiraling during stress."
+          },
+          {
+            "idea": "The gateway to Being",
+            "why": "The inner body bridges the fleeting world of physical form with the formless depths of pure spirit."
+          }
+        ],
+        "line": {
+          "text": "Inhabit your body. Feel the subtle energy field that animates every cell. That is how you step out of the prison of conceptual thought.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Feel the warmth and tingling in your palms while sitting in boring lectures or stressful meetings.",
+          "Take three conscious breaths into your lower abdomen before answering difficult emails or texts.",
+          "Use physical exercise and walking not to escape yourself, but to feel the vibrant life surging in your limbs."
+        ],
+        "connects_to": [
+          {
+            "book_id": "deep-work",
+            "chapter": 3,
+            "reason": "Grounding your physical nervous system enables prolonged, laser-focused intellectual concentration."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "The Beauty of Surrender",
+        "hook": "Surrender is not cowardly weakness; it is the yielded wisdom of yielding to the reality of what is.",
+        "spark": "To many modern minds, the word 'surrender' carries connotations of defeat, resignation, and failure.\nTolle radically redefines surrender: it is not passive victimhood or tolerating abuse.\nSurrender is the simple, profound willingness to yield to the reality of the present moment without internal resistance.\nWhen you are stuck in traffic, raining on your wedding day, or facing a flat tire, resistance is sheer madness.\nSaying 'this should not be happening' does not change the flat tire; it only adds agonizing suffering to the circumstance.\nSurrender means saying 'Yes' to what is, accepting the fact of the situation with total internal neutrality.\nFrom that clear, unclouded state of surrender, you take whatever effective, intelligent action is required.\nSurrender eliminates the poison of resentment and unlocks creative power that transforms any obstacle.",
+        "key_ideas": [
+          {
+            "idea": "Surrender is not defeat",
+            "why": "Yielding to reality frees you from toxic internal rebellion against unchangeable current facts."
+          },
+          {
+            "idea": "The madness of resistance",
+            "why": "Arguing with the present moment is as foolish as yelling at the rain for falling."
+          },
+          {
+            "idea": "Clean, unclouded action",
+            "why": "Accepting what is allows you to act with surgical precision, free from the distortions of rage."
+          }
+        ],
+        "line": {
+          "text": "Surrender is the simple but profound wisdom of yielding to rather than opposing the flow of life.",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "When facing unexpected flight delays, immediately accept the fact without whining to airline desk staff.",
+          "Say 'Yes' to the rain on your picnic day, and then calmly pack up your basket and move indoors.",
+          "Accept when an exam question is unexpectedly hard; drop panic, take a deep breath, and tackle what you know."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 6,
+            "reason": "Loving your allotted fate transforms every impediment into fuel for virtuous action."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "The Unmanifested: Beyond Death",
+        "hook": "Beneath the surface ripples of your mortal personality lies an eternal realm of luminous peace.",
+        "spark": "Everything in the physical cosmos—stars, galaxies, empires, and human bodies—is subject to birth, decay, and death.\nThe ego lives in constant terror of this physical mortality, building wealth and reputations to shield itself from dust.\nYet Tolle reveals that death only claims what is ephemeral: your physical form and mental concepts.\nConsciousness itself—the formless, unmanifested light of awareness that shines through your eyes—was never born and can never die.\nIn deep meditation, in the silence of nature, and in moments of deep presence, you touch this unmanifested realm.\nYou realize that you are not a drop of water desperately trying to avoid evaporating on a hot rock.\nYou are the boundless ocean itself, temporarily expressing itself in the shape of a human wave.\nWhen this realization dawns, fear of death vanishes, and life becomes an effortless, joyful celebration of Being.",
+        "key_ideas": [
+          {
+            "idea": "The transient nature of form",
+            "why": "All physical objects and worldly personalities inevitably dissolve in the cosmic river of change."
+          },
+          {
+            "idea": "The eternal unmanifested source",
+            "why": "Formless consciousness is the timeless canvas upon which the temporary universe appears."
+          },
+          {
+            "idea": "The ocean and the wave",
+            "why": "Realizing your identity as pure awareness eliminates all existential dread and fear of death."
+          }
+        ],
+        "line": {
+          "text": "Death is a stripping away of all that is not you. The secret of life is to 'die before you die'—and find that there is no death.",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Take five minutes tonight under the stars to gaze into the deep black space, sensing the timeless stillness.",
+          "Remember that material possessions, academic degrees, and trophies will all be left behind at death; cultivate inner peace.",
+          "Smile at your mortal human quirks, resting in the unshakable realization that your true nature is boundless awareness."
+        ],
+        "connects_to": [
+          {
+            "book_id": "gitanjali",
+            "chapter": 6,
+            "reason": "At the close of our brief mortal dance, life takes its voyage to its eternal home like homeward cranes."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  },
+  {
+    "id": "the-untethered-soul",
+    "title": "The Untethered Soul",
+    "author": "Michael A. Singer",
+    "genre": "Self Discovery",
+    "cover_url": "https://covers.openlibrary.org/b/id/10543702-M.jpg",
+    "public_domain": false,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "The Voice Inside Your Head",
+        "hook": "Stop listening to the neurotic roommate in your mind who never stops talking about everything.",
+        "spark": "If you sit quietly for just two minutes, you will notice an incessant voice chattering away inside your consciousness.\nIt says: 'Did I lock the door? Why did she look at me like that? It's too cold in here. I need a coffee.'\nMichael A. Singer asks a devastating question: if you had a human roommate who talked like that nonstop, would you live with them?\nYou would throw them out of your apartment within twenty minutes for being clinically insane.\nYet we allow this frantic mental voice to dictate our mood, our self-worth, and our life decisions every single hour.\nThe voice talks not because it is wise, but because it is trying to make the infinite, uncontrollable universe feel manageable.\nTo achieve spiritual liberation, take a step back and occupy the seat of witness consciousness.\nYou are not the voice; you are the one who hears the voice.\nOnce you notice the voice from the seat of the witness, you are finally free from its neurotic dictatorship.",
+        "key_ideas": [
+          {
+            "idea": "The neurotic roommate",
+            "why": "The inner monologue is a hyper-reactive mechanism attempting to control reality, not a source of truth."
+          },
+          {
+            "idea": "The seat of witness consciousness",
+            "why": "True freedom begins when you step back and observe the inner chatter without participating."
+          },
+          {
+            "idea": "Dis-identifying with the mind",
+            "why": "Realizing that you are the listener rather than the speaker breaks the cycle of anxiety."
+          }
+        ],
+        "line": {
+          "text": "There is nothing more important to true growth than realizing that you are not the voice of the mind—you are the one who hears it.",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Listen to your mind complain about bad weather today as if listening to a fussy toddler on a bus.",
+          "When feeling insecure before an interview, observe the voice whispering doubts without believing its catastrophic warnings.",
+          "Take three quiet breaths before sleep, resting as the silent observer who watches thoughts drift by."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-power-of-now",
+            "chapter": 1,
+            "reason": "Observing the mental thinker from spacious presence breaks the tyrant grip of egoic chatter."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "Your Inner Energy: The Flow of Prana",
+        "hook": "Your heart is an energetic valve that opens with love and closes with fear and past resentment.",
+        "spark": "Have you ever noticed how you can feel completely exhausted, but when someone you love calls, you suddenly have boundless energy?\nWhere did that massive surge of vitality come from? You didn't eat a meal or take an hour-long nap.\nSinger explains that human beings possess an unlimited reservoir of spiritual life energy, known as prana, chi, or shakti.\nThis energy flows naturally into your mind and body as long as your heart center remains open.\nThe heart is an energetic valve: when you experience trauma, rejection, or disappointment, you instinctively close down to protect yourself.\nBy closing your heart, you trap the old pain inside and block the upward flow of universal life energy.\nYou become lethargic, depressed, and defensive, needing endless coffee and external stimulation just to function.\nThe secret to vibrant living is to keep your heart open, no matter what happens in the outside world.",
+        "key_ideas": [
+          {
+            "idea": "The infinite well of life energy",
+            "why": "Boundless vitality resides within you, accessible whenever the heart center remains receptive."
+          },
+          {
+            "idea": "The closing mechanism of fear",
+            "why": "Closing the heart to prevent pain traps old emotional poison and blocks energetic nourishment."
+          },
+          {
+            "idea": "The vow of the open heart",
+            "why": "Choosing to keep your heart open through all circumstances ensures an endless stream of inner light."
+          }
+        ],
+        "line": {
+          "text": "Energy does not get tired. You only feel drained when you close your heart and block the flow of life through your system.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Notice the physical sensation of tightening in your chest during arguments and consciously relax your shoulders to stay open.",
+          "Instead of shutting down when criticized, keep your posture relaxed and breathe through the discomfort.",
+          "Choose to greet friends and family with an open, warm heart even when you feel slightly tired or irritable."
+        ],
+        "connects_to": [
+          {
+            "book_id": "flow",
+            "chapter": 2,
+            "reason": "Opening consciousness to experience allows psychic energy to flow without friction or blockage."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "The Samskaras: Clearing the Thorn",
+        "hook": "Unprocessed emotional impressions get stuck in your psyche like festering thorns waiting to be triggered.",
+        "spark": "Suppose you have a sharp thorn stuck in your arm directly over a nerve ending.\nIt hurts excruciatingly whenever anything brushes against it: clothes, branches, or a gentle touch from a friend.\nYou have two fundamental choices: you can carefully build elaborate padding around the thorn to avoid touching it, or you can pull it out.\nBuilding padding means rearranging your entire life—wearing special sleeves, avoiding crowds, and never hugging anyone.\nSinger explains that human beings do this exact foolish thing with their emotional wounds, known in yogic science as samskaras.\nWhen a past betrayal or humiliation occurs, we don't process it; we lock it away and rearrange our entire life to avoid triggering it.\nWe avoid certain places, become defensive around certain topics, and control other people's behavior to protect our inner thorn.\nThe only authentic path to freedom is to pull the thorn out: allow the old feeling to surface, feel its sting, and let it pass through.",
+        "key_ideas": [
+          {
+            "idea": "The thorn analogy",
+            "why": "Rearranging your lifestyle to avoid triggering unhealed wounds keeps you in permanent emotional prison."
+          },
+          {
+            "idea": "The creation of samskaras",
+            "why": "Incomplete experiences get blocked in the energy system, becoming emotional landmines."
+          },
+          {
+            "idea": "Liberation through extraction",
+            "why": "Letting the thorn get touched and feeling the old pain allows it to release forever."
+          }
+        ],
+        "line": {
+          "text": "If you want to be free, you must stop protecting your thorns and simply let them come out.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "When a conversation triggers old high school insecurities, resist the urge to get angry or flee; sit and let it burn out.",
+          "Stop demanding that friends walk on eggshells around your sensitive topics; take responsibility for your thorns.",
+          "View moments of emotional discomfort as the thorn rising to the surface to be permanently released."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-mountain-is-you",
+            "chapter": 3,
+            "reason": "Interpersonal triggers are mirrors revealing the exact internal wounds ready for healing."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "Relax and Release: The Ultimate Practice",
+        "hook": "When life pushes your buttons, do not fight back; relax your shoulders, breathe, and release.",
+        "spark": "Throughout your day, thousands of microscopic events will disturb your comfort zone.\nSomeone will cut you off in traffic, the elevator will take too long, or a colleague will use a curt tone.\nIn that split second, your internal energy will contract; your mind will urge you to shout, complain, or seethe in silent fury.\nSinger offers the most practical, transformative spiritual tool in existence: the practice of relax and release.\nThe instant you feel the contraction in your chest or throat, immediately relax the physical muscles around your heart.\nTake a slow, deep breath, lean back behind the disturbance, and let the negative energy pass right through you like a gust of wind.\nDo not touch it, do not analyze it, and do not act upon it while contracted.\nBy relaxing and releasing twenty times a day, you become an untouchable spiritual warrior who walks through fire without burning.",
+        "key_ideas": [
+          {
+            "idea": "The split-second choice",
+            "why": "Between a trigger and your reaction lies a moment of supreme power to relax or contract."
+          },
+          {
+            "idea": "Relaxing the heart center",
+            "why": "Releasing physical tension around the chest allows emotional contractions to dissipate harmlessly."
+          },
+          {
+            "idea": "Letting the wind blow through",
+            "why": "Viewing disturbances as passing gusts of wind preserves your profound inner peace."
+          }
+        ],
+        "line": {
+          "text": "Relax and release. When the disturbance hits, just let go of your shoulders, breathe out, and let it pass.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Relax your jaw and hands the moment you see an annoying email notification arrive.",
+          "When someone takes the parking spot you wanted, exhale deeply and consciously say: 'I release this; it means nothing.'",
+          "Practice relaxing your chest while standing in long supermarket checkout lines rather than tapping your foot."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 3,
+            "reason": "External events cannot penetrate consciousness unless you endorse the disturbing judgment."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "Stepping Behind the Wall: The Prison of the Ego",
+        "hook": "You built a psychological fortress to keep pain out, but that fortress has become your solitary prison.",
+        "spark": "Imagine living inside a house where you boarded up all the windows and doors because you were terrified of the dark woods outside.\nInside, it is pitch black, stuffy, and claustrophobic, but you tell yourself: 'At least I am safe from predators.'\nThis boarded-up house is your ego: a rigid mental structure built out of preferences, dislikes, anxieties, and defenses.\nYou say: 'I only like people who agree with me; I only like warm weather; I cannot stand loud noise.'\nEvery single preference is another heavy bar you weld onto your own cell door.\nYou spend your entire earthly incarnation defending your prison walls rather than exploring the boundless universe of experience.\nTo awaken, you must dare to tear down the boards and step outside into the sunlight of reality.\nEmbrace the cold days as well as the warm; accept difficult people alongside pleasant companions.\nWhen you no longer need the universe to match your petty preferences, you discover that you are already free.",
+        "key_ideas": [
+          {
+            "idea": "The architecture of the ego prison",
+            "why": "Preferences and neurotic dislikes are psychological bars that trap us in tiny comfort zones."
+          },
+          {
+            "idea": "The misery of defensive living",
+            "why": "Spending life protecting a fragile self-concept prevents direct participation in the beauty of life."
+          },
+          {
+            "idea": "Dismantling the walls",
+            "why": "Dropping rigid demands about how reality must behave unlocks boundless experiential joy."
+          }
+        ],
+        "line": {
+          "text": "Your inner house is only a prison if you refuse to open the door and walk out into the vast world.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Eat a meal you usually avoid without complaining, training your mind to transcend petty culinary dislikes.",
+          "Spend an afternoon with people of differing political or cultural viewpoints with an open, curious heart.",
+          "Catch yourself saying 'I can't stand when...' and remind yourself that your peace does not depend on external conditions."
+        ],
+        "connects_to": [
+          {
+            "book_id": "siddhartha",
+            "chapter": 4,
+            "reason": "Transcending rigid ascetic preferences enables full, joyful immersion in the dance of reality."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "Death as the Great Teacher",
+        "hook": "Death does not rob life of its meaning; death is the supreme master that makes every breath precious.",
+        "spark": "Most people live as though they have an infinite lease on life, squandering hours on petty arguments, resentment, and trivial distractions.\nSinger reminds us that death is walking right beside us every single day, waiting to tap us on the shoulder.\nSuppose an angel told you that tonight at midnight, your heart would stop beating forever.\nWould you spend your remaining hours arguing about politics on social media or complaining about the weather?\nEvery single trivial grievance would evaporate instantly in the blazing light of your imminent departure.\nYou would hug your loved ones, gaze at the green leaves of the trees with wonder, and marvel at the taste of clean water.\nDeath is not an enemy to be feared; death is your greatest friend, stripping away petty nonsense and revealing what truly matters.\nLive every single day with death by your side as an advisor, and every ordinary moment will shine like a polished jewel.",
+        "key_ideas": [
+          {
+            "idea": "The reality of mortality",
+            "why": "Forgetting our inevitable death causes us to squander precious time on meaningless squabbles."
+          },
+          {
+            "idea": "Death clarifies priority",
+            "why": "Viewing your day through the lens of your final hour instantly dissolves petty grievances."
+          },
+          {
+            "idea": "Gratitude for every ordinary breath",
+            "why": "Remembering mortality turns walking outside, drinking water, and smiling into holy miracles."
+          }
+        ],
+        "line": {
+          "text": "Death is the great equalizer and the greatest teacher. It reminds you that this moment is all you are ever guaranteed.",
+          "type": "quote"
+        },
+        "in_your_life": [
+          "Ask yourself before engaging in a petty argument: 'If this were my last day on earth, would I want to spend it being right?'",
+          "Look at a tree or a sunset today with the profound awareness that one day you will see your last one.",
+          "Tell your family members that you love them with total presence and heartfelt sincerity today."
+        ],
+        "connects_to": [
+          {
+            "book_id": "meditations",
+            "chapter": 2,
+            "reason": "Viewing life from the equalizing perspective of cosmic time and mortality restores profound serenity."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  }
+]

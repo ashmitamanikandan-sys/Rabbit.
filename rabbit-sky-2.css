@@ -1,0 +1,377 @@
+/* =========================================================================
+   RABBIT 2.0 — The Sky, Warren, Clubs, Modals Styles (rabbit-sky-2.css)
+   ========================================================================= */
+
+/* The Sky Profile Canvas View */
+.sky-view-container {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 128px);
+  height: calc(100dvh - 128px);
+  overflow: hidden;
+  background: #050408;
+}
+
+.sky-stats-header {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(13, 11, 20, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--rabbit-card-border);
+  border-radius: 16px;
+  padding: 10px 18px;
+  z-index: 20;
+}
+.sky-stat-box {
+  display: flex;
+  flex-direction: column;
+}
+.sky-stat-val {
+  font-size: 18px;
+  font-weight: 800;
+  color: #FFFFFF;
+}
+.sky-stat-lbl {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--rabbit-muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.sky-wrapped-btn {
+  background: linear-gradient(135deg, rgba(188, 166, 255, 0.2), rgba(46, 37, 72, 0.6));
+  border: 1px solid var(--rabbit-lilac);
+  color: #FFFFFF;
+  padding: 8px 14px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.sky-wrapped-btn:hover {
+  background: var(--rabbit-lilac);
+  color: #000000;
+  box-shadow: 0 0 14px var(--rabbit-glow);
+}
+
+/* Constellation Modal */
+.rabbit-constellation-modal, .rabbit-settings-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  padding: 20px;
+}
+.rabbit-constellation-modal.open, .rabbit-settings-modal.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.constellation-modal-content, .settings-modal-content {
+  background: #0E0C16;
+  border: 1px solid var(--rabbit-card-border);
+  border-radius: 24px;
+  max-width: 520px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 26px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
+}
+.modal-close-btn {
+  position: absolute;
+  top: 18px; right: 18px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #FFFFFF;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.cmodal-header {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.cmodal-cover {
+  width: 64px;
+  height: 94px;
+  border-radius: 8px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.cmodal-chapters-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.cmodal-chapter-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(33, 27, 51, 0.4);
+  border: 1px solid rgba(188, 166, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.cmodal-chapter-row:hover {
+  background: rgba(46, 37, 72, 0.6);
+  border-color: var(--rabbit-lilac);
+}
+.cmodal-chapter-row.lit {
+  border-color: rgba(251, 191, 36, 0.4);
+  background: rgba(251, 191, 36, 0.08);
+}
+.cmodal-ch-star {
+  font-size: 16px;
+  color: #FBBF24;
+}
+.cmodal-ch-info {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.cmodal-ch-info strong {
+  font-size: 13px;
+  color: #FFFFFF;
+}
+.cmodal-ch-info small {
+  font-size: 11px;
+  color: var(--rabbit-muted);
+}
+.cmodal-ch-action {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--rabbit-lilac);
+}
+
+/* Warren & Clubs Views */
+.warren-feed-wrapper, .clubs-view-wrapper, .tonight-view-wrapper {
+  max-width: 580px;
+  margin: 0 auto;
+  padding: 16px 16px 80px 16px;
+  overflow-y: auto;
+  height: calc(100vh - 128px);
+  height: calc(100dvh - 128px);
+}
+.warren-header, .clubs-header, .tonight-header {
+  margin-bottom: 22px;
+}
+.warren-header h1, .clubs-header h1, .tonight-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0 0 4px 0;
+}
+.warren-header p, .clubs-header p, .tonight-header p {
+  font-size: 13px;
+  color: var(--rabbit-muted);
+  margin: 0;
+}
+
+.warren-posts-list, .clubs-list, .tonight-playlist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.warren-card, .club-card, .tonight-item-card {
+  background: #0E0C16;
+  border: 1px solid var(--rabbit-card-border);
+  border-radius: 18px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+.warren-card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+.warren-author {
+  font-weight: 700;
+  color: var(--rabbit-lilac);
+}
+.warren-book-tag {
+  color: var(--rabbit-muted);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.warren-card-quote {
+  font-family: var(--rabbit-font-serif);
+  font-style: italic;
+  font-size: 15px;
+  color: #DDD6FE;
+  margin: 8px 0;
+  padding-left: 10px;
+  border-left: 2px solid var(--rabbit-lilac);
+}
+.warren-card-body {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #EDEAF5;
+  margin: 8px 0 14px 0;
+}
+.warren-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.warren-react-btn {
+  background: rgba(188, 166, 255, 0.1);
+  border: 1px solid rgba(188, 166, 255, 0.3);
+  color: var(--rabbit-white);
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.warren-react-btn:hover, .warren-react-btn.reacted {
+  background: var(--rabbit-lilac);
+  color: var(--rabbit-black);
+}
+.warren-time {
+  font-size: 11px;
+  color: var(--rabbit-muted);
+}
+
+/* Club Cards */
+.club-card {
+  cursor: pointer;
+}
+.club-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--rabbit-lilac);
+  box-shadow: 0 8px 24px var(--rabbit-glow);
+}
+.club-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+.club-name {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 2px 0;
+}
+.club-book {
+  font-size: 12px;
+  color: var(--rabbit-muted);
+  margin: 0;
+}
+.club-members-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+.club-progress-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+.club-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rabbit-lilac), #FBBF24);
+  border-radius: 99px;
+}
+.club-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--rabbit-muted);
+}
+
+/* Tonight's Sky Cards */
+.tonight-progress-pill {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #FBBF24;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 6px 14px;
+  border-radius: 99px;
+}
+.tonight-item-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+.tonight-item-card:hover {
+  border-color: var(--rabbit-lilac);
+}
+.tonight-item-card.finished {
+  border-color: rgba(251, 191, 36, 0.35);
+  background: rgba(251, 191, 36, 0.06);
+}
+.tonight-item-star {
+  font-size: 18px;
+  font-weight: 800;
+  color: #FBBF24;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(251, 191, 36, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.tonight-item-cover {
+  width: 40px;
+  height: 58px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.tonight-item-info {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.tonight-item-info strong {
+  font-size: 14px;
+  color: #FFFFFF;
+}
+.tonight-item-info span {
+  font-size: 12px;
+  color: var(--rabbit-muted);
+}
+.tonight-read-action {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--rabbit-lilac);
+  background: none;
+  border: none;
+  cursor: pointer;
+}

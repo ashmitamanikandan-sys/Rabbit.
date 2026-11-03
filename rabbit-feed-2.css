@@ -1,0 +1,787 @@
+/* =========================================================================
+   RABBIT 2.0 — Chapter Deck & Feed Styles (rabbit-feed-2.css)
+   Identity: "Every chapter is a star."
+   Palette: Black #000000, Lilac #BCA6FF, Purple #211B33, White #F7F4FF
+   ========================================================================= */
+
+:root {
+  --rabbit-black: #000000;
+  --rabbit-card-bg: #0D0B14;
+  --rabbit-card-border: rgba(188, 166, 255, 0.15);
+  --rabbit-lilac: #BCA6FF;
+  --rabbit-purple: #211B33;
+  --rabbit-purple-light: #2E2548;
+  --rabbit-white: #F7F4FF;
+  --rabbit-muted: #9E96B0;
+  --rabbit-glow: rgba(188, 166, 255, 0.25);
+  --rabbit-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --rabbit-font-serif: "Newsreader", "Playfair Display", Georgia, "Times New Roman", serif;
+  --vh: 1vh;
+}
+
+/* Base resets & full height locking */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--rabbit-black);
+  color: var(--rabbit-white);
+  font-family: var(--rabbit-font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* App Shell */
+.rabbit-app-viewport {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--rabbit-black);
+}
+
+/* Top Constellations-In-Progress Rail */
+.rabbit-constellations-rail {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  background: rgba(13, 11, 20, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--rabbit-card-border);
+  overflow-x: auto;
+  scrollbar-width: none;
+  z-index: 50;
+}
+.rabbit-constellations-rail::-webkit-scrollbar {
+  display: none;
+}
+
+.rail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  width: 62px;
+  transition: transform 0.2s ease;
+}
+.rail-item:hover {
+  transform: translateY(-2px);
+}
+
+.rail-ring-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rail-svg-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+.rail-svg-bg {
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 2.5;
+  fill: none;
+}
+.rail-svg-progress {
+  stroke: var(--rabbit-lilac);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  fill: none;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rail-item.completed .rail-svg-progress {
+  stroke: #FBBF24; /* Golden glow for completed constellations */
+  filter: drop-shadow(0 0 6px rgba(251, 191, 36, 0.6));
+}
+
+.rail-cover {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--rabbit-purple);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.rail-label {
+  margin-top: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--rabbit-muted);
+  max-width: 60px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+}
+.rail-item.completed .rail-label {
+  color: #FBBF24;
+}
+
+/* Main Burrow Vertical Scroll Feed */
+.rabbit-feed-container {
+  flex: 1 1 auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* Chapter Deck Container (1 chapter = 1 vertical snap post) */
+.chapter-deck {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 128px);
+  height: calc(100dvh - 128px);
+  min-height: 520px;
+  max-height: 840px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px 14px 12px;
+  box-sizing: border-box;
+}
+
+/* Horizontal Track inside Chapter Deck */
+.deck-card-viewport {
+  position: relative;
+  flex: 1 1 auto;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--rabbit-card-bg);
+  border: 1px solid var(--rabbit-card-border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+  display: flex;
+}
+
+.deck-track {
+  display: flex;
+  width: 500%; /* 5 cards */
+  height: 100%;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
+}
+
+/* Generic Card Styles */
+.deck-card {
+  width: 20%; /* 1/5th */
+  height: 100%;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  padding: 20px 22px 55px 22px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rabbit-purple) transparent;
+}
+.deck-card::-webkit-scrollbar {
+  width: 4px;
+}
+.deck-card::-webkit-scrollbar-thumb {
+  background: var(--rabbit-purple-light);
+  border-radius: 4px;
+}
+
+/* Top Progress Dots */
+.deck-dots-bar {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  z-index: 20;
+  pointer-events: none;
+}
+.deck-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.25s ease;
+}
+.deck-dot.active {
+  width: 18px;
+  border-radius: 99px;
+  background: var(--rabbit-lilac);
+  box-shadow: 0 0 8px var(--rabbit-glow);
+}
+
+/* Arrow Navigation Overlays */
+.deck-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(33, 27, 51, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(188, 166, 255, 0.3);
+  color: var(--rabbit-white);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 25;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+.deck-arrow-btn:hover {
+  background: var(--rabbit-lilac);
+  color: var(--rabbit-black);
+  box-shadow: 0 0 14px var(--rabbit-glow);
+}
+.deck-arrow-left {
+  left: 8px;
+}
+.deck-arrow-right {
+  right: 8px;
+}
+.deck-arrow-btn[hidden] {
+  display: none !important;
+}
+
+/* Card 1: THE SPARK */
+.card-spark {
+  justify-content: flex-start;
+}
+.spark-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.spark-cover {
+  width: 52px;
+  height: 76px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+.spark-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.spark-genre-pill {
+  align-self: flex-start;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: rgba(188, 166, 255, 0.12);
+  color: var(--rabbit-lilac);
+  border: 1px solid rgba(188, 166, 255, 0.3);
+}
+.spark-book-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--rabbit-white);
+  margin: 0;
+  line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.spark-book-author {
+  font-size: 12px;
+  color: var(--rabbit-muted);
+  margin: 0;
+}
+.spark-chapter-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--rabbit-lilac);
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+.spark-chapter-title {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0 0 12px 0;
+  font-family: var(--rabbit-font-serif);
+  color: var(--rabbit-white);
+}
+.spark-hook {
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #DDD6FE;
+  margin-bottom: 14px;
+  padding-left: 10px;
+  border-left: 3px solid var(--rabbit-lilac);
+}
+.spark-copy {
+  font-family: var(--rabbit-font-serif);
+  font-size: 16px;
+  line-height: 1.7;
+  color: #E2DFEC;
+  white-space: pre-line;
+  margin-bottom: 16px;
+}
+.spark-read-more-btn {
+  align-self: flex-start;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--rabbit-lilac);
+  background: rgba(188, 166, 255, 0.08);
+  border: 1px solid rgba(188, 166, 255, 0.25);
+  padding: 8px 16px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: auto;
+}
+.spark-read-more-btn:hover {
+  background: var(--rabbit-lilac);
+  color: var(--rabbit-black);
+}
+
+/* Card 2: KEY IDEAS */
+.card-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--rabbit-lilac);
+  margin-bottom: 8px;
+}
+.card-heading {
+  font-size: 22px;
+  font-weight: 700;
+  font-family: var(--rabbit-font-serif);
+  margin: 0 0 18px 0;
+}
+.key-ideas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.key-idea-card {
+  display: flex;
+  gap: 12px;
+  background: rgba(33, 27, 51, 0.45);
+  border: 1px solid rgba(188, 166, 255, 0.12);
+  border-radius: 16px;
+  padding: 14px;
+}
+.idea-num {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--rabbit-lilac);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(188, 166, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.idea-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.idea-bold {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--rabbit-white);
+  line-height: 1.35;
+}
+.idea-why {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--rabbit-muted);
+}
+
+/* Card 3: THE LINE */
+.card-line {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.the-line-quote {
+  font-family: var(--rabbit-font-serif);
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--rabbit-white);
+  margin: 20px 0;
+  position: relative;
+  font-style: italic;
+  max-width: 440px;
+}
+.the-line-quote::before {
+  content: "“";
+  font-size: 48px;
+  color: var(--rabbit-lilac);
+  position: absolute;
+  top: -24px;
+  left: -16px;
+  opacity: 0.4;
+}
+.the-line-badge {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  padding: 5px 14px;
+  border-radius: 99px;
+  background: rgba(188, 166, 255, 0.12);
+  color: var(--rabbit-lilac);
+  border: 1px solid rgba(188, 166, 255, 0.25);
+  margin-bottom: 24px;
+}
+.line-share-warren-btn {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rabbit-white);
+  background: var(--rabbit-purple);
+  border: 1px solid var(--rabbit-lilac);
+  padding: 10px 22px;
+  border-radius: 99px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.2s ease;
+}
+.line-share-warren-btn:hover {
+  background: var(--rabbit-lilac);
+  color: var(--rabbit-black);
+  box-shadow: 0 0 16px var(--rabbit-glow);
+}
+
+/* Card 4: IN YOUR LIFE */
+.life-scenarios-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+.life-scenario-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: rgba(33, 27, 51, 0.35);
+  border: 1px solid rgba(188, 166, 255, 0.1);
+  border-radius: 14px;
+  padding: 14px;
+}
+.life-icon {
+  font-size: 18px;
+  color: var(--rabbit-lilac);
+  flex-shrink: 0;
+}
+.life-text {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #EDEAF5;
+  margin: 0;
+}
+
+/* Card 5: RABBIT HOLE */
+.rabbit-hole-intro {
+  font-size: 14px;
+  color: var(--rabbit-muted);
+  margin-bottom: 14px;
+}
+.connection-cards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.connection-card {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: rgba(46, 37, 72, 0.5);
+  border: 1px solid rgba(188, 166, 255, 0.25);
+  border-radius: 16px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.connection-card:hover {
+  transform: translateX(4px);
+  background: rgba(58, 46, 92, 0.7);
+  border-color: var(--rabbit-lilac);
+  box-shadow: 0 4px 20px var(--rabbit-glow);
+}
+.conn-cover {
+  width: 42px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.conn-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.conn-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--rabbit-white);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.conn-reason {
+  font-size: 12px;
+  color: var(--rabbit-muted);
+  line-height: 1.35;
+}
+
+/* Star Lit Celebration Banner on Card 5 */
+.star-lit-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, rgba(188, 166, 255, 0.15), rgba(46, 37, 72, 0.4));
+  border: 1px solid var(--rabbit-lilac);
+  border-radius: 14px;
+  padding: 12px 16px;
+  margin-top: auto;
+  box-shadow: 0 0 20px rgba(188, 166, 255, 0.2);
+}
+.star-lit-icon {
+  font-size: 24px;
+  color: #FBBF24;
+  animation: pulseStar 1.8s infinite ease-in-out;
+}
+@keyframes pulseStar {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px #FBBF24); }
+  50% { transform: scale(1.2); filter: drop-shadow(0 0 10px #FBBF24); }
+}
+.star-lit-text {
+  display: flex;
+  flex-direction: column;
+}
+.star-lit-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--rabbit-white);
+}
+.star-lit-subtitle {
+  font-size: 11px;
+  color: var(--rabbit-muted);
+}
+
+.find-book-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 9px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--rabbit-muted);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.find-book-btn:hover {
+  border-color: var(--rabbit-white);
+  color: var(--rabbit-white);
+}
+
+/* Fiction Spoiler Veil */
+.spoiler-veil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(13, 11, 20, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  z-index: 30;
+  border-radius: 24px;
+  padding: 20px;
+  text-align: center;
+}
+.spoiler-reveal-btn {
+  padding: 10px 20px;
+  border-radius: 99px;
+  background: var(--rabbit-lilac);
+  color: var(--rabbit-black);
+  font-size: 13px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 18px var(--rabbit-glow);
+}
+
+/* Flying Star Micro-Interaction */
+.flying-star-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  font-size: 26px;
+  color: #FBBF24;
+  text-shadow: 0 0 12px #FBBF24;
+  transition: transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.85s ease;
+}
+
+/* Bottom Navigation Bar */
+.rabbit-bottom-nav {
+  flex: 0 0 64px;
+  height: 64px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(13, 11, 20, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid var(--rabbit-card-border);
+  z-index: 60;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.nav-tab-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: none;
+  border: none;
+  color: var(--rabbit-muted);
+  cursor: pointer;
+  padding: 6px 14px;
+  transition: all 0.2s ease;
+}
+.nav-tab-btn.active {
+  color: var(--rabbit-lilac);
+}
+.nav-tab-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+.nav-tab-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.nav-tab-btn#nav-sky.pulse-glow {
+  animation: navSkyGlow 0.8s ease;
+}
+@keyframes navSkyGlow {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(251, 191, 36, 0)); }
+  50% { transform: scale(1.3); filter: drop-shadow(0 0 18px #FBBF24); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(251, 191, 36, 0)); }
+}
+
+/* Full Long-Form Reader Overlay */
+.rabbit-reader-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--rabbit-black);
+  z-index: 200;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 20px 80px 20px;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.rabbit-reader-overlay.open {
+  transform: translateY(0);
+}
+.reader-close-btn {
+  position: fixed;
+  top: 16px;
+  right: 18px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(33, 27, 51, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--rabbit-card-border);
+  color: var(--rabbit-white);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 210;
+}
+.reader-inner {
+  max-width: 680px;
+  margin: 40px auto 0 auto;
+  line-height: 1.85;
+}
+
+/* Desktop & Laptop Responsive Layout */
+@media (min-width: 1024px) {
+  .rabbit-app-viewport {
+    flex-direction: row;
+  }
+  .rabbit-bottom-nav {
+    flex-direction: column;
+    width: 80px;
+    height: 100vh;
+    border-top: none;
+    border-right: 1px solid var(--rabbit-card-border);
+    justify-content: flex-start;
+    padding-top: 40px;
+    gap: 28px;
+  }
+  .rabbit-feed-container {
+    max-width: 620px;
+    height: 100vh;
+    padding-top: 10px;
+  }
+  .chapter-deck {
+    height: calc(100vh - 30px);
+  }
+}

@@ -1,0 +1,235 @@
+[
+  {
+    "id": "the-48-laws-of-power",
+    "title": "The 48 Laws of Power",
+    "author": "Robert Greene",
+    "genre": "The Human Mind",
+    "cover_url": "https://covers.openlibrary.org/b/id/12843462-M.jpg",
+    "public_domain": false,
+    "fiction": false,
+    "chapters": [
+      {
+        "n": 1,
+        "title": "Never Outshine the Master",
+        "hook": "Always make those above you feel comfortably superior in intelligence and standing.",
+        "spark": "Everyone possesses insecurities, but superiors feel them with heightened intensity.\nWhen you flaunt your talents or display effortless brilliance, you evoke silent dread in leadership.\nIn 1661, Nicolas Fouquet threw the most extravagant party in French history to impress King Louis XIV.\nInstead of gratitude, the King felt outshone and had Fouquet imprisoned for the remainder of his life.\nTo advance, make your masters appear more brilliant and luminous than they truly are.\nAttribute your best ideas to their quiet guidance or offhand remarks.\nDiscreet flattery is a shield that disarms jealousy and secures your position.\nMaster the art of selective modesty to advance without awakening dangerous rivals.",
+        "key_ideas": [
+          {
+            "idea": "Insecurity rules high office",
+            "why": "Superiors crave affirmation and react viciously when subordinates expose their limitations."
+          },
+          {
+            "idea": "Ostentatious talent invites ruin",
+            "why": "Flaunting gifts triggers envy; masking them in modesty creates patient opportunity."
+          },
+          {
+            "idea": "Credit should flow upward",
+            "why": "Attributing breakthroughs to mentors converts potential rivals into staunch protectors."
+          }
+        ],
+        "line": {
+          "text": "Make your masters appear more brilliant than they are, and you will attain the heights of influence.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "When proposing a solution in meetings, frame it as an extension of a theme your manager previously mentioned.",
+          "Avoid correcting teachers or senior colleagues publicly; offer insights privately as humble questions.",
+          "Dress neatly but avoid overshadowing the host or team leader at formal company gatherings."
+        ],
+        "connects_to": [
+          {
+            "book_id": "influence-psychology-of-persuasion",
+            "chapter": 5,
+            "reason": "Liking and deference disarm resistance far faster than aggressive argument."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 2,
+        "title": "Conceal Your Intentions",
+        "hook": "Keep people off-balance and in the dark by never revealing the purpose behind your actions.",
+        "spark": "Human beings are open books by default, desperate to share their plans and seek validation.\nThis transparent impulse hands your competitors the exact roadmap to block your path.\nBy concealing your true intentions, you prevent rivals from preparing defenses or organizing opposition.\nUse decoys, false trails, and smoke screens to misdirect the curiosity of onlookers.\nTalk openly about trivial opinions to give the impression of total transparency.\nWhen people believe they understand your goals, they lower their guard and grow complacent.\nBy the time they realize your actual objective, it is already too late for them to interfere.\nCalculated silence preserves your strategic advantage across every competitive arena.",
+        "key_ideas": [
+          {
+            "idea": "Transparency forfeits leverage",
+            "why": "Announcing your moves in advance allows adversaries to anticipate and counter your progress."
+          },
+          {
+            "idea": "Smoke screens generate false security",
+            "why": "Chattering about harmless trivialities convinces observers that you harbor no hidden ambitions."
+          },
+          {
+            "idea": "Timing is protected by secrecy",
+            "why": "Striking without prior fanfare ensures your plans face minimal friction."
+          }
+        ],
+        "line": {
+          "text": "If people have no clue what you are up to, they cannot prepare a defense.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Do not announce your preparation for a competitive job or school transfer until the offer is secured.",
+          "Keep project prototypes private until they are polished enough to speak for themselves.",
+          "Avoid broadcasting financial moves or investments on social channels where others can mimic or critique them."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-laws-of-human-nature",
+            "chapter": 3,
+            "reason": "Observing social masks allows you to conceal your own motivations effectively."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 3,
+        "title": "Always Say Less Than Necessary",
+        "hook": "When you are trying to impress people with words, the more you say, the more common you appear.",
+        "spark": "Powerful people impress and intimidate by saying less than everyone else in the room.\nThe more you speak, the more likely you are to say something foolish or reveal your anxieties.\nShort, measured answers create an aura of mysterious depth that forces others to fill the silence.\nIn their nervous discomfort, other people will babble and reveal their hand, weaknesses, and secrets.\nKing Louis XIV was famously economical with language, responding to lengthy appeals with a calm: 'I shall see.'\nNobody could decipher his thoughts, which kept ministers terrified and perpetually eager to please him.\nSilence is an instrument of psychological dominance that costs nothing to employ.\nGuard your tongue like gold, for once words leave your mouth, you can never retrieve them.",
+        "key_ideas": [
+          {
+            "idea": "Verbosity signals weakness",
+            "why": "Over-explaining betrays a desperate craving for approval and reassurance from listeners."
+          },
+          {
+            "idea": "Silence commands authority",
+            "why": "Brief, deliberate responses force the other party to reveal their underlying anxieties."
+          },
+          {
+            "idea": "Careless words cannot be recalled",
+            "why": "A single impulsive remark can destroy years of painstakingly built reputation."
+          }
+        ],
+        "line": {
+          "text": "The more you say, the more common you appear, and the less in control you remain.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Count to three before answering probing questions during job interviews or intense discussions.",
+          "Resist the urge to jump into awkward group pauses; let someone else speak first and reveal their stance.",
+          "Write concise emails with clear bullet points rather than winding paragraphs that beg for validation."
+        ],
+        "connects_to": [
+          {
+            "book_id": "thinking-fast-and-slow",
+            "chapter": 1,
+            "reason": "Quick reactive speech is driven by System 1 emotional impulses."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 4,
+        "title": "Guard Your Reputation With Your Life",
+        "hook": "Reputation is the cornerstone of influence; through reputation alone you can intimidate and win.",
+        "spark": "In the social arena, appearances are the reality upon which all judgments are constructed.\nA single outstanding quality—whether iron discipline, generosity, or daring—can anchor your public aura.\nOnce a solid reputation is established, it precedes you and wins half the battle before you arrive.\nConversely, a tarnished reputation opens you to endless attacks, ridicule, and suspicion from all sides.\nDuring the American Civil War, General Stonewall Jackson built an aura of ferocious unpredictability.\nEnemy commanders hesitated and panicked simply upon hearing rumors that Jackson might be nearby.\nNever respond to petty attacks with defensive anger, which merely legitimizes the attacker's accusations.\nMaintain an impeccable, consistent public record and let your quiet results refute your detractors.",
+        "key_ideas": [
+          {
+            "idea": "Aura precedes action",
+            "why": "A legendary reputation does the heavy lifting of persuasion before you even speak a sentence."
+          },
+          {
+            "idea": "Defensiveness confirms suspicion",
+            "why": "Lashing out at critics makes you look guilty, agitated, and weak."
+          },
+          {
+            "idea": "Anchor on one unmistakable strength",
+            "why": "Known reliability in one specific virtue makes people trust your overall competence."
+          }
+        ],
+        "line": {
+          "text": "Reputation is an invisible fortress that protects you from the arrows of envy and malice.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Always deliver on small commitments to friends so you become known as the person whose word is sacred.",
+          "Refuse to participate in office or hallway gossip; a reputation for confidentiality is rare and magnetic.",
+          "Keep your digital footprint clean and thoughtful; old posts are permanent public records."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-psychology-of-money",
+            "chapter": 3,
+            "reason": "Reputation is an invaluable asset that must never be risked for short-term vanity."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 5,
+        "title": "Win Through Your Actions, Never Through Argument",
+        "hook": "Any momentary triumph you gain through debate is really a Pyrrhic victory that breeds resentment.",
+        "spark": "You can argue with someone until you are blue in the face, citing statistics and flawless logic.\nEven if you prove them mathematically wrong, you have humiliated their pride and created an enemy.\nPeople do not abandon beliefs when attacked; they dig their heels in and rationalize harder.\nThe far more potent path is demonstration: show the truth through tangible, physical results.\nWhen Michelangelo was told by a patron that a statue's nose was too long, he did not argue.\nHe climbed the scaffolding, tapped his chisel softly while letting marble dust fall, and asked if it was better.\nThe patron praised the improvement, completely satisfied, without Michelangelo changing a single millimeter.\nDemonstrate the reality through living proof and let the results speak for your viewpoint.",
+        "key_ideas": [
+          {
+            "idea": "Verbal debate poisons goodwill",
+            "why": "Winning an argument wounds the other person's ego and creates lingering resentment."
+          },
+          {
+            "idea": "Demonstration bypasses defensiveness",
+            "why": "Tangible physical evidence persuades the eye without attacking the listener's pride."
+          },
+          {
+            "idea": "Let others retain their dignity",
+            "why": "Providing an honorable exit allows people to adopt your reality without losing face."
+          }
+        ],
+        "line": {
+          "text": "Do not argue. Demonstrate. It is far more powerful to make others see than to make them listen.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Instead of debating which study method works best, use yours quietly and let your exam scores do the talking.",
+          "Build a working mini prototype of an app feature rather than arguing abstractly in team meetings.",
+          "Clean the shared kitchen yourself without complaining; the visual standard will shame roommates into helping."
+        ],
+        "connects_to": [
+          {
+            "book_id": "influence-psychology-of-persuasion",
+            "chapter": 4,
+            "reason": "Social proof and visible examples persuade far deeper than abstract verbal logic."
+          }
+        ],
+        "spoiler_level": "none"
+      },
+      {
+        "n": 6,
+        "title": "Master the Art of Timing",
+        "hook": "Never look hurried; keep emotions calm, anticipate trends, and strike only when the hour is ripe.",
+        "spark": "Hurriedness betrays a lack of control over time and your own internal emotional state.\nThose who master power cultivate three forms of time: historical time, forced time, and end time.\nHistorical time involves sensing the cultural zeitgeist and riding societal waves as they crest.\nForced time involves deliberately disrupting an opponent's rhythm, making them rush into impulsive blunders.\nEnd time is the decisive, uncompromising strike executed when the pieces are perfectly aligned.\nJoseph Fouché survived the French Revolution, the Terror, and Napoleon by mastering patient timing.\nHe knew when to vanish into political obscurity and exactly when to re-emerge as an indispensable mediator.\nPatience is not passive waiting; it is active, vigilant preparation for the inevitable shift in fortunes.",
+        "key_ideas": [
+          {
+            "idea": "Impatience reveals vulnerability",
+            "why": "Rushing an outcome shows your desperation and allows adversaries to dictate terms."
+          },
+          {
+            "idea": "Control the opponent's clock",
+            "why": "Forcing others to make decisions under time pressure leads to unforced errors."
+          },
+          {
+            "idea": "Patience is active vigilance",
+            "why": "Waiting for the right moment requires sharpening your tools in quiet obscurity."
+          }
+        ],
+        "line": {
+          "text": "He who controls time controls the decisions of everyone operating within it.",
+          "type": "rabbit_take"
+        },
+        "in_your_life": [
+          "Sleep on major career or academic choices rather than accepting rushed deadlines imposed by others.",
+          "Notice emerging shifts in tech or culture early and invest your learning months before the mainstream arrives.",
+          "Wait for emotional storms in family arguments to clear before proposing your thoughtful compromise."
+        ],
+        "connects_to": [
+          {
+            "book_id": "the-psychology-of-money",
+            "chapter": 4,
+            "reason": "Long-term patience allows compounding and timing to work miracles on your behalf."
+          }
+        ],
+        "spoiler_level": "none"
+      }
+    ]
+  }
+]
